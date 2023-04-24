@@ -20,7 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Migrations\" />
     <Folder Include="Migration\" />
+    <Folder Include="Persistence\" />
   </ItemGroup>
 
   <ItemGroup>
