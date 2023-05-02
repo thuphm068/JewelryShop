@@ -21,7 +21,7 @@ public class JewelryShopDBContext : DbContext
     public DbSet<Order> _orders { get; set; } = null;
     public DbSet<OrderDetail> _orderdetails { get; set; } = null;
     public DbSet<Category> _categories { get; set; } = null;
-    public DbSet<ProductCategory> _productcategories { get; set; } = null;
+    public DbSet<SubCategory> _subcategories { get; set; } = null;
 
     public DbSet<Warranty> _warrantys { get; set; } = null;
 
@@ -49,6 +49,7 @@ public class JewelryShopDBContext : DbContext
             re.Property(r => r.Description).IsRequired();
             re.Property(r => r.Material).IsRequired().HasMaxLength(20);
             re.HasOne<Warranty>().WithMany().HasForeignKey(x => x.Id).IsRequired(false);
+            re.HasOne<SubCategory>().WithMany().HasForeignKey(x => x.Id).IsRequired();
         });
         modelBuilder.Entity<Customer>(re =>
         {
@@ -112,11 +113,11 @@ public class JewelryShopDBContext : DbContext
             re.Property(r => r.Name).IsRequired().HasMaxLength(50);
         });
 
-        modelBuilder.Entity<ProductCategory>(re =>
+        modelBuilder.Entity<SubCategory>(re =>
         {
-            re.ToTable("ProductCategory");
+            re.ToTable("SubCategory");
             re.HasKey(r => r.Id);
-            re.HasOne<Product>().WithMany().HasForeignKey(x => x.Id).IsRequired();
+            re.Property(r => r.Name).IsRequired().HasMaxLength(50);
             re.HasOne<Category>().WithMany().HasForeignKey(x => x.Id).IsRequired();
 
         });

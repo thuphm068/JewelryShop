@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Mapster" Version="7.3.0" />
+    <PackageReference Include="Mapster.Core" Version="1.2.0" />
+    <PackageReference Include="Mapster.DependencyInjection" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JewelryShop.Application.Contracts\JewelryShop.Application.Contracts.csproj" />
+    <ProjectReference Include="..\JewelryShop.Domain\JewelryShop.Domain.csproj" />
+    <ProjectReference Include="..\JewelryShop.Infrastructure\JewelryShop.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

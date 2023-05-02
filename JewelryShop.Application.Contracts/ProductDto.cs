@@ -1,15 +1,14 @@
-﻿namespace JewelryShop.Domain.Entities
+﻿namespace JewelryShop.Application.Contracts
 {
-    public class Product
+    public class ProductDto
     {
         public Guid Id { get; set; } = Guid.NewGuid();
-        public Guid WarrantyId { get; set; }
+        public WarrantyDto WarrantyDto { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public string Material { get; set; } = string.Empty;
         public float Price { get; set; } = 0;
-        public Guid SubCategoryId { get; set; }
-
+        public string CategoryName { get; set; } = string.Empty;
 
     }
 

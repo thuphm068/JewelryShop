@@ -13,8 +13,7 @@ namespace JewelryShop.Domain.Shared.Const
         Shipped,//đã gửi cho đơn vị vận chuyển
         Returned, //giao hàng thất bại -> trả về
         Completed, // đơn hàng hoàn tất
-        Failed //đơn hàng thất bại (shop không đủ hàng, lí do khác)
-
-
+        Failed, //đơn hàng thất bại (shop không đủ hàng, lí do khác)
+        Canceled //khách chủ động huỷ đơn
     }
 }
