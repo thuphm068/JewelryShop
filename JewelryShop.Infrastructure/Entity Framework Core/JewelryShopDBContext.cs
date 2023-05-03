@@ -47,6 +47,7 @@ public class JewelryShopDBContext : DbContext
             re.Property(r => r.Name).IsRequired().HasMaxLength(100);
             re.Property(r => r.Price).IsRequired();
             re.Property(r => r.Description).IsRequired();
+            re.Property(r => r.Image).IsRequired();
             re.Property(r => r.Material).IsRequired().HasMaxLength(20);
             re.HasOne<Warranty>().WithMany().HasForeignKey(x => x.Id).IsRequired(false);
             re.HasOne<SubCategory>().WithMany().HasForeignKey(x => x.Id).IsRequired();

@@ -5,10 +5,11 @@ using JewelryShop.Infrastructure.Persistence;
 using JewelryShop.Application.Contracts;
 using MapsterMapper;
 using System.Security.Cryptography.X509Certificates;
+using JewelryShop.Application.Interfaces;
 
 namespace JewelryShop.Application.Services
 {
-    public class ProductService
+    public class ProductService: IProductService
     {
         //set up related repository using Dependency Injection
         private readonly IRepository<Product> _productRepository;
