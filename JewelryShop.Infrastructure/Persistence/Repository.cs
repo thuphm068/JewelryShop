@@ -7,7 +7,7 @@ namespace JewelryShop.Infrastructure.Persistence
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         protected readonly JewelryShopDBContext _context;
-        protected Repository(JewelryShopDBContext context)
+        public Repository(JewelryShopDBContext context)
         {
             _context = context;
         }

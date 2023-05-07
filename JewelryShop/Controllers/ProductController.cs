@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JewelryShop.Controllers
 {
+    [Route("nhan-bac")]
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
@@ -13,10 +14,10 @@ namespace JewelryShop.Controllers
 
         }
 
-        [HttpGet("Index")]  
-        public IActionResult Index()
+        [HttpGet("")]  
+        public async Task<IActionResult> IndexAsync()
         {
-            var productdtos = _productService.GetAllAvailableProducts();
+            var productdtos = await _productService.GetAllAvailableProducts();
             return View(productdtos);
         }
     }

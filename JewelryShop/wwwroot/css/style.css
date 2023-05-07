@@ -1443,17 +1443,9 @@ ol {
 	position: relative;
 }
 
-.filter-range-wrap .range-slider .price-input p {
-	font-size: 16px;
-	color: #0d0d0d;
-	font-weight: 500;
-	display: inline-block;
-	margin-bottom: 0;
-}
-
 .filter-range-wrap .range-slider .price-input:after {
 	position: absolute;
-	left: 81px;
+	left: 51px;
 	top: 12px;
 	height: 1px;
 	width: 5px;

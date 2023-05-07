@@ -49,8 +49,8 @@ public class JewelryShopDBContext : DbContext
             re.Property(r => r.Description).IsRequired();
             re.Property(r => r.Image).IsRequired();
             re.Property(r => r.Material).IsRequired().HasMaxLength(20);
-            re.HasOne<Warranty>().WithMany().HasForeignKey(x => x.Id).IsRequired(false);
-            re.HasOne<SubCategory>().WithMany().HasForeignKey(x => x.Id).IsRequired();
+            re.HasOne<Warranty>().WithMany().HasForeignKey(x => x.WarrantyId).IsRequired(false);
+            re.HasOne<SubCategory>().WithMany().HasForeignKey(x => x.SubCategoryId).IsRequired();
         });
         modelBuilder.Entity<Customer>(re =>
         {
@@ -70,7 +70,7 @@ public class JewelryShopDBContext : DbContext
             re.ToTable("Cart");
             re.HasKey(r => r.Id);
             re.Property(r => r.Total).IsRequired();
-            re.HasOne<Customer>().WithOne().HasForeignKey<Cart>(r => r.Id).IsRequired();//test
+            re.HasOne<Customer>().WithOne().HasForeignKey<Cart>(r => r.CustomerId).IsRequired();//test
         });
 
 
@@ -81,8 +81,8 @@ public class JewelryShopDBContext : DbContext
             re.HasKey(r => r.Id);
             re.Property(r => r.TotalPrice).IsRequired();
             re.Property(r => r.Quantity).IsRequired();
-            re.HasOne<Cart>().WithMany().HasForeignKey(x => x.Id).IsRequired();
-            re.HasOne<Product>().WithMany().HasForeignKey(x => x.Id).IsRequired();
+            re.HasOne<Cart>().WithMany().HasForeignKey(x => x.CartId).IsRequired();
+            re.HasOne<Product>().WithMany().HasForeignKey(x => x.ProductId).IsRequired();
 
 
         });
@@ -94,7 +94,7 @@ public class JewelryShopDBContext : DbContext
             re.Property(r => r.Status).IsRequired();
             re.Property(r => r.Total).IsRequired();
             re.Property(r => r.Date).IsRequired();
-            re.HasOne<Customer>().WithMany().HasForeignKey(x => x.Id).IsRequired();
+            re.HasOne<Customer>().WithMany().HasForeignKey(x => x.CustomerId).IsRequired();
         });
 
 
@@ -104,8 +104,8 @@ public class JewelryShopDBContext : DbContext
             re.HasKey(r => r.Id);
             re.Property(r => r.Quantity).IsRequired();
             re.Property(r => r.TotalPrice).IsRequired();
-            re.HasOne<Order>().WithMany().HasForeignKey(x => x.Id).IsRequired();
-            re.HasOne<Product>().WithMany().HasForeignKey(x => x.Id).IsRequired();
+            re.HasOne<Order>().WithMany().HasForeignKey(x => x.OrderId).IsRequired();
+            re.HasOne<Product>().WithMany().HasForeignKey(x => x.ProductId).IsRequired();
         });
         modelBuilder.Entity<Category>(re =>
         {
@@ -119,7 +119,7 @@ public class JewelryShopDBContext : DbContext
             re.ToTable("SubCategory");
             re.HasKey(r => r.Id);
             re.Property(r => r.Name).IsRequired().HasMaxLength(50);
-            re.HasOne<Category>().WithMany().HasForeignKey(x => x.Id).IsRequired();
+            re.HasOne<Category>().WithMany().HasForeignKey(x => x.CategoryId).IsRequired();
 
         });
 

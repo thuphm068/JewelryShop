@@ -4,6 +4,7 @@ using JewelryShop.Infrastructure.Entity_Framework_Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JewelryShop.Infrastructure.Migrations
 {
     [DbContext(typeof(JewelryShopDBContext))]
-    partial class JewelryShopDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230504085656_Fixed FK Migration")]
+    partial class FixedFKMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

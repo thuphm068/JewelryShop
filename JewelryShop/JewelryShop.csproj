@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\JewelryShop.Application\JewelryShop.Application.csproj" />
+    <ProjectReference Include="..\JewelryShop.Infrastructure\JewelryShop.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
