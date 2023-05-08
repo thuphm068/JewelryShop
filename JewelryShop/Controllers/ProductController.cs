@@ -19,6 +19,21 @@ namespace JewelryShop.Controllers
         {
             var productdtos = await _productService.GetAllAvailableProducts();
             return View(productdtos);
+        }        
+
+        [HttpGet("detail/{id?}")]  
+        public async Task<IActionResult> Detail(Guid id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var productdto = await _productService.GetProductDetails(id);
+            var productdtos = await _productService.GetProductsBySubCategoryName(productdto.SubCategoryName);
+            ViewData["RelatedProducts"] = productdtos;
+            return View(productdto);
+
+
         }
     }
 }

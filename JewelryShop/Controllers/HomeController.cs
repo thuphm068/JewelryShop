@@ -1,22 +1,34 @@
-﻿using JewelryShop.Models;
+﻿using JewelryShop.Application.Interfaces;
+using JewelryShop.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace JewelryShop.Controllers
 {
+
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IProductService _productService;
+
+        public HomeController(IProductService productService)
         {
-            _logger = logger;
+
+            _productService = productService;
         }
 
-        public IActionResult Index()
+
+        [HttpGet("")]
+        public async Task<IActionResult> IndexAsync()
         {
-            return View();
+            var productdtos = await _productService.GetAllAvailableProducts();
+            return View(productdtos);
         }
+
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
 
         public IActionResult Privacy()
         {
