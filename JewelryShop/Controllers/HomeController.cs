@@ -19,16 +19,15 @@ namespace JewelryShop.Controllers
 
 
         [HttpGet("")]
-        public async Task<IActionResult> IndexAsync()
-        {
-            var productdtos = await _productService.GetAllAvailableProducts();
-            return View(productdtos);
-        }
-
-        //public IActionResult Index()
+        //public async Task<IActionResult> IndexAsync(string CategoryName)
         //{
-        //    return View();
+        //    var productdtos = await _productService.GetProductsByCategoryName(CategoryName);
+        //    return View(productdtos);
         //}
+        public IActionResult Index()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {

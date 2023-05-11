@@ -30,25 +30,14 @@
                     <div class="product__details__pic">
                         <div class="product__details__pic__left product__thumb nice-scroll">
                             <a class="pt active" href="#product-1">
-                                <img src="/Source/img/product/details/@Model.Image alt="">
+                                <img src="~/Source/img/product/@Model.Image" alt=""/>
                             </a>
-                            @*                            <a class="pt" href="#product-2">
-                        <img src="img/product/details/thumb-2.jpg" alt="">
-                        </a>
-                        <a class="pt" href="#product-3">
-                        <img src="img/product/details/thumb-3.jpg" alt="">
-                        </a>
-                        <a class="pt" href="#product-4">
-                        <img src="img/product/details/thumb-4.jpg" alt="">
-                        </a>*@
+
                         </div>
                         <div class="product__details__slider__content">
                             <div class="product__details__pic__slider owl-carousel">
-                            <img data-hash="product-1" class="product__big__img" src="/Source/img/product/details/@Model.Image" alt="">
-@*                            <img data-hash="product-2" class="product__big__img" src="/Source/img/product/details/product-3.jpg" alt="">
-                            <img data-hash="product-3" class="product__big__img" src="/Source/img/product/details/product-2.jpg" alt="">
-                            <img data-hash="product-4" class="product__big__img" src="/Source/img/product/details/product-4.jpg" alt="">*@
-                            </div>
+                            <img data-hash="product-1" class="product__big__img" src="/Source/img/product/@Model.Image" alt=""/>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -57,7 +46,7 @@
                 <div class="col-lg-6">
                     <div class="product__details__text">
                         <h3>@Model.Name</h3>
-                        <div class="product__details__price">@Model.Price</div>
+                        <div class="product__details__price">@Model.Price VND</div>
                         <p>@Model.Name với chất liệu @Model.Material</p>
                         <div class="product__details__button">
                             <div class="quantity">
@@ -67,9 +56,7 @@
                                 </div>
                             </div>
                             <a href="#" class="cart-btn"><span class="icon_bag_alt"></span> Thêm vào giỏ hàng</a>
-                            <ul>
-                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                            </ul>
+
                         </div>
                         <div class="product__details__widget">
                             <ul>
@@ -144,44 +131,8 @@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="tabs-1" role="tabpanel">
-@*                                <h6>Mô tả</h6>
-*@                                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
-                                    quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
-                                    Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam
-                                    voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu
-                                    consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla
-                                consequat massa quis enim.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
-                                    dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-                                    nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
-                                quis, sem.</p>
+                                <p>@Model.Description</p>
                             </div>
-@*                            <div class="tab-pane" id="tabs-2" role="tabpanel">
-                                <h6>Specification</h6>
-                                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
-                                    quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
-                                    Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam
-                                    voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu
-                                    consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla
-                                consequat massa quis enim.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
-                                    dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-                                    nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
-                                quis, sem.</p>
-                            </div>
-                            <div class="tab-pane" id="tabs-3" role="tabpanel">
-                                <h6>Reviews ( 2 )</h6>
-                                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
-                                    quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
-                                    Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam
-                                    voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu
-                                    consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla
-                                consequat massa quis enim.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
-                                    dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-                                    nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
-                                quis, sem.</p>
-                            </div>*@
                         </div>
                     </div>
                 </div>

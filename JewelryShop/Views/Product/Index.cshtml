@@ -20,7 +20,7 @@
                             <div class="accordion" id="accordionExample">
                                 <div class="card">
                                     <div class="card-heading active">
-                                        <a data-toggle="collapse" data-target="#collapseOne">Nhẫn bạc</a>
+                                        <a data-toggle="collapse" data-target="#collapseOne" asp-action="IndexAsyncNhanBac" asp-controller="Product">Nhẫn bạc</a>
                                     </div>
                                     <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
                                         <div class="card-body">
@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="card">
                                     <div class="card-heading">
-                                        <a data-toggle="collapse" data-target="#collapseTwo">Khuyên tai</a>
+                                        <a data-toggle="collapse" data-target="#collapseTwo" asp-action="IndexAsyncKhuyenTai" asp-controller="Product">Khuyên tai</a>
                                     </div>
                                     <div id="collapseTwo" class="collapse" data-parent="#accordionExample">
                                         <div class="card-body">
@@ -83,7 +83,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#">Filter</a>
+                        <a href="#">Lọc</a>
                     </div>
                 </div>
             </div>
@@ -94,12 +94,12 @@
                     {
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="/Source/img/shop/@e.Image">
+                                <div class="product__item__pic set-bg" data-setbg="/Source/img/product/@e.Image">
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="#">@e.Name</a></h6>
+                                    <h6><a asp-action="Detail" asp-controller="Product" asp-route-id="@e.Id">@e.Name</a></h6>
 
-                                    <div class="product__price">@e.Price VND</div>
+                                    <div class="product__price">@e.Price đ</div>
                                 </div>
                             </div>
                         </div>

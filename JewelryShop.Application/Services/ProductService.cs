@@ -6,6 +6,7 @@ using JewelryShop.Application.Contracts;
 using MapsterMapper;
 using System.Security.Cryptography.X509Certificates;
 using JewelryShop.Application.Interfaces;
+using System.Net.WebSockets;
 
 namespace JewelryShop.Application.Services
 {
@@ -55,6 +56,27 @@ namespace JewelryShop.Application.Services
 
             return result;
         }
+
+        public async Task<List<ProductHomePageDto>> GetProductsByCategoryName(string CategoryName)
+        {
+
+            var products = await _productRepository.GetAllList();
+            var categorys = await _categoryRepository.GetAllList();
+            var subcategorys = await _subcategoryRepository.GetAllList();
+
+            var category = categorys.FirstOrDefault(x => x.Name == CategoryName);
+            subcategorys = subcategorys.Where(x => x.CategoryId.Equals(category.Id)).ToList();
+
+            var ids = subcategorys.Select(x => x.Id).ToList();
+
+            products = products.Where(x => ids.Contains(x.SubCategoryId)).ToList();
+
+            var result = _mapper.Map<List<ProductHomePageDto>>(products);
+
+            return result;
+        }
+
+
 
         public async Task<ProductDto> GetProductDetails(Guid id)
         {
