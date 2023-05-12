@@ -109,6 +109,9 @@ ol {
 /*---------------------
   Helper CSS
 -----------------------*/
+.sort-box {
+	margin-bottom: 45px;
+}
 
 .section-title {
 	margin-bottom: 45px;
@@ -341,6 +344,10 @@ ol {
 	position: relative;
 }
 
+.header__menu ul{
+	width: 580px;
+}
+
 .header__menu ul li.active a:after {
 	-webkit-transform: scale(1);
 	-ms-transform: scale(1);
@@ -368,7 +375,7 @@ ol {
 		left: 0;
 		top: 56px;
 		width: 150px;
-		background: #FAEAEA;
+		background: #fffdfc;
 		text-align: left;
 		padding: 2px 0;
 		z-index: 9;
@@ -426,31 +433,52 @@ ol {
 	text-align: right;
 	padding: 30px 0 27px;
 }
-.header_right input {
-	border-radius: 50px;
+
+.icon {
+	padding: 7px;
+	text-align: right;
 }
 
-.header__right__auth {
+.header__right__search {
 	display: inline-block;
 	margin-right: 25px;
 }
+	.header__right__search i {
+		position: absolute;
+	}
 
-.header__right__auth a {
+.input-field {
+	width: 100%;
+	height: fit-content;
+	text-align: center;
+	border: 1px solid #bdbdbd;
+}
+
+.header__right__search input {
+	border-radius:10px;
+}
+
+.header__right__search input::placeholder {
+	padding-left: 10px;
+	font-size: 12px;
+}
+
+.header__right__search a {
 	font-size: 12px;
 	color: #666666;
 	position: relative;
 	margin-right: 8px;
 }
 
-.header__right__auth a:last-child {
+.header__right__search a:last-child {
 	margin-right: 0;
 }
 
-.header__right__auth a:last-child:after {
+.header__right__search a:last-child:after {
 	display: none;
 }
 
-.header__right__auth a:after {
+.header__right__search a:after {
 	position: absolute;
 	right: -8px;
 	top: -2px;
@@ -1418,6 +1446,41 @@ ol {
 	top: -1px;
 }
 
+.sidebar__sort {
+	position: relative;
+	margin-bottom: 60px;
+}
+
+	.sidebar__sort.sort-box {
+		margin-bottom: 45px;
+	}
+
+.sort-values {
+	border: 1px solid #737373;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+select {
+	font-size: 14px;
+	border: none;
+	width: 100%;
+	background: white;
+}
+
+option{
+	height: 50px;
+}
+
+.sidebar__sort .section-title h4 {
+	font-size: 18px;
+}
+
+	.sidebar__sort.sort-box.select option {
+		font-family: "Montserrat", sans-serif;
+		font-size: 14px;
+	}
+
 .sidebar__filter {
 	position: relative;
 	margin-bottom: 60px;
@@ -1431,24 +1494,27 @@ ol {
 	font-size: 18px;
 }
 
-.sidebar__filter a {
-	font-size: 14px;
-	color: #0d0d0d;
-	text-transform: uppercase;
-	letter-spacing: 2px;
-	font-weight: 700;
-	display: inline-block;
-	padding: 5px 16px 5px 24px;
-	border: 2px solid #ff0000;
-	position: absolute;
-	right: 0;
-	bottom: -5px;
-	border-radius: 2px;
-}
+	.sidebar__filter a {
+		font-size: 14px;
+		color: #0d0d0d;
+		text-transform: uppercase;
+		text-align: center;
+		letter-spacing: 2px;
+		font-weight: 700;
+		display: inline-block;
+		padding: 5px 16px 5px 24px;
+		border: 2px solid #9A4747;
+		/*	position: absolute;
+		bottom: -5px;*/
+		right: 0;
+		border-radius: 2px;
+		width: 100%;
+	}
 
 .filter-range-wrap .range-slider .price-input {
+	width: auto;
 	position: relative;
-	width:600px;
+	padding-bottom: 20px;
 }
 
 .filter-range-wrap .range-slider .price-input:after {
@@ -1462,7 +1528,7 @@ ol {
 }
 
 .filter-range-wrap .range-slider .price-input input {
-	font-size: 16px;
+	font-size: 13px;
 	color: #0d0d0d;
 	max-width: 16%;
 	border: none;
@@ -3151,6 +3217,9 @@ ol {
 	.header {
 		padding: 0 85px;
 	}
+	.header__right__search {
+		margin-right: 5px;
+	}
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1599px) {
@@ -3174,7 +3243,7 @@ ol {
 	.header__menu ul li {
 		margin-right: 20px;
 	}
-	.header__right__auth {
+	.header__right__search {
 		margin-right: 5px;
 	}
 	.sidebar__filter a {

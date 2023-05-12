@@ -37,8 +37,9 @@
     <div class="offcanvas-menu-wrapper">
         <div class="offcanvas__close">+</div>
         <ul class="offcanvas__widget">
-            <li><span class="fa fa-search search-switch"></span></li>
-            <li>
+@*            <input type="text" placeholder="Type to search">
+*@@*            <li><span class="fa fa-search search-switch"></span></li>
+*@            <li>
                 <a href="#">
                     <span class="fa fa-user-o"></span>
                     <div class="tip">2</div>
@@ -68,13 +69,13 @@
             <div class="row">
                 <div class="col-xl-2 col-lg-2">
                     <div class="header__logo">
-                        <a href=""><img src="/Source/img/luminique.svg" alt=""></a>
+                        <a href="/"><img src="/Source/img/luminique.svg" alt=""></a>
                     </div>
                 </div>
-                <div class="col-xl-6 col-lg-8">
+                <div class="col-xl-6 col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="">Trang chủ</a></li>
+                            <li class="active"><a href="/">Trang chủ</a></li>
                             <li>
                                 <a href="/san-pham/nhan-bac">Nhẫn bạc</a>
                                 <ul class="dropdown">
@@ -101,17 +102,16 @@
                         </ul>
                     </nav>
                 </div>
-                <div class="col-xl-4 col-lg-3">
+                <div class="col-xl-4 col-lg-4">
                     <div class="header__right">
-@*                        <div class="header__right__auth">
-                            <a href="#">Login</a>
-                            <a href="#">Register</a>
-                        </div>*@
-@*                        <input type="text" id="search-input" placeholder="Tìm kiếm">
-*@
-                        <ul class="header__right__widget">
-                            <li><span class="fa fa-search search-switch"></span></li>
-                            <li>
+                        <div class="header__right__search">
+                            <i class="fa fa-search icon">
+                            </i>
+                            <input class="input-field" type="text" placeholder="Tìm kiếm">
+                        </div>
+                        <ul class="header__right__widget ">
+@*                            <li><span class="fa fa-search search-switch"></span></li>
+*@                            <li>
                                 <a href="#">
                                     <span class="fa fa-user-o"></span>
                                     <div class="tip">2</div>
@@ -136,7 +136,7 @@
 
    
 
- @*   <!-- Search Begin -->
+    <!-- Search Begin -->
     <div class="search-model">
         <div class="h-100 d-flex align-items-center justify-content-center">
             <div class="search-close-switch">+</div>
@@ -147,7 +147,7 @@
     </div>
     <!-- Search End -->
 
-*@
+
     <main role="main" class="pb-3">
         @RenderBody()
     </main>
@@ -161,7 +161,7 @@
                 <div class="col-lg-5 col-md-6 col-sm-7">
                     <div class="footer__about">
                         <div class="footer__logo">
-                            <a href="./index.html"><img src="/Source/img/luminique.svg" alt=""></a>
+                            <a href="/"><img src="/Source/img/luminique.svg" alt=""></a>
                         </div>
                         <span>Cửa hàng trang sức Luminique</span>
                         <p>
