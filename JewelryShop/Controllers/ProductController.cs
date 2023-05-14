@@ -1,5 +1,6 @@
 ﻿using JewelryShop.Application.Contracts;
 using JewelryShop.Application.Interfaces;
+using JewelryShop.Helper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JewelryShop.Controllers
@@ -12,6 +13,53 @@ namespace JewelryShop.Controllers
         public ProductController(IProductService productService) {
         
             _productService = productService;
+
+        }
+
+        [Route("Sort")]
+        [HttpGet]
+        public async Task<IActionResult> Sort(string sortOrder, string min = "0", string max = "10000000", int pageIndex = 1)
+        {
+            ViewData["CurrentSort"] = sortOrder;
+          
+
+            var productHomePageDtos = await _productService.GetAllAvailableProducts();
+
+            var realmin = Int32.Parse(new string(min.Substring(0, min.Length - 2).Where(x => x != ('.')).ToArray()));
+            var realmax = Int32.Parse(new string(max.Substring(0, max.Length - 2).Where(x => x != ('.')).ToArray()));
+            ViewData["CurrentMin"] = realmin.ToString();
+            ViewData["CurrentMax"] = realmax.ToString();
+            if (productHomePageDtos != null)
+            {
+
+                switch (sortOrder)
+                {
+                    case "price_desc":
+                        productHomePageDtos = productHomePageDtos.OrderByDescending(s => s.Price).ToList();
+                        break;
+    
+                    case "price_asc":
+                        productHomePageDtos = productHomePageDtos.OrderBy(s => s.Price).ToList();
+                        break;
+                    default:
+                        break;
+                }
+
+
+                productHomePageDtos = productHomePageDtos.Where(x => x.Price < realmax && x.Price > realmin).ToList();
+
+                int pageSize = 6;
+
+                var objs = PaginatedList<ProductHomePageDto>.CreateAsync(productHomePageDtos, pageIndex, pageSize);
+
+                return View("Index", objs);
+
+
+            }
+
+
+            return NotFound();
+
 
         }
 
@@ -76,7 +124,7 @@ namespace JewelryShop.Controllers
         public async Task<IActionResult> Index()
         {
             var productdtos = await _productService.GetAllAvailableProducts();
-            return View(productdtos);
+            return View(PaginatedList<ProductHomePageDto>.CreateAsync(productdtos,1,6));
         }             
             
 

@@ -1,0 +1,60 @@
+﻿@using JewelryShop.Application.Contracts;
+@using JewelryShop.Helper;
+@model PaginatedList<ProductHomePageDto>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+
+    string optionselected = ViewData["CurrentSort"] as string ?? "price_asc";
+
+}
+
+<div class="d-flex w-100 justify-content-center gap-3 mt-3">
+    @*last page*@
+    @if ((Model.PageIndex - 1) > 1)
+    {
+        <a href="@Url.Action("Sort", "Product", new { sortOrder = optionselected, pageIndex = 1 })" class="btn btn-default">
+            &lt;&lt;
+        </a>
+    }
+
+    <a href="@Url.Action("Sort", "Product", new { sortOrder = optionselected, pageIndex = Model.PageIndex - 1 })" class="btn btn-default @prevDisabled">
+        Previous
+    </a>
+
+
+    @if ((Model.PageIndex - 1) > 0)
+    {
+        <a href="@Url.Action("Sort", "Product", new { sortOrder = optionselected, pageIndex = Model.PageIndex - 1 })" class="btn btn-default @prevDisabled">
+            @(Model.PageIndex - 1)
+        </a>
+    }
+
+
+    <a href="@Url.Action("Sort", "Product", new { sortOrder = optionselected, pageIndex = Model.PageIndex })"
+       class="btn btn-no-min focus">
+        @Model.PageIndex
+    </a>
+
+    @*next page*@
+    @if (Model.PageIndex + 1 <= Model.TotalPages)
+    {
+        <a href="@Url.Action("Sort", "Product", new { sortOrder = optionselected, pageIndex = Model.PageIndex + 1 })"
+           class="btn btn-default @nextDisabled">
+            @(Model.PageIndex + 1)
+        </a>
+    }
+
+    <a href="@Url.Action("Sort", "Product", new { sortOrder = optionselected, pageIndex = Model.PageIndex + 1 })" class="btn btn-default @nextDisabled">
+        Next
+    </a>
+
+    @*last page*@
+    @if (Model.TotalPages - (Model.PageIndex + 1) >= 1)
+    {
+        <a href="@Url.Action("Sort", "Product", new { sortOrder = optionselected, pageIndex = Model.TotalPages })" class="btn btn-default">
+            &gt;&gt;
+        </a>
+    }
+</div>
