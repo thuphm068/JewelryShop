@@ -10,8 +10,9 @@ namespace JewelryShop.Application.Interfaces
     public interface IProductService
     {
         public Task<List<ProductHomePageDto>> GetAllAvailableProducts();
-        public Task<List<ProductHomePageDto>> GetProductsByCategoryName(string categoryName);
+        public Task<List<ProductHomePageDto>> GetProductsBySubCategoryName(string categoryName);
         public Task<ProductDto> GetProductDetails(Guid id);
+        public Task<List<ProductHomePageDto>> GetProductsByCategoryName(string CategoryName);
 
 
     }

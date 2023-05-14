@@ -18,12 +18,15 @@
     margin-bottom: 10px;
     margin-right: 10px;
 
+
     &.categories__large__item {
         height: 638px;
         padding-left: 70px;
+        background-color: coral;
 
         .categories__text {
             max-width: 480px;
+
             p {
                 margin-bottom: 15px;
             }

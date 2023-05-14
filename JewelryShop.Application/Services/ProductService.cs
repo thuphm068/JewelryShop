@@ -6,6 +6,7 @@ using JewelryShop.Application.Contracts;
 using MapsterMapper;
 using System.Security.Cryptography.X509Certificates;
 using JewelryShop.Application.Interfaces;
+using System.Net.WebSockets;
 
 namespace JewelryShop.Application.Services
 {
@@ -40,22 +41,42 @@ namespace JewelryShop.Application.Services
             return result;
         }
 
-        public async Task<List<ProductHomePageDto>> GetProductsByCategoryName(string categoryName)
+        public async Task<List<ProductHomePageDto>> GetProductsBySubCategoryName(string subCategoryName)
         {
             var products = await _productRepository.GetAllList();
             var categorys = await _categoryRepository.GetAllList();
             var subcategorys = await _subcategoryRepository.GetAllList();
 
-            var id = categorys.FirstOrDefault(x => x.Name == categoryName);
-            subcategorys = subcategorys.Where(x => x.CategoryId.Equals(id)).ToList();
-            var listSubCateIds = subcategorys.Select(x=> x.Id).ToList();
+            var subcategory = subcategorys.FirstOrDefault(x => x.Name == subCategoryName);
+           
 
-            products = products.Where(x => listSubCateIds.Contains(x.SubCategoryId)).ToList();
+            products = products.Where(x => x.SubCategoryId.Equals(subcategory.Id)).ToList();
 
             var result = _mapper.Map<List<ProductHomePageDto>>(products);
 
             return result;
         }
+
+        public async Task<List<ProductHomePageDto>> GetProductsByCategoryName(string CategoryName)
+        {
+
+            var products = await _productRepository.GetAllList();
+            var categorys = await _categoryRepository.GetAllList();
+            var subcategorys = await _subcategoryRepository.GetAllList();
+
+            var category = categorys.FirstOrDefault(x => x.Name == CategoryName);
+            subcategorys = subcategorys.Where(x => x.CategoryId.Equals(category.Id)).ToList();
+
+            var ids = subcategorys.Select(x => x.Id).ToList();
+
+            products = products.Where(x => ids.Contains(x.SubCategoryId)).ToList();
+
+            var result = _mapper.Map<List<ProductHomePageDto>>(products);
+
+            return result;
+        }
+
+
 
         public async Task<ProductDto> GetProductDetails(Guid id)
         {
@@ -63,15 +84,17 @@ namespace JewelryShop.Application.Services
             var warranty = await _warrantyRepository.GetById(product.WarrantyId);
 
             var productdto = _mapper.Map<ProductDto>(product);
+            var subcategory = await _subcategoryRepository.GetById(product.SubCategoryId);
+
+
+            productdto.SubCategoryName = subcategory.Name;
+            productdto.SubCategoryId = subcategory.Id;
+
             var warrantydto = _mapper.Map<WarrantyDto>(warranty);
             productdto.WarrantyDto = warrantydto;
 
             return productdto;
         }
-
-
-
-
 
     }
 }
