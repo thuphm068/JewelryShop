@@ -1,7 +1,9 @@
 ﻿using JewelryShop.Application.Interfaces;
+using JewelryShop.Helper;
 using JewelryShop.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+
 
 namespace JewelryShop.Controllers
 {
@@ -10,6 +12,7 @@ namespace JewelryShop.Controllers
     {
 
         private readonly IProductService _productService;
+
 
         public HomeController(IProductService productService)
         {
@@ -24,9 +27,11 @@ namespace JewelryShop.Controllers
         //    var productdtos = await _productService.GetProductsByCategoryName(CategoryName);
         //    return View(productdtos);
         //}
-        public IActionResult Index()
+
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var productdtos = await _productService.GetProductsByCategoryName("Nhẫn bạc");
+            return View("Index", productdtos);
         }
 
         public IActionResult Privacy()
@@ -39,5 +44,10 @@ namespace JewelryShop.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        ////////////////////////////////////////
+
+
+
     }
 }

@@ -242,4 +242,5 @@ function formatCurrency(number) {
         $(this).addClass('active');
     });
 
+
 })(jQuery);

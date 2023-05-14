@@ -460,11 +460,11 @@ ol {
 
 .header__right__search input::placeholder {
 	padding-left: 10px;
-	font-size: 12px;
+	font-size: 14px;
 }
 
 .header__right__search a {
-	font-size: 12px;
+	font-size: 14px;
 	color: #666666;
 	position: relative;
 	margin-right: 8px;
@@ -3071,11 +3071,19 @@ option{
 	margin-bottom: 45px;
 }
 
+
+.contact__address h1 {
+	color: #111111;
+	font-size: 30px;
+	font-weight: 600;
+	text-align: center;
+	text-transform: uppercase;
+	margin-bottom: 20px;
+}
 .contact__address h5 {
 	color: #111111;
 	font-size: 20px;
 	font-weight: 600;
-	text-transform: uppercase;
 	margin-bottom: 20px;
 }
 
@@ -3217,9 +3225,7 @@ option{
 	.header {
 		padding: 0 85px;
 	}
-	.header__right__search {
-		margin-right: 5px;
-	}
+
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1599px) {
@@ -3229,6 +3235,7 @@ option{
 	.header {
 		padding: 0 30px;
 	}
+
 }
 
 @media only screen and (min-width: 1200px) {

@@ -1,5 +1,6 @@
 ﻿@using JewelryShop.Application.Contracts
-@model List<ProductHomePageDto>
+@using JewelryShop.Helper;
+@model PaginatedList<ProductHomePageDto>
 @{
     ViewData["Title"] = "Home Page";
     //Layout = null;
@@ -74,8 +75,8 @@
                         </div>
                         <div class="sort-box">
                             <select class="sort-values">
-                                <option value="option1">Giá tăng dần</option>
-                                <option value="option2">Giá giảm dần</option>
+                                <option value="asc"><a asp-action="Index" asp-controller="Product" asp-route-sub="" asp-route-sortOrder="">Giá tăng dần</a></option>
+                                <option value="desc" href="@Url.Action("Index","Product", new {sub="", sortOrder="price_desc"})">Giá giảm dần</option>
                             </select>
                         </div>
 

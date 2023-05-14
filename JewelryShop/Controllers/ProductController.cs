@@ -1,6 +1,10 @@
 ﻿using JewelryShop.Application.Contracts;
 using JewelryShop.Application.Interfaces;
+using JewelryShop.Application.Services;
+using JewelryShop.Helper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Net.WebSockets;
 
 namespace JewelryShop.Controllers
 {
@@ -9,20 +13,32 @@ namespace JewelryShop.Controllers
     {
         private readonly IProductService _productService;
 
-        public ProductController(IProductService productService) {
-        
+        public ProductController(IProductService productService)
+        {
+
             _productService = productService;
 
         }
 
-        [HttpGet("nhan-bac/{id?}")]  
-        public async Task<IActionResult> IndexAsyncNhanBac(string? sub)
+        public async Task<IActionResult> Index()
+        {
+            var productdtos = await _productService.GetAllAvailableProducts();
+            return View(productdtos);
+        }
+
+
+
+        [HttpGet("nhan-bac/{id?}")]
+        public async Task<IActionResult> IndexAsyncNhanBac(string? sub, int page)
         {
             List<ProductHomePageDto> productHomePageDtos = new List<ProductHomePageDto>();
+            var pageResults = 6f;
+            var pageCount = Math.Ceiling(productHomePageDtos.Count() / pageResults);
+
+            
             if (sub == null)
             {
                 productHomePageDtos = await _productService.GetProductsByCategoryName("Nhẫn bạc");
-
             }
             else
             {
@@ -30,8 +46,8 @@ namespace JewelryShop.Controllers
             }
             return View("Index", productHomePageDtos);
 
-        }        
-        [HttpGet("khuyen-bac/{id?}")]  
+        }
+        [HttpGet("khuyen-bac/{id?}")]
         public async Task<IActionResult> IndexAsyncKhuyenBac(string? sub)
         {
             List<ProductHomePageDto> productHomePageDtos = new List<ProductHomePageDto>();
@@ -44,10 +60,10 @@ namespace JewelryShop.Controllers
                 productHomePageDtos = await _productService.GetProductsBySubCategoryName(sub);
             }
             return View("Index", productHomePageDtos);
-        }   
-        
+        }
 
-        [HttpGet("vong-bac/{id?}")]  
+
+        [HttpGet("vong-bac/{id?}")]
         public async Task<IActionResult> IndexAsyncVongBac(string? sub)
         {
             List<ProductHomePageDto> productHomePageDtos = new List<ProductHomePageDto>();
@@ -63,7 +79,7 @@ namespace JewelryShop.Controllers
         }
 
 
-        [HttpGet("day-chuyen")]  
+        [HttpGet("day-chuyen")]
         public async Task<IActionResult> IndexAsyncKhuyenTai()
         {
             var productdtos = await _productService.GetProductsByCategoryName("Dây chuyền");
@@ -71,16 +87,7 @@ namespace JewelryShop.Controllers
         }
 
 
-        [HttpGet("")]
-
-        public async Task<IActionResult> Index()
-        {
-            var productdtos = await _productService.GetAllAvailableProducts();
-            return View(productdtos);
-        }             
-            
-
-        [HttpGet("detail/{id?}")]  
+        [HttpGet("chi-tiet/{id?}")]
         public async Task<IActionResult> Detail(Guid? id)
         {
             if (id == null)
@@ -97,4 +104,7 @@ namespace JewelryShop.Controllers
 
 
     }
+
+
+
 }
