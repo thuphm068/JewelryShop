@@ -77,26 +77,26 @@
                         <ul>
                             <li class="active"><a href="/">Trang chủ</a></li>
                             <li>
-                                <a href="/san-pham/nhan-bac">Nhẫn bạc</a>
+                                <a href="/san-pham/?cate=Nhẫn%20bạc">Nhẫn bạc</a>
                                 <ul class="dropdown">
-                                    <li><a asp-action="IndexAsyncNhanBac" asp-controller="Product" asp-route-sub="Nhẫn nữ">Nhẫn nữ</a></li>
-                                    <li><a asp-action="IndexAsyncNhanBac" asp-controller="Product" asp-route-sub="Nhẫn nam">Nhẫn nam</a></li>
-                                    <li><a asp-action="IndexAsyncNhanBac" asp-controller="Product" asp-route-sub="Nhẫn đôi">Nhẫn đôi</a></li>
+                                    <li><a href="/san-pham/?sub=Nhẫn%20nữ">Nhẫn nữ</a></li>
+                                    <li><a href="/san-pham/?sub=Nhẫn%20nam">Nhẫn nam</a></li>
+                                    <li><a href="/san-pham/?sub=Nhẫn%20đôi">Nhẫn đôi</a></li>
                                 </ul>
                             </li>
-                            <li><a href="/san-pham/day-chuyen">Dây chuyền</a></li>
+                            <li><a href="/san-pham/?cate=Dây%20chuyền">Dây chuyền</a></li>
                             <li>
-                                <a href="/san-pham/vong-bac">Vòng bạc</a>
+                                <a href="/san-pham/?cate=Vòng%20bạc">Vòng bạc</a>
                                 <ul class="dropdown">
-                                    <li><a asp-action="IndexAsyncVongBac" asp-controller="Product" asp-route-sub="Vòng tay">Vòng - Lắc tay</a></li>
-                                    <li><a asp-action="IndexAsyncVongBac" asp-controller="Product" asp-route-sub="Vòng chân"> Vòng - Lắc chân</a></li>
+                                    <li><a href="/san-pham/?sub=Vòng%20tay">Vòng - Lắc tay</a></li>
+                                    <li><a href="/san-pham/?sub=Vòng%20chân"> Vòng - Lắc chân</a></li>
                                 </ul>
                             </li>                            
                             <li>
-                                <a href="/san-pham/khuyen-bac">Khuyên bạc</a>
+                                <a href="/san-pham/?cate=Khuyên%20bạc">Khuyên bạc</a>
                                 <ul class="dropdown">
-                                    <li><a asp-action="IndexAsyncKhuyenBac" asp-controller="Product" asp-route-sub="Khuyên tai">Khuyên tai</a></li>
-                                    <li><a asp-action="IndexAsyncKhuyenBac" asp-controller="Product" asp-route-sub="Khuyên vị trí khác">Khuyên vị trí khác</a></li>
+                                    <li><a href="/san-pham/?sub=Khuyên%20tai">Khuyên tai</a></li>
+                                    <li><a href="/san-pham/?sub=Khuyên%20vị%20trí%20khác">Khuyên vị trí khác</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -105,9 +105,9 @@
                 <div class="col-xl-4 col-lg-4">
                     <div class="header__right">
                         <div class="header__right__search">
-                            <i class="fa fa-search icon">
-                            </i>
-                            <input class="input-field" type="text" placeholder="Tìm kiếm">
+                            <form class="search-model-form">
+                                <input type="text" id="search-input" placeholder="Search here...">
+                            </form>
                         </div>
                         <ul class="header__right__widget ">
 @*                            <li><span class="fa fa-search search-switch"></span></li>
