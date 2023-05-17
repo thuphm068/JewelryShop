@@ -47,7 +47,7 @@
                     <div class="carousel-item ">
                         <img src="~/Source/img/product/@e.Image" alt="/">
                         <h6><a asp-action="Detail" asp-controller="Product" asp-route-id=@e.Id>@e.Name</a></h6>
-                        <div class="product__price">@e.Price đ</div>
+                        <div class="product__price">@ViewBag.FormattedPrice đ</div>
                     </div>
                 </div>
             }

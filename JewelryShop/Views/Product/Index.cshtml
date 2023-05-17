@@ -106,7 +106,7 @@
                             </div>
                             <div class="filter-range-wrap">
                                 <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                     data-min="0" data-max="1000000">
+                                     data-min="0" data-max="1500000">
                                 </div>
                                 <div class="range-slider">
                                     <div class="price-input">
@@ -122,6 +122,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-9 col-md-9">
                 <div class="row">
 
@@ -133,7 +134,7 @@
                                 </div>                                
                                 <div class="product__item__text">
                                     <h6><a asp-action="Detail" asp-controller="Product" asp-route-id="@e.Id">@e.Name</a></h6>
-                                    <div class="product__price">@e.Price đ</div>
+                                    <div class="product__price">@ViewBag.FormattedPrice đ</div>
                                 </div>
                             </div>
                         </div>

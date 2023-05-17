@@ -1,5 +1,6 @@
 ﻿using JewelryShop.Application.Contracts;
 using JewelryShop.Application.Interfaces;
+using JewelryShop.Domain.Entities;
 using JewelryShop.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
@@ -19,9 +20,11 @@ namespace JewelryShop.Controllers
 
         }
 
+
+
         [Route("Sort")]
         [HttpGet]
-        public async Task<IActionResult> Sort(string sortOrder, string min = "000", string max = "1000000000", int pageIndex = 1)
+        public async Task<IActionResult> Sort(string sortOrder, string min = "000", string max = "1500000000", int pageIndex = 1)
         {
             ViewData["CurrentSort"] = sortOrder;
             var productHomePageDtos = await _productService.GetAllAvailableProducts();
@@ -65,7 +68,7 @@ namespace JewelryShop.Controllers
         [HttpGet]
         [Route("")]
 
-        public async Task<IActionResult> Index(string? searchString,string? cate, string? sub, string sortOrder, string min = "000", string max = "1000000000", int pageIndex = 1)
+        public async Task<IActionResult> Index(string? searchString,string? cate, string? sub, string sortOrder, string min = "000", string max = "1500000000", int pageIndex = 1)
         {
             ViewData["CurrentSort"] = sortOrder;
 
@@ -94,7 +97,6 @@ namespace JewelryShop.Controllers
             }            
             if (productHomePageDtos != null)
             {
-
                 switch (sortOrder)
                 {
                     case "price_desc":
@@ -109,20 +111,22 @@ namespace JewelryShop.Controllers
                 }
 
                 productHomePageDtos = productHomePageDtos.Where(x => x.Price < realmax && x.Price > realmin).ToList();
-
-                int pageSize = 6;
-
-                var objs = PaginatedList<ProductHomePageDto>.CreateAsync(productHomePageDtos, pageIndex, pageSize);
-
-                return View("Index", objs);
             }
             if (searchString != null)
             {
-                productHomePageDtos = productHomePageDtos.Where(x => x.Name.Contains(searchString)).ToList();
+                productHomePageDtos = productHomePageDtos.Where(x => x.Name.ToLower().Contains(searchString.ToLower())).ToList();
+            }
+            int pageSize = 6;
+            var objs = PaginatedList<ProductHomePageDto>.CreateAsync(productHomePageDtos, pageIndex, pageSize);
+
+            foreach (var product in objs)
+            {
+                ViewBag.FormattedPrice = PriceFormatter.FormatPrice(product.Price);
             }
 
+            return View("Index", objs);
 
-            return View(PaginatedList<ProductHomePageDto>.CreateAsync(productHomePageDtos, 1, 6));
+            //return View(PaginatedList<ProductHomePageDto>.CreateAsync(productHomePageDtos, 1, 6));
 
         }
 
@@ -203,6 +207,8 @@ namespace JewelryShop.Controllers
             var productdto = await _productService.GetProductDetails((Guid)id);
             var productdtos = await _productService.GetProductsBySubCategoryName(productdto.SubCategoryName);
             ViewData["RelatedProducts"] = productdtos;
+            ViewBag.FormattedPrice = PriceFormatter.FormatPrice(productdto.Price);
+
             return View(productdto);
 
 

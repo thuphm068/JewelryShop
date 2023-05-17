@@ -10,6 +10,11 @@ namespace JewelryShop.Controllers
         public IActionResult Index()
         {
             return View("ShopCart");
+        }        
+        [HttpGet("dat-hang")]
+        public IActionResult CheckOut()
+        {
+            return View("CheckOut");
         }
     }
 }

@@ -5,23 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - JewelryShop</title>
     @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-      <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/JewelryShop.styles.css" asp-append-version="true" />*@
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" 
-    rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet" />
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css"/>
-    <link rel="stylesheet" href="~/Source/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css"/>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="~/Source/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css" />
     <link rel="stylesheet" href="~/Source/fonts/elegant-icons.css" type="text/css" />
-    <link rel="stylesheet" href="~/css/jquery-ui.min.css" type="text/css"/>
-    <link rel="stylesheet" href="~/css/magnific-popup.css" type="text/css"/>
-    <link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css"/>
-    <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css"/>
-    <link rel="stylesheet" href="~/css/style.css" type="text/css"/>
+    <link rel="stylesheet" href="~/css/jquery-ui.min.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/magnific-popup.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/style.css" type="text/css" />
 
 </head>
 <body>
@@ -37,32 +37,25 @@
     <div class="offcanvas-menu-wrapper">
         <div class="offcanvas__close">+</div>
         <ul class="offcanvas__widget">
-@*            <input type="text" placeholder="Type to search">
-*@@*            <li><span class="fa fa-search search-switch"></span></li>
-*@            <li>
+            <li><span class="icon_search search-switch"></span></li>
+            <li>
                 <a href="#">
                     <span class="fa fa-user-o"></span>
                     <div class="tip">2</div>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="/gio-hang">
                     <span class="fa fa-shopping-cart"></span>
                     <div class="tip">2</div>
                 </a>
             </li>
         </ul>
         <div class="offcanvas__logo">
-            <a href="./index.html"><img src="/Source/img/luminique.svg" alt=""></a>
-        </div>
-        <div id="mobile-menu-wrap"></div>
-        <div class="offcanvas__auth">
-            <a href="#">Login</a>
-            <a href="#">Register</a>
+            <a href="/"><img src="/Source/img/luminique.svg" alt=""></a>
         </div>
     </div>
     <!-- Offcanvas Menu End -->
-
     <!-- Header Section Begin -->
     <header class="header">
         <div class="container-fluid">
@@ -91,7 +84,7 @@
                                     <li><a href="/san-pham/?sub=Vòng%20tay">Vòng - Lắc tay</a></li>
                                     <li><a href="/san-pham/?sub=Vòng%20chân"> Vòng - Lắc chân</a></li>
                                 </ul>
-                            </li>                            
+                            </li>
                             <li>
                                 <a href="/san-pham/?cate=Khuyên%20bạc">Khuyên bạc</a>
                                 <ul class="dropdown">
@@ -102,31 +95,31 @@
                         </ul>
                     </nav>
                 </div>
-@*                <div class="col-xl-2 col-lg-2">
-                    <div class="header__right__search">
-                        <form class="search-model-form">
-                            <input type="text" id="search-input" placeholder="Search here...">
-                        </form>
-                    </div>
+                @*                <div class="col-xl-2 col-lg-2">
+                <div class="header__right__search">
+                <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here...">
+                </form>
+                </div>
 
                 </div>*@
-@*                <div class="col-xl-2 col-lg-4">
-                    <div class="header__right">
-                        <ul class="header__right__widget ">
-                           <li>
-                                <a href="#">
-                                    <span class="fa fa-user-o"></span>
-                                    <div class="tip">2</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="fa fa-shopping-cart"></span>
-                                    <div class="tip">2</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                @*                <div class="col-xl-2 col-lg-4">
+                <div class="header__right">
+                <ul class="header__right__widget ">
+                <li>
+                <a href="#">
+                <span class="fa fa-user-o"></span>
+                <div class="tip">2</div>
+                </a>
+                </li>
+                <li>
+                <a href="#">
+                <span class="fa fa-shopping-cart"></span>
+                <div class="tip">2</div>
+                </a>
+                </li>
+                </ul>
+                </div>
                 </div>*@
                 <div class="col-lg-3 col-xl-3">
                     <div class="header__right">
@@ -155,15 +148,12 @@
         </div>
     </header>
     <!-- Header Section End -->
-
-   
-
     <!-- Search Begin -->
     <div class="search-model">
         <div class="h-100 d-flex align-items-center justify-content-center">
             <div class="search-close-switch">+</div>
             <form class="search-model-form" asp-action="Index" asp-controller="Product" method="get">
-                <input class="submit_on_enter" type="text" id="search-input" placeholder="Nhập để tìm kiếm" name="searchString">
+                <input type="text" id="search-input" placeholder="Nhập để tìm kiếm" name="searchString" onchange="this.form.submit()">
             </form>
         </div>
     </div>
@@ -211,10 +201,10 @@
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-8 col-sm-8">
-                        <div class="footer__social">
+                    <div class="footer__social">
                         <a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
                         <a href="https://www.instagram.com/"><i class="fa fa-instagram"></i></a>
-                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -228,7 +218,6 @@
         </div>
     </footer>
     <!-- Footer Section End -->
-
     @*<script src="~/lib/jquery/dist/jquery.min.js"></script>*@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

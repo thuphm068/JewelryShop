@@ -1,5 +1,6 @@
 ﻿using JewelryShop.Application.Contracts;
 using JewelryShop.Application.Interfaces;
+using JewelryShop.Helper;
 using JewelryShop.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -25,6 +26,10 @@ namespace JewelryShop.Controllers
             List<ProductHomePageDto> productHomePageDtos = new List<ProductHomePageDto>();
             productHomePageDtos = await _productService.GetProductsByCategoryName(cate);
 
+            foreach (var product in productHomePageDtos)
+            {
+                ViewBag.FormattedPrice = PriceFormatter.FormatPrice(product.Price);
+            }
             return View("Index", productHomePageDtos);
         }
 

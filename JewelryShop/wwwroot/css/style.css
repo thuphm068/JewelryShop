@@ -1524,6 +1524,11 @@ option {
         .sidebar__filter .section-title h4 {
             font-size: 18px;
         }
+/*    .sidebar__filter button:hover {
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+        border-top: 1px solid #e5e5e5;
+    }*/
+
 
     .sidebar__filter a {
         font-size: 14px;
@@ -1550,7 +1555,7 @@ option {
 
     .filter-range-wrap .range-slider .price-input:after {
         position: absolute;
-        left: 51px;
+        left: 40%;
         top: 12px;
         height: 1px;
         width: 5px;
@@ -1559,9 +1564,9 @@ option {
     }
 
     .filter-range-wrap .range-slider .price-input input {
-        font-size: 13px;
+        font-size: 15px;
         color: #0d0d0d;
-        max-width: 16%;
+        max-width: 40%;
         border: none;
     }
 
@@ -2579,6 +2584,7 @@ option {
             font-weight: 600;
             float: right;
         }
+
 
 .checkout__order__total {
     padding-top: 12px;
