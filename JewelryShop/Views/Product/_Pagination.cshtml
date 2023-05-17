@@ -15,25 +15,28 @@
     @*last page*@
     @if ((Model.PageIndex - 1) > 1)
     {
-        <a href="@Url.Action("Sort", "Product", new { sortOrder = optionselected, pageIndex = 1, sub = subselected, cate = cateselected })" class="btn btn-default">
+        //<a href="@Url.Action("Index", "Product", new { sortOrder = optionselected, pageIndex = 1, sub = subselected, cate = cateselected })" class="btn btn-default">
+        //    &lt;&lt;
+        //</a>
+        <a asp-controller="Product" asp-action="Index" asp-route-sortOrder=@optionselected asp-route-pageIndex=1 asp-route-cate=@cateselected asp-route-sub=@subselected
+           class="btn btn-default">
             &lt;&lt;
         </a>
     }
 
-    <a href="@Url.Action("Sort", "Product", new { sortOrder = optionselected, pageIndex = Model.PageIndex - 1, sub = subselected, cate = cateselected })" class="btn btn-default @prevDisabled">
+    <a asp-controller="Product" asp-action="Index" asp-route-sortOrder=@optionselected asp-route-pageIndex=@(Model.PageIndex - 1) asp-route-cate=@cateselected asp-route-sub=@subselected
+       class="btn btn-default @prevDisabled">
         Previous
     </a>
 
-
     @if ((Model.PageIndex - 1) > 0)
     {
-        <a href="@Url.Action("Sort", "Product", new { sortOrder = optionselected, pageIndex = Model.PageIndex - 1, sub = subselected, cate = cateselected })" class="btn btn-default @prevDisabled">
+        <a asp-controller="Product" asp-action="Index" asp-route-sortOrder=@optionselected asp-route-pageIndex=@(Model.PageIndex - 1) asp-route-cate=@cateselected asp-route-sub=@subselected
+           class="btn btn-default @prevDisabled">
             @(Model.PageIndex - 1)
         </a>
     }
-
-
-    <a href="@Url.Action("Sort", "Product", new { sortOrder = optionselected, pageIndex = Model.PageIndex, sub = subselected, cate = cateselected })"
+    <a asp-controller="Product" asp-action="Index" asp-route-sortOrder=@optionselected asp-route-pageIndex=@Model.PageIndex asp-route-cate=@cateselected asp-route-sub=@subselected
        class="btn btn-no-min focus">
         @Model.PageIndex
     </a>
@@ -41,20 +44,22 @@
     @*next page*@
     @if (Model.PageIndex + 1 <= Model.TotalPages)
     {
-        <a href="@Url.Action("Sort", "Product", new { sortOrder = optionselected, pageIndex = Model.PageIndex + 1, sub = subselected, cate = cateselected })"
+        <a asp-controller="Product" asp-action="Index" asp-route-sortOrder=@optionselected asp-route-pageIndex=@(Model.PageIndex+1) asp-route-cate=@cateselected asp-route-sub=@subselected
            class="btn btn-default @nextDisabled">
             @(Model.PageIndex + 1)
         </a>
     }
 
-    <a href="@Url.Action("Sort", "Product", new { sortOrder = optionselected, pageIndex = Model.PageIndex + 1, sub = subselected, cate = cateselected })" class="btn btn-default @nextDisabled">
+    <a asp-controller="Product" asp-action="Index" asp-route-sortOrder=@optionselected asp-route-pageIndex=@(Model.PageIndex+1) asp-route-cate=@cateselected asp-route-sub=@subselected
+       class="btn btn-default @nextDisabled">
         Next
     </a>
 
     @*last page*@
     @if (Model.TotalPages - (Model.PageIndex + 1) >= 1)
     {
-        <a href="@Url.Action("Sort", "Product", new { sortOrder = optionselected, pageIndex = Model.TotalPages, sub = subselected, cate = cateselected })" class="btn btn-default">
+        <a asp-controller="Product" asp-action="Index" asp-route-sortOrder=@optionselected asp-route-pageIndex=@Model.TotalPages asp-route-cate=@cateselected asp-route-sub=@subselected
+           class="btn btn-default">
             &gt;&gt;
         </a>
     }

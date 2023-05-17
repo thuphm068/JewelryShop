@@ -62,9 +62,10 @@ namespace JewelryShop.Controllers
             return NotFound();
         }
 
-        [HttpGet("{cate?}/{sub?}")]
+        [HttpGet]
+        [Route("")]
 
-        public async Task<IActionResult> IndexAsync(string? cate, string? sub, string sortOrder, string min = "000", string max = "1000000000", int pageIndex = 1)
+        public async Task<IActionResult> Index(string? cate, string? sub, string sortOrder, string min = "000", string max = "1000000000", int pageIndex = 1)
         {
             ViewData["CurrentSort"] = sortOrder;
 

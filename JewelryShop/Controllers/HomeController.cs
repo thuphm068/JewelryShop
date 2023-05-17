@@ -1,11 +1,12 @@
-﻿using JewelryShop.Application.Interfaces;
+﻿using JewelryShop.Application.Contracts;
+using JewelryShop.Application.Interfaces;
 using JewelryShop.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace JewelryShop.Controllers
 {
-
+ 
     public class HomeController : Controller
     {
 
@@ -19,15 +20,20 @@ namespace JewelryShop.Controllers
 
 
         [HttpGet("")]
-        //public async Task<IActionResult> IndexAsync(string CategoryName)
-        //{
-        //    var productdtos = await _productService.GetProductsByCategoryName(CategoryName);
-        //    return View(productdtos);
-        //}
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string? cate = "Nhẫn bạc")
         {
-            return View();
+            List<ProductHomePageDto> productHomePageDtos = new List<ProductHomePageDto>();
+            productHomePageDtos = await _productService.GetProductsByCategoryName(cate);
+
+            return View("Index", productHomePageDtos);
         }
+
+        //public async Task<IActionResult> Index()
+        //{
+        //    List<ProductHomePageDto> productHomePageDtos = new List<ProductHomePageDto>();
+        //    productHomePageDtos = await _productService.GetAllAvailableProducts();
+        //    return View(productHomePageDtos);
+        //}
 
         public IActionResult Privacy()
         {

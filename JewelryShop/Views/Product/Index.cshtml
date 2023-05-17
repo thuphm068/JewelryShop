@@ -11,7 +11,8 @@
     var currentMax = Int32.Parse(ViewData["CurrentMax"] as string ?? "1000000");
     
     string optionselected = ViewData["CurrentSort"] as string ?? "price_asc";
-
+    string? cateselected = ViewData["CurrentCate"] as string;
+    string? subselected = ViewData["CurrentSub"] as string;
 }
 
 
@@ -85,13 +86,13 @@
                             <select class="sort-values" onchange="gotoSection(this.value)">
                                 @if (optionselected == "price_asc")
                                 {
-                                    <option selected value="@Url.Action("Sort","Product",new {sortOrder = "price_asc"})">Giá tăng dần</option>
-                                    <option value="@Url.Action("Sort","Product",new {sortOrder = "price_desc"})">Giá giảm dần</option>
+                                    <option selected value="@Url.Action("Index","Product",new {sortOrder = "price_asc", sub = subselected, cate = cateselected})">Giá tăng dần</option>
+                                    <option value="@Url.Action("Index","Product",new {sortOrder = "price_desc", sub = subselected, cate = cateselected})">Giá giảm dần</option>
                                 }
                                 else
                                 {
-                                    <option value="@Url.Action("Sort","Product",new {sortOrder = "price_asc"})">Giá tăng dần</option>
-                                    <option selected value="@Url.Action("Sort","Product",new {sortOrder = "price_desc"})">Giá giảm dần</option>
+                                    <option value="@Url.Action("Index","Product",new {sortOrder = "price_asc", sub = subselected, cate = cateselected})">Giá tăng dần</option>
+                                    <option selected value="@Url.Action("Index","Product",new {sortOrder = "price_desc", sub = subselected, cate = cateselected})">Giá giảm dần</option>
                                 }
 
                             </select>
@@ -129,10 +130,9 @@
                         <div class="col-6 col-lg-4 col-md-4">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="/Source/img/product/@e.Image">
-                                </div>
+                                </div>                                
                                 <div class="product__item__text">
                                     <h6><a asp-action="Detail" asp-controller="Product" asp-route-id="@e.Id">@e.Name</a></h6>
-
                                     <div class="product__price">@e.Price đ</div>
                                 </div>
                             </div>
