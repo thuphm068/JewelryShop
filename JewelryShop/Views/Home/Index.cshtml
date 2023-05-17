@@ -30,8 +30,6 @@
     </div>
 </section>
 <!-- Categories Section End -->
-
-
 <!-- Product Section Begin -->
 <section class="product spad">
     <div class="container">
@@ -41,34 +39,18 @@
                     <h4>Nhẫn bạc nổi bật</h4>
                 </div>
             </div>
-@*            <div class="col-lg-8 col-md-8">
-                <ul class="filter__controls">
-                    <li class="active" data-filter="*">Nhẫn nữ</li>
-                    <li data-filter=".women">Nhẫn nam</li>
-                    <li data-filter=".men">Nhẫn đôi</li>
-                </ul>
-            </div>*@
         </div>
-        <div class="row property__gallery">
-
-                    <div class="carousel">
-                        @foreach (var e in Model){
-                            <div class="carousel-item col-lg-3 col-md-4 col-sm-6">
-                                <img src="~/Source/img/product/@e.Image" alt="/">
-                                <h6><a asp-action="Detail" asp-controller="Product" asp-route-id=@e.Id>@e.Name</a></h6>
-                                <div class="product__price">@e.Price đ</div>
-
-                            </div>
-                        }
-
+        <div class="carousel slide" data-ride="carousel">
+                 @foreach (var e in Model)
+            {
+                <div class="carousel-inner col-lg-3 col-md-4 col-sm-6">
+                    <div class="carousel-item ">
+                        <img src="~/Source/img/product/@e.Image" alt="/">
+                        <h6><a asp-action="Detail" asp-controller="Product" asp-route-id=@e.Id>@e.Name</a></h6>
+                        <div class="product__price">@e.Price đ</div>
                     </div>
-
-@*                    <div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Buttons tweed blazer</a></h6>
-                        <div class="product__price">$ 59.0</div>
-                    </div>*@
+                </div>
+            }
 
         </div>
     </div>
@@ -98,7 +80,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12 p-0">
                         <div class="categories__item set-bg" data-setbg="/Source/img/categories/category-4.jpg">
                             <div class="categories__text">
-                                
+
                                 <a href="san-pham/khuyen-bac?sub=Khuyên%20tai"><h4>Khuyên tai</h4></a>
                             </div>
                         </div>
@@ -109,8 +91,6 @@
     </div>
 </section>
 <!-- Categories Section 2 End -->
-
-
 @*<!-- Banner Section Begin -->
 <section class="banner set-bg" data-setbg="/Source/img/banner/banner-1.jpg">
     <div class="container">

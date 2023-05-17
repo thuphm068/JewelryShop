@@ -65,7 +65,7 @@ namespace JewelryShop.Controllers
         [HttpGet]
         [Route("")]
 
-        public async Task<IActionResult> Index(string? cate, string? sub, string sortOrder, string min = "000", string max = "1000000000", int pageIndex = 1)
+        public async Task<IActionResult> Index(string? searchString,string? cate, string? sub, string sortOrder, string min = "000", string max = "1000000000", int pageIndex = 1)
         {
             ViewData["CurrentSort"] = sortOrder;
 
@@ -116,6 +116,11 @@ namespace JewelryShop.Controllers
 
                 return View("Index", objs);
             }
+            if (searchString != null)
+            {
+                productHomePageDtos = productHomePageDtos.Where(x => x.Name.Contains(searchString)).ToList();
+            }
+
 
             return View(PaginatedList<ProductHomePageDto>.CreateAsync(productHomePageDtos, 1, 6));
 
