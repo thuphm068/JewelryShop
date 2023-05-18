@@ -5,6 +5,7 @@ using JewelryShop.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Data.SqlClient;
+using Newtonsoft.Json;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace JewelryShop.Controllers
@@ -14,8 +15,9 @@ namespace JewelryShop.Controllers
     {
         private readonly IProductService _productService;
 
-        public ProductController(IProductService productService) {
-        
+        public ProductController(IProductService productService)
+        {
+
             _productService = productService;
 
         }
@@ -42,7 +44,7 @@ namespace JewelryShop.Controllers
                     case "price_desc":
                         productHomePageDtos = productHomePageDtos.OrderByDescending(s => s.Price).ToList();
                         break;
-    
+
                     case "price_asc":
                         productHomePageDtos = productHomePageDtos.OrderBy(s => s.Price).ToList();
                         break;
@@ -52,7 +54,7 @@ namespace JewelryShop.Controllers
 
                 if (realmax < realmin)
                 {
-                    return NotFound(); 
+                    return NotFound();
                 }
                 productHomePageDtos = productHomePageDtos.Where(x => x.Price < realmax && x.Price > realmin).ToList();
 
@@ -68,7 +70,7 @@ namespace JewelryShop.Controllers
         [HttpGet]
         [Route("")]
 
-        public async Task<IActionResult> Index(string? searchString,string? cate, string? sub, string sortOrder, string min = "000", string max = "1500000000", int pageIndex = 1)
+        public async Task<IActionResult> Index(string? searchString, string? cate, string? sub, string sortOrder, string min = "000", string max = "1500000000", int pageIndex = 1)
         {
             ViewData["CurrentSort"] = sortOrder;
 
@@ -94,7 +96,7 @@ namespace JewelryShop.Controllers
                 {
                     productHomePageDtos = await _productService.GetAllAvailableProducts();
                 }
-            }            
+            }
             if (productHomePageDtos != null)
             {
                 switch (sortOrder)
@@ -132,72 +134,9 @@ namespace JewelryShop.Controllers
 
 
 
-//[HttpGet("nhan-bac/{id?}")]  
-//public async Task<IActionResult> IndexAsyncNhanBac(string? sub)
-//{
-//    List<ProductHomePageDto> productHomePageDtos = new List<ProductHomePageDto>();
-//    if (sub == null)
-//    {
-//        productHomePageDtos = await _productService.GetProductsByCategoryName("Nhẫn bạc");
-
-//    }
-//    else
-//    {
-//        productHomePageDtos = await _productService.GetProductsBySubCategoryName(sub);
-//    }
-//    return View("Index", productHomePageDtos);
-
-//}        
-//[HttpGet("khuyen-bac/{id?}")]  
-//public async Task<IActionResult> IndexAsyncKhuyenBac(string? sub)
-//{
-//    List<ProductHomePageDto> productHomePageDtos = new List<ProductHomePageDto>();
-//    if (sub == null)
-//    {
-//        productHomePageDtos = await _productService.GetProductsByCategoryName("Khuyên bạc");
-//    }
-//    else
-//    {
-//        productHomePageDtos = await _productService.GetProductsBySubCategoryName(sub);
-//    }
-//    return View("Index", productHomePageDtos);
-//}   
 
 
-//[HttpGet("vong-bac/{id?}")]  
-//public async Task<IActionResult> IndexAsyncVongBac(string? sub)
-//{
-//    List<ProductHomePageDto> productHomePageDtos = new List<ProductHomePageDto>();
-//    if (sub == null)
-//    {
-//        productHomePageDtos = await _productService.GetProductsByCategoryName("Vòng bạc");
-//    }
-//    else
-//    {
-//        productHomePageDtos = await _productService.GetProductsBySubCategoryName(sub);
-//    }
-//    return View("Index", productHomePageDtos);
-//}
-
-
-//[HttpGet("day-chuyen")]  
-//public async Task<IActionResult> IndexAsyncKhuyenTai()
-//{
-//    var productdtos = await _productService.GetProductsByCategoryName("Dây chuyền");
-//    return View("Index", productdtos);
-//}
-
-
-//[HttpGet("")]
-
-//public async Task<IActionResult> Index()
-//{
-//    var productdtos = await _productService.GetAllAvailableProducts();
-//    return View(PaginatedList<ProductHomePageDto>.CreateAsync(productdtos,1,6));
-//}             
-
-
-[HttpGet("detail/{id?}")]  
+        [HttpGet("detail/{id?}")]
         public async Task<IActionResult> Detail(Guid? id)
         {
             if (id == null)
@@ -210,6 +149,51 @@ namespace JewelryShop.Controllers
             ViewBag.FormattedPrice = PriceFormatter.FormatPrice(productdto.Price);
 
             return View(productdto);
+
+
+        }
+
+
+        [HttpGet("AddtoCart/{id?}")]
+        public async Task<IActionResult> AddtoCart(Guid? id, int count = 1)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var productdto = await _productService.GetProductDetails((Guid)id);
+            if (productdto == null) { return NotFound(); }
+
+            string? pro = HttpContext.Session.GetString("P_ID");
+            if (pro != null)
+            {
+                var listofP = JsonConvert.DeserializeObject<List<string>>(pro);
+                if (listofP != null)
+                { 
+                    for(int i = 0; i <count; i++)
+                    {
+                        listofP.Add(((Guid)id).ToString());
+
+                    }
+                    HttpContext.Session.SetString("P_ID", JsonConvert.SerializeObject(listofP
+                ).ToString()              );
+                }
+            }
+            else
+            {
+                var temp  = new List<string>();
+                for (int i = 0; i < count; i++)
+                {
+                    temp.Add(((Guid)id).ToString());
+
+                }
+                this.HttpContext.Session.SetString(
+               "P_ID",
+               JsonConvert.SerializeObject(temp).ToString()
+               );
+            }
+            await this.HttpContext.Session.CommitAsync();
+            return RedirectToAction("Index", "Cart");
 
 
         }

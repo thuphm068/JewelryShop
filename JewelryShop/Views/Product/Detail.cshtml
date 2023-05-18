@@ -48,13 +48,19 @@
                     <div class="product__details__price">@ViewBag.FormattedPrice đ</div>
                     <p>@Model.Name với chất liệu @Model.Material</p>
                     <div class="product__details__button">
-                        <div class="quantity">
-                            <span>Số lượng:</span>
-                            <div class="pro-qty">
-                                <input type="text" value="1">
+                        <form asp-controller="Product" asp-action="AddtoCart" method="get">
+                            <input type="text" value="@Model.Id" hidden name="id">
+
+                            <div class="quantity">
+                                <span>Số lượng:</span>
+                                <div class="pro-qty">
+                                    <input type="text" value="1" name="count">
+                                </div>
                             </div>
-                        </div>
-                        <a href="#" class="cart-btn"><span class="icon_bag_alt"></span> Thêm vào giỏ hàng</a>
+                            <button type="submit"  class="cart-btn"><span class="icon_bag_alt"></span> Thêm vào giỏ hàng</button>
+                    
+                    </form>
+
 
                     </div>
                     <div class="product__details__widget">

@@ -40,20 +40,60 @@
                 </div>
             </div>
         </div>
-        <div class="carousel slide" data-ride="carousel">
-                 @foreach (var e in Model)
-            {
-                <div class="carousel-inner col-lg-3 col-md-4 col-sm-6">
-                    <div class="carousel-item ">
+    </div>
+    <div class="container">
+
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner col-lg-12">
+                @foreach (var e in Model)
+                {
+                    <div class="carousel-item col-lg-3 col-md-4 col-sm-6 col-6 float-left">
                         <img src="~/Source/img/product/@e.Image" alt="/">
                         <h6><a asp-action="Detail" asp-controller="Product" asp-route-id=@e.Id>@e.Name</a></h6>
                         <div class="product__price">@ViewBag.FormattedPrice đ</div>
                     </div>
-                </div>
-            }
+                }
+            </div>
+            <div class="carousel-arrow carousel-arrow--prev carousel-arrow--hint carousel-arrow--hidden" role="button" data-slide="prev"></span>
+                <span class="sr-only">Previous</span>
+            </div>
 
+            <div class="carousel-arrow carousel-arrow--next carousel-arrow--hint"  role="button" data-slide="next">
+                <span class="sr-only">Next</span>
+            </div>
         </div>
+
     </div>
+
+    @*    <!-- Top content -->
+    <div class="top-content">
+    <div class="container-fluid">
+    <div id="carousel-example" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner row w-100 mx-auto" role="listbox">
+    @foreach (var e in Model)
+    {
+    <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
+    <img src="~/Source/img/product/@e.Image" class="img-fluid mx-auto d-block" alt="@e.Name">
+    <h6><a asp-action="Detail" asp-controller="Product" asp-route-id=@e.Id>@e.Name</a></h6>
+    <div class="product__price">@ViewBag.FormattedPrice đ</div>
+    </div>
+    }
+
+    </div>
+    <a class="carousel-control-prev" href="#carousel-example" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carousel-example" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+    </a>
+    </div>
+    </div>
+    </div>*@
+
+
+
 </section>
 <!-- Product Section End -->
 <!-- Categories Section 2 Begin -->

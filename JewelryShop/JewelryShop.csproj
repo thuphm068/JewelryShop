@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\JewelryShop.Application\JewelryShop.Application.csproj" />
     <ProjectReference Include="..\JewelryShop.Infrastructure\JewelryShop.Infrastructure.csproj" />
   </ItemGroup>

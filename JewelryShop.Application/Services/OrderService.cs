@@ -58,6 +58,8 @@ namespace JewelryShop.Application.Services
 
             return orderdetaildtos;
         }
+
+
         //GetListOfOrder
         //GetOrderByStatus
         //CancelOrder
