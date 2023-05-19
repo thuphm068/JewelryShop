@@ -17,5 +17,13 @@ namespace JewelryShop.Domain.Entities
         public string Address { get; set; } = string.Empty;
         public DateTime Birthday{ get; set; } = DateTime.Now;
         public string Password { get; set; } = string.Empty;
+        
+
+        public void UpdateCustomerInfo(Customer customer)
+        {
+            Name = customer.Name;
+            Phone = customer.Phone;
+            Address = customer.Address;
+        }
     }
 }

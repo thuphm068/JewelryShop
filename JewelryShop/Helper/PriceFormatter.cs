@@ -2,7 +2,7 @@
 {
     public static class PriceFormatter
     {
-        public static string FormatPrice(float price)
+        public static string FormatPrice(double price)
         {
             string formattedPrice = price.ToString("#,0").Replace(",", ".");
             return formattedPrice;

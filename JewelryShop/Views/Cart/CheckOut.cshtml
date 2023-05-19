@@ -1,8 +1,12 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@model List<CartViewModel>
+
 @{
     ViewData["Title"] = "Thông tin đặt hàng";
+    var total = ViewBag.Total;
+    var ftotal = ViewBag.FTotal as string;
 
 }
 
@@ -10,7 +14,16 @@
 <!-- Checkout Section Begin -->
 <section class="checkout spad">
     <div class="container">
-        <form action="#" class="checkout__form">
+        <form asp-action="LastCheckOut" class="checkout__form" asp-controller="Cart" method="post">
+            @foreach (var e in Model)
+            {
+
+                <input type="text" value="@e.Product.Id" name="id" hidden>
+                <input type="text" value="@e.count" name="count" hidden id="pcount">
+
+
+            }
+
             <div class="row">
                 <div class="col-lg-7">
                     <h5>Thông tin đặt hàng</h5>
@@ -18,44 +31,44 @@
                         <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                             <div class="checkout__form__input">
                                 <p>Họ tên <span>*</span></p>
-                                <input type="text">
+                                <input type="text" name="name">
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                             <div class="checkout__form__input">
                                 <p>Số điện thoại <span>*</span></p>
-                                <input type="text">
+                                <input type="text" name="phone">
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <div class="checkout__form__input">
                                 <p>Tỉnh / Thành phố <span>*</span></p>
-                                <input type="text">
+                                <input type="text" name="city">
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                             <div class="checkout__form__input">
                                 <p>Quận / Huyện <span>*</span></p>
-                                <input type="text" placeholder="Quận / Huyện">
+                                <input type="text" placeholder="Quận / Huyện" name="district">
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                             <div class="checkout__form__input">
                                 <p>Phường / Xã <span>*</span></p>
-                                <input type="text" placeholder="Phường / Xã">
+                                <input type="text" placeholder="Phường / Xã" name="ward">
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <div class="checkout__form__input">
                                 <p>Địa chỉ cụ thể <span>*</span></p>
-                                <input type="text">
+                                <input type="text" name="address">
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <div class="checkout__form__input">
                                 <p>Ghi chú</p>
                                 <input type="text"
-                                       placeholder="Ghi chú cho đơn hàng">
+                                       placeholder="Ghi chú cho đơn hàng" name="note">
                             </div>
                         </div>
 
@@ -70,16 +83,19 @@
                                     <span class="top__text">Sản phẩm</span>
                                     <span class="top__text__right">Tổng cộng</span>
                                 </li>
-                                <li>Chain buck bag <span>$ 300.0</span></li>
-                                <li>Zip-pockets pebbled<br /> tote briefcase <span>$ 170.0</span></li>
-                                <li>Black jean <span>$ 170.0</span></li>
-                                <li>Cotton shirt <span>$ 110.0</span></li>
+                                @foreach (var i in Model)
+                                {
+                                    <li>@i.Product.Name <span>@i.Product.FPrice đ</span></li>
+
+                                }
+
                             </ul>
                         </div>
                         <div class="checkout__order__total">
                             <ul>
-                                <li>Phí giao hàng <span>$ 750.0</span></li>
-                                <li>Tổng cộng <span>$ 750.0</span></li>
+                                <input name="total" value="@total" hidden />
+                                <li>Phí giao hàng <span>$ 100.0</span></li>
+                                <li>Tổng cộng <span>@ftotal đ</span></li>
                             </ul>
                         </div>
                         <div class="checkout__order__widget">

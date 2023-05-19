@@ -1,6 +1,8 @@
 ﻿using JewelryShop.Application.Contracts;
 using JewelryShop.Application.Interfaces;
+using JewelryShop.Helper;
 using JewelryShop.Models;
+using MapsterMapper;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -11,12 +13,15 @@ namespace JewelryShop.Controllers
     public class CartController : Controller
     {
         private readonly IProductService _productService;
+        private readonly IOrderService _orderService;
+        private readonly IMapper _mapper;
 
-        public CartController(IProductService productService)
+        public CartController(IProductService productService, IOrderService orderService, IMapper mapper)
         {
 
+            _mapper = mapper;
             _productService = productService;
-
+            _orderService = orderService;
         }
 
 
@@ -25,11 +30,12 @@ namespace JewelryShop.Controllers
         {
             var serializedString = HttpContext.Session.GetString("P_ID");
             var listofproduct = new List<CartViewModel>();
+            int quantity = 0;
 
             if (serializedString != null)
             {
                 var listofid = JsonConvert.DeserializeObject<List<string>>(serializedString);
-                var reallist = 
+                var reallist =
                 listofid.GroupBy(x => x)
                     .Select(x => new
                     {
@@ -39,14 +45,16 @@ namespace JewelryShop.Controllers
 
                 if (listofid != null)
                 {
-                    foreach (var id in reallist) 
+                    foreach (var id in reallist)
                     {
                         var product = await _productService.GetProductDetails(new Guid(id.id));
+                        product.FPrice = PriceFormatter.FormatPrice(product.Price);
                         listofproduct.Add(
                             new CartViewModel
                             {
                                 count = id.count,
-                                Product = product
+                                Product = product,
+                                totalprice = PriceFormatter.FormatPrice(id.count * product.Price),
                             }
                             );
 
@@ -54,15 +62,91 @@ namespace JewelryShop.Controllers
                 }
             }
             return View("ShopCart", listofproduct);
-        } 
-        
+        }
 
 
 
-        [HttpGet("dat-hang")]
-        public IActionResult CheckOut()
+
+        [HttpPost("dat-hang")]
+        public async Task<IActionResult> CheckOut(List<string> id, List<int> count)
         {
-            return View("CheckOut");
+            var listofproduct = new List<CartViewModel>();
+            double total = 0;
+            if (id != null)
+            {
+                int index = 0;
+                foreach (var i in id)
+                {
+                    var product = await _productService.GetProductDetails(new Guid(i));
+                    product.FPrice = PriceFormatter.FormatPrice(product.Price);
+                    var currentprice = count.ElementAt(index) * product.Price;
+                    listofproduct.Add(
+                        new CartViewModel
+                        {
+                            count = count.ElementAt(index++),
+                            Product = product,
+                            totalprice = PriceFormatter.FormatPrice(currentprice),
+                        }
+                        );
+                    total += currentprice;
+
+                }
+            }
+            ViewBag.FTotal = PriceFormatter.FormatPrice(total);
+            ViewBag.Total = (total);
+
+            return View("CheckOut", listofproduct);
+        }
+        [HttpPost("LastCheckOut")]
+        public async Task<IActionResult> LastCheckOut(OrderViewModel order)
+        {
+            var listoforderDetailDto = new List<OrderDetailDto>();
+
+            var listofproduct = new List<ProductDto>();
+            int index = 0;
+
+            if (order == null)
+            {
+                return Redirect("/");
+            }
+            foreach (var o in order.id)
+            {
+                var product = await _productService.GetProductDetails(new Guid(o));
+
+                listofproduct.Add(product);
+
+                var obj = _mapper.Map<ProductOrderDto>(product);
+                var quan = order.count.ElementAt(index++);
+                listoforderDetailDto.Add(
+                    new OrderDetailDto()
+                    {
+                        ProductOrderDto = obj,
+                        Quantity = quan,
+                        TotalPrice = quan * obj.Price
+                    }
+                    );
+            }
+
+            var orderDto = new OrderDto()
+            {
+                Customer = new CustomerDto()
+                {
+                    Name = order.name,
+                    Phone = order.phone,
+                    Address = order.address + ", " + order.ward + ", " + order.district + ", " + order.city,
+
+
+                },
+                orderDetailDtos = listoforderDetailDto,
+                Date = DateTime.Now,
+                Status = Domain.Shared.Const.OrderStatus.Pending,
+                Total = order.total
+            };
+
+            await _orderService.AddOrder(orderDto);
+
+
+            return View("OrderSuccess");
         }
     }
 }

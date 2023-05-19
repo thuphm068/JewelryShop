@@ -1,4 +1,5 @@
 ﻿using JewelryShop.Application.Contracts;
+using JewelryShop.Application.Interfaces;
 using JewelryShop.Domain.Entities;
 using JewelryShop.Domain.Repository;
 using MapsterMapper;
@@ -6,7 +7,7 @@ using MapsterMapper;
 
 namespace JewelryShop.Application.Services
 {
-    public class OrderService
+    public class OrderService : IOrderService
     {
 
         //set up related repository using Dependency Injection
@@ -14,7 +15,7 @@ namespace JewelryShop.Application.Services
         private readonly IRepository<Category> _categoryRepository;
         private readonly IRepository<SubCategory> _subcategoryRepository;
         private readonly IRepository<Warranty> _warrantyRepository;
-        private readonly IRepository<Customer> _customerRepository;
+        private readonly ICustomerRepository _customerRepository;
         private readonly IRepository<Order> _orderRepository;
         private readonly IOrderDetailRepository _orderdetailsRepository;
 
@@ -28,7 +29,7 @@ namespace JewelryShop.Application.Services
             IRepository<Warranty> warrantyRepository,
             IRepository<Order> orderRepository,
             IOrderDetailRepository orderdetailsRepository,
-            IRepository<Customer> customerRepository,
+            ICustomerRepository customerRepository,
             IMapper mapper)
         {
             _productRepository = productRepository;
@@ -41,6 +42,44 @@ namespace JewelryShop.Application.Services
             _customerRepository = customerRepository;
 
         }
+
+        public async Task<bool> AddOrder(OrderDto orderdto)
+        {
+            var getUser = await _customerRepository.GetCustomerByPhone(orderdto.Customer.Phone);
+            if (getUser == null)
+            {
+                getUser = _mapper.Map<Customer>(orderdto.Customer);
+                await _customerRepository.Insert(getUser);
+
+            }
+            else
+            {
+                getUser.UpdateCustomerInfo(_mapper.Map<Customer>(orderdto.Customer));
+
+                _customerRepository.Update(getUser);
+            }
+
+           
+            var order = _mapper.Map<Order>(orderdto);
+            order.CustomerId = getUser.Id;
+
+            await _orderRepository.Insert(order);
+
+            foreach (var od in orderdto.orderDetailDtos)
+            {
+                var realOd = _mapper.Map<OrderDetail>(od);
+                if (realOd == null) { return false; }
+                realOd.OrderId = order.Id;
+                realOd.ProductId = od.ProductOrderDto.Id;
+                await _orderdetailsRepository.Insert(realOd);
+            }
+            
+
+           
+            return true;
+
+        }
+
         public async Task<List<OrderDetailDto>> GetDetailsInOrder(Guid Id)
         {
             var orderdetails = await _orderdetailsRepository.GetDetailsInOrder(Id);
@@ -58,6 +97,10 @@ namespace JewelryShop.Application.Services
 
             return orderdetaildtos;
         }
+
+       
+
+
 
 
         //GetListOfOrder

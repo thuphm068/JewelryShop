@@ -6,6 +6,7 @@ namespace JewelryShop.Application.Contracts
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public OrderStatus Status { get; set; } = OrderStatus.Pending; //enum
+        public CustomerDto Customer { get; set; }
         public DateTime Date { get; set; } = DateTime.Now;
         public float Total { get; set; } = 0;
         public List<OrderDetailDto> orderDetailDtos { get; set; }

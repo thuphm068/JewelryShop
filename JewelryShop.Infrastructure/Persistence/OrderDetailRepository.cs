@@ -8,7 +8,7 @@ namespace JewelryShop.Infrastructure.Persistence
 {
     public class OrderDetailRepository : Repository<OrderDetail>, IOrderDetailRepository
     { 
-        protected OrderDetailRepository(JewelryShopDBContext context): base(context) 
+        public OrderDetailRepository(JewelryShopDBContext context): base(context) 
         {
         }
 

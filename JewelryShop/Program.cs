@@ -20,7 +20,10 @@ builder.Services.AddDbContext<JewelryShopDBContext>(options =>
 builder.Services.AddScoped<IMapper, Mapper>();
 builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddDistributedMemoryCache();
 
 

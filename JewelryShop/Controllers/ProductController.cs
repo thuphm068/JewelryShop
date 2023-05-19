@@ -78,6 +78,7 @@ namespace JewelryShop.Controllers
             var realmax = Int32.Parse(new string(max.Substring(0, max.Length - 2).Where(x => x != ('.')).ToArray()));
             ViewData["CurrentMin"] = realmin.ToString();
             ViewData["CurrentMax"] = realmax.ToString();
+            ViewData["CurrentSearch"] = searchString;
 
             List<ProductHomePageDto> productHomePageDtos = new List<ProductHomePageDto>();
             if (cate != null)
@@ -123,7 +124,7 @@ namespace JewelryShop.Controllers
 
             foreach (var product in objs)
             {
-                ViewBag.FormattedPrice = PriceFormatter.FormatPrice(product.Price);
+                product.FPrice = PriceFormatter.FormatPrice(product.Price);
             }
 
             return View("Index", objs);

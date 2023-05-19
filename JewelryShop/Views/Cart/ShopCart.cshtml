@@ -7,6 +7,8 @@
 <!-- Shop Cart Section Begin -->
 <section class="shop-cart spad">
     <div class="container">
+        <form asp-controller="Cart" asp-action="CheckOut" method="post">
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="shop__cart__table">
@@ -33,13 +35,14 @@
                                             <a asp-action="Detail" asp-controller="Product" asp-route-id="@e.Product.Id"> <h6>@e.Product.Name</h6></a>
                                         </div>
                                     </td>
-                                    <td class="cart__price">@e.Product.Price đ</td>
+                                    <td class="cart__price">@e.Product.FPrice đ</td>
                                     <td class="cart__quantity">
                                         <div class="pro-qty">
-                                            <input type="text" value="@e.count">
+                                            <input type="text" value="@e.Product.Id" name="id" hidden >
+                                            <input type="text" value="@e.count" name="count" id="pcount">
                                         </div>
                                     </td>
-                                    <td class="cart__total">$ 300.0</td>
+                                    <td class="cart__total">@e.totalprice đ</td>
                                     <td class="cart__close"><span class="icon_close"></span></td>
                                 </tr>
 
@@ -58,7 +61,7 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="cart__btn update__btn">
-                    <a href="#"><span class="icon_loading"></span>Cập nhật</a>
+                    <a ><span class="icon_loading"></span>Cập nhật</a>
                 </div>
             </div>
         </div>
@@ -76,10 +79,11 @@
 *@                        <li>Số lượng <span>4</span></li>
                           <li>Tạm tính <span>$ 750.0</span></li>
                     </ul>
-                    <a href="/dat-hang" class="primary-btn">Tiếp tục</a>
+                    <button type="submit" class="primary-btn">Tiếp tục</button>
                 </div>
             </div>
         </div>
+        </form>
     </div>
 </section>
 <!-- Shop Cart Section End -->
