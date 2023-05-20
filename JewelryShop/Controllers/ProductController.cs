@@ -146,9 +146,12 @@ namespace JewelryShop.Controllers
             }
             var productdto = await _productService.GetProductDetails((Guid)id);
             var productdtos = await _productService.GetProductsBySubCategoryName(productdto.SubCategoryName);
-            ViewData["RelatedProducts"] = productdtos;
-            ViewBag.FormattedPrice = PriceFormatter.FormatPrice(productdto.Price);
-
+            productdto.FPrice = PriceFormatter.FormatPrice(productdto.Price);
+            foreach (var p in productdtos)
+            {
+                p.FPrice = PriceFormatter.FormatPrice(p.Price);
+            }
+                ViewData["RelatedProducts"] = productdtos;
             return View(productdto);
 
 

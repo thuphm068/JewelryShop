@@ -1,6 +1,4 @@
-﻿
-
-@using JewelryShop.Application.Contracts
+﻿@using JewelryShop.Application.Contracts
 @model ProductDto
 @{
     var relatedProductDtos = ViewData["RelatedProducts"] as List<ProductHomePageDto> ?? new List<ProductHomePageDto>();
@@ -28,14 +26,18 @@
             <div class="col-lg-6">
                 <div class="product__details__pic">
                     <div class="product__details__pic__left product__thumb nice-scroll">
-                        <a class="pt active" href="#">
+                        <a class="pt active" href="#product-1">
                             <img src="~/Source/img/product/@Model.Image" alt="" />
+                        </a>
+                        <a class="pt" href="#product-2">
+                            <img src="/Source/img/product/details/@Model.Image" alt="">
                         </a>
 
                     </div>
                     <div class="product__details__slider__content">
                         <div class="product__details__pic__slider owl-carousel">
                             <img data-hash="product-1" class="product__big__img" src="/Source/img/product/@Model.Image" alt="" />
+                            <img data-hash="product-2" class="product__big__img" src="/Source/img/product/details/@Model.Image" alt="" />
                         </div>
                     </div>
                 </div>
@@ -45,7 +47,7 @@
             <div class="col-lg-6">
                 <div class="product__details__text">
                     <h3>@Model.Name</h3>
-                    <div class="product__details__price">@ViewBag.FormattedPrice đ</div>
+                    <div class="product__details__price">@Model.FPrice đ</div>
                     <p>@Model.Name với chất liệu @Model.Material</p>
                     <div class="product__details__button">
                         <form asp-controller="Product" asp-action="AddtoCart" method="get">
@@ -57,9 +59,9 @@
                                     <input type="text" value="1" name="count">
                                 </div>
                             </div>
-                            <button type="submit"  class="cart-btn"><span class="icon_bag_alt"></span> Thêm vào giỏ hàng</button>
-                    
-                    </form>
+                            <button type="submit" class="cart-btn"><span class="icon_bag_alt"></span> Thêm vào giỏ hàng</button>
+
+                        </form>
 
 
                     </div>
@@ -109,14 +111,9 @@
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="product__item">
                         <div class="product__item__pic set-bg" data-setbg="/Source/img/product/@r.Image">
-                            <ul class="product__hover">
-                                <li><a href="/Source/img/product/@r." class="image-popup"><span class="arrow_expand"></span></a></li>
-                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                            </ul>
                         </div>
                         <div class="product__item__text">
-                            <h6><a href="#">@r.Name</a></h6>
+                            <h6><a asp-action="Detail" asp-controller="Product" asp-route-id="@r.Id">@r.Name</a></h6>
                             <div class="product__price">@r.Price</div>
                         </div>
                     </div>
@@ -125,5 +122,30 @@
             }
         </div>
     </div>
+    <!-- Banner Section Begin -->
+    <section class="banner ">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-7 col-lg-8 m-auto">
+                    <div class="banner__slider owl-carousel">
+                        <div class="banner__item">
+                        @foreach (var r in relatedProductDtos)
+            {
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="/Source/img/product/@r.Image">
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a asp-action="Detail" asp-controller="Product" asp-route-id="@r.Id">@r.Name</a></h6>
+                                    <div class="product__price">@r.Price</div>
+                                </div>
+                            </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Banner Section End -->
 </section>
 <!-- Product Details Section End -->

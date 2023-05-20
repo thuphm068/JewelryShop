@@ -25,20 +25,13 @@ namespace JewelryShop.Controllers
         {
             List<ProductHomePageDto> productHomePageDtos = new List<ProductHomePageDto>();
             productHomePageDtos = await _productService.GetProductsByCategoryName(cate);
-
             foreach (var product in productHomePageDtos)
             {
-                ViewBag.FormattedPrice = PriceFormatter.FormatPrice(product.Price);
+                product.FPrice = PriceFormatter.FormatPrice(product.Price);
             }
             return View("Index", productHomePageDtos);
         }
 
-        //public async Task<IActionResult> Index()
-        //{
-        //    List<ProductHomePageDto> productHomePageDtos = new List<ProductHomePageDto>();
-        //    productHomePageDtos = await _productService.GetAllAvailableProducts();
-        //    return View(productHomePageDtos);
-        //}
 
         public IActionResult Privacy()
         {
