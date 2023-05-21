@@ -1,0 +1,150 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Đăng ký tài khoản";
+}
+
+<section class="container">
+    <header>Đăng ký tài khoản</header>
+    <form action="#" class="form">
+            <div class="input-box">
+                <label>Tên <span>*</span></label>
+                <input type="text" placeholder="Nhập tên" required />
+            </div>
+        <div class="column">
+
+            <div class="input-box">
+                <label>Số điện thoại <span>*</span></label>
+                <input type="text" placeholder="Nhập số điện thoại" required />
+            </div>
+            <div class="input-box">
+                <label>Email</label>
+                <input type="text" placeholder="Nhập email" />
+            </div>
+        </div>
+     
+        <div class="column">
+            <div class="input-box">
+                <label>Ngày sinh <span>*</span></label>
+                <input type="date" placeholder="dd-mm-yyyy" required />
+            </div>
+            <div class="gender-box">
+                <h3>Giới tính</h3>
+                <div class="gender-option">
+                    <div class="gender">
+                        <input type="radio" id="check-male" name="gender" checked />
+                        <label for="check-male">Nam</label>
+                    </div>
+                    <div class="gender">
+                        <input type="radio" id="check-female" name="gender" />
+                        <label for="check-female">Nữ</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+ 
+        <button>Đăng ký</button>
+    </form>
+</section>
+
+
+
+<style>
+    .container header {
+        margin-top: 70px;
+  text-align: center;
+        height: 90px;
+        border-radius: 5px 5px 0 0;
+        color: black;
+        font-size: 28px;
+        font-weight: 400;
+    }
+.container .form {
+        max-width: max-content;
+        margin: 100px auto;
+        margin-top: 20px !important;
+    }
+.form .input-box {
+  width: 100%;
+  margin-top: 20px;
+}
+.input-box label {
+  color: #333;
+}
+.form :where(.input-box input, .select-box) {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #707070;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0 15px;
+}
+.input-box input:focus {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+.form .column {
+  display: flex;
+  column-gap: 15px;
+}
+.form .gender-box {
+  margin-top: 20px;
+        width: -webkit-fill-available;
+    }
+.gender-box h3 {
+  color: #333;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+.form :where(.gender-option, .gender) {
+        display: -webkit-box;
+        align-items: center;
+  column-gap: 50px;
+  flex-wrap: wrap;
+        display: block;
+    }
+.form .gender {
+  column-gap: 5px;
+}
+.gender input {
+  accent-color: rgb(130, 106, 251);
+}
+.form :where(.gender input, .gender label) {
+  cursor: pointer;
+}
+.gender label {
+  color: #707070;
+}
+.address :where(input, .select-box) {
+  margin-top: 15px;
+}
+.select-box select {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  color: #707070;
+  font-size: 1rem;
+}
+.form button {
+  height: 55px;
+  width: 100%;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 30px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+        background: #545454;
+}
+.form button:hover {
+  background: black;
+}
+
+</style>

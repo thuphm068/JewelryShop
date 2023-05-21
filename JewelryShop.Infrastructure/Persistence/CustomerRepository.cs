@@ -18,7 +18,7 @@ namespace JewelryShop.Infrastructure.Persistence
             return await _context.Set<Customer>().SingleOrDefaultAsync(x => x.Phone == phone);
         }
 
-      
+   
           
     }
 }

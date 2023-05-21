@@ -1,0 +1,164 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Đăng nhập";
+
+}
+
+
+<div class="login_box">
+    <div class="wrapper">
+        <div class="title"><span>Đăng nhập</span></div>
+        <form asp-action="Login" asp-controller="User">
+            <div class="row">
+                <i class="fa fa-user"></i>
+                <input type="text" placeholder="Số điện thoại" required>
+            </div>
+            <div class="row">
+                <i class="fa fa-lock"></i>
+                <input type="password" placeholder="Mật khẩu" required>
+            </div>
+            @*            <div class="pass"><a href="#">Quên mật khẩu?</a></div>
+            *@            
+            <div class="row button">
+                <input type="submit" value="Đăng nhập">
+            </div>
+            <div class="signup-link">Chưa có tài khoản? <a href="/dang-ky">Đăng ký ngay</a></div>
+        </form>
+    </div>
+</div>
+
+
+<style>
+
+
+
+    ::selection {
+        background: white;
+    }
+
+    .wrapper {
+        max-width: 440px;
+        padding: 0 20px;
+        margin: 140px auto;
+        width: 500px;
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0px 4px 10px 1px rgba(0,0,0,0.1);
+    }
+
+        .wrapper .title {
+            height: 90px;
+            background: white;
+            border-radius: 5px 5px 0 0;
+            color: black;
+            font-size: 28px;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wrapper form {
+            padding: 30px 25px 25px 25px;
+        }
+
+            .wrapper form .row {
+                height: 45px;
+                margin-bottom: 15px;
+                position: relative;
+            }
+
+                .wrapper form .row input {
+                    height: 100%;
+                    width: 100%;
+                    outline: none;
+                    padding-left: 60px;
+                    border-radius: 5px;
+                    border: 1px solid lightgrey;
+                    font-size: 16px;
+                    transition: all 0.3s ease;
+                }
+
+    form .row input:focus {
+        border-color: black;
+        box-shadow: inset 0px 0px 2px 2px white;
+    }
+
+    form .row input::placeholder {
+        color: #999;
+    }
+
+    .wrapper form .row i {
+        position: absolute;
+        width: 47px;
+        height: 100%;
+        color: black;
+        font-size: 18px;
+        background: white;
+        border: 1px solid black;
+        border-radius: 5px 0 0 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .wrapper form .pass {
+        margin: -8px 0 20px 0;
+    }
+
+        .wrapper form .pass a {
+            color: black;
+            font-size: 17px;
+            text-decoration: none;
+        }
+
+            .wrapper form .pass a:hover {
+                text-decoration: underline;
+            }
+
+    .wrapper form .button input {
+        color: #fff;
+        font-size: 16px;
+        font-weight: 500;
+        margin-top: 15px;
+        padding-left: 0px;
+        background: #545454;
+        cursor: pointer;
+    }
+
+    form .button input:hover {
+        background: black;
+    }
+
+    .wrapper form .signup-link {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 14px;
+    }
+
+        .wrapper form .signup-link a {
+            color: black;
+            text-decoration: none;
+        }
+
+    form .signup-link a:hover {
+        text-decoration: underline;
+    }
+
+    .wrapper form .register-link {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 14px;
+    }
+
+        .wrapper form .register-link a {
+            color: black;
+            text-decoration: none;
+        }
+
+    form .register-link a:hover {
+        text-decoration: underline;
+    }
+</style>

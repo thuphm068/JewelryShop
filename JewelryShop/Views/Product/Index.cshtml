@@ -115,13 +115,15 @@
                                 </div>
                                 <div class="range-slider">
                                     <div class="price-input">
-                                    
                                         <input type="text" readonly id="minamount" value="@currentMin" name="min">
                                         <input type="text" readonly id="maxamount" value="@currentMax" name="max">
                                     </div>
                                 </div>
                             </div>
                             <button type="submit">Lọc</button>
+                            <input type="text" readonly value="@subselected" name="sub" hidden>
+                            <input type="text" readonly value="@cateselected" name="cate" hidden>
+                            <input type="text" readonly value="@optionselected" name="sortOrder" hidden>
                         </form>
 
                     </div>

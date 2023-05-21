@@ -95,76 +95,76 @@
     .blog__sidebar {
       padding-left: 0;
     }
-  
     .canvas__open {
-      display: block;
-      font-size: 22px;
-      color: #222;
-      height: 35px;
-      width: 35px;
-      line-height: 35px;
-      text-align: center;
-      border: 1px solid #323232;
-      border-radius: 2px;
-      cursor: pointer;
-      position: absolute;
-      right: 15px;
-      top: 24px;
+        display: block;
+        font-size: 22px;
+        color: #222;
+        height: 35px;
+        width: 35px;
+        line-height: 35px;
+        text-align: center;
+        border: 1px solid #323232;
+        border-radius: 2px;
+        cursor: pointer;
+        position: absolute;
+        right: 15px;
+        top: 24px;
     }
-  
+
     .offcanvas-menu-overlay {
-      position: fixed;
-      left: 0;
-      top: 0;
-      height: 100%;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      content: '';
-      z-index: 98;
-      @include transition(all, .5s);
-      visibility: hidden;
-  
-      &.active {
-        visibility: visible;
-      }
-    }
-  
-    .offcanvas-menu-wrapper {
-      position: fixed;
-      left: -300px;
-      width: 300px;
-      height: 100%;
-      background: $white-color;
-      padding: 90px 20px 30px 30px;
-      display: block;
-      z-index: 99;
-      overflow-y: auto;
-      @include transition(all, .5s);
-      opacity: 0;
-  
-      &.active {
-        opacity: 1;
+        position: fixed;
         left: 0;
-      }
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        content: '';
+        z-index: 98;
+        @include transition(all, .5s);
+        visibility: hidden;
+
+        &.active {
+            visibility: visible;
+        }
     }
-  
+
+    .offcanvas-menu-wrapper {
+        position: fixed;
+        left: -300px;
+        width: 300px;
+        height: 100%;
+        background: $white-color;
+        padding: 90px 20px 30px 30px;
+        display: block;
+        z-index: 99;
+        overflow-y: auto;
+        @include transition(all, .5s);
+        opacity: 0;
+
+        &.active {
+            opacity: 1;
+            left: 0;
+        }
+    }
+
     .offcanvas__close {
-      position: absolute;
-      width: 40px;
-      height: 40px;
-      right: 30px;
-      top: 25px;
-      border: 1px solid #ddd;
-      border-radius: 50%;
-      font-size: 26px;
-      text-align: center;
-      transform: rotate(45deg);
-      cursor: pointer;
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        right: 30px;
+        top: 25px;
+        border: 1px solid #ddd;
+        border-radius: 50%;
+        font-size: 26px;
+        text-align: center;
+        transform: rotate(45deg);
+        cursor: pointer;
+    }
+
+    .offcanvas__menu {
+        display: none;
     }
   
-    .offcanvas__menu {
-      display: none;
-    }
   
     .slicknav_btn {
       display: none;
@@ -290,73 +290,73 @@
   /* Wide Mobile = 480px */
   @media only screen and (max-width: 767px) {
     .canvas__open {
-      display: block;
-      font-size: 22px;
-      color: #222;
-      height: 35px;
-      width: 35px;
-      line-height: 35px;
-      text-align: center;
-      border: 1px solid #323232;
-      border-radius: 2px;
-      cursor: pointer;
-      position: absolute;
-      right: 15px;
-      top: 24px;
+        display: block;
+        font-size: 22px;
+        color: #222;
+        height: 35px;
+        width: 35px;
+        line-height: 35px;
+        text-align: center;
+        border: 1px solid #323232;
+        border-radius: 2px;
+        cursor: pointer;
+        position: absolute;
+        right: 15px;
+        top: 24px;
     }
-  
+
     .offcanvas-menu-overlay {
-      position: fixed;
-      left: 0;
-      top: 0;
-      height: 100%;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      content: '';
-      z-index: 98;
-      @include transition(all, .5s);
-      visibility: hidden;
-  
-      &.active {
-        visibility: visible;
-      }
-    }
-  
-    .offcanvas-menu-wrapper {
-      position: fixed;
-      left: -270px;
-      width: 270px;
-      height: 100%;
-      background: $white-color;
-      padding: 90px 20px 30px 30px;
-      display: block;
-      z-index: 99;
-      overflow-y: auto;
-      @include transition(all, .5s);
-      opacity: 0;
-  
-      &.active {
-        opacity: 1;
+        position: fixed;
         left: 0;
-      }
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        content: '';
+        z-index: 98;
+        @include transition(all, .5s);
+        visibility: hidden;
+
+        &.active {
+            visibility: visible;
+        }
     }
-  
+
+    .offcanvas-menu-wrapper {
+        position: fixed;
+        left: -270px;
+        width: 270px;
+        height: 100%;
+        background: $white-color;
+        padding: 90px 20px 30px 30px;
+        display: block;
+        z-index: 99;
+        overflow-y: auto;
+        @include transition(all, .5s);
+        opacity: 0;
+
+        &.active {
+            opacity: 1;
+            left: 0;
+        }
+    }
+
     .offcanvas__close {
-      position: absolute;
-      width: 40px;
-      height: 40px;
-      right: 30px;
-      top: 25px;
-      border: 1px solid #ddd;
-      border-radius: 50%;
-      font-size: 26px;
-      text-align: center;
-      transform: rotate(45deg);
-      cursor: pointer;
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        right: 30px;
+        top: 25px;
+        border: 1px solid #ddd;
+        border-radius: 50%;
+        font-size: 26px;
+        text-align: center;
+        transform: rotate(45deg);
+        cursor: pointer;
     }
-  
+
     .offcanvas__menu {
-      display: none;
+        display: none;
     }
   
     .slicknav_btn {

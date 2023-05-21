@@ -85,12 +85,6 @@
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Mô tả</a>
                         </li>
-                        @*                           <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Specification</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Reviews ( 2 )</a>
-                        </li>*@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tabs-1" role="tabpanel">
@@ -100,6 +94,9 @@
                 </div>
             </div>
         </div>
+
+
+
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="related__title">
@@ -114,7 +111,7 @@
                         </div>
                         <div class="product__item__text">
                             <h6><a asp-action="Detail" asp-controller="Product" asp-route-id="@r.Id">@r.Name</a></h6>
-                            <div class="product__price">@r.Price</div>
+                            <div class="product__price">@r.FPrice đ</div>
                         </div>
                     </div>
                 </div>
@@ -122,30 +119,5 @@
             }
         </div>
     </div>
-    <!-- Banner Section Begin -->
-    <section class="banner ">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-7 col-lg-8 m-auto">
-                    <div class="banner__slider owl-carousel">
-                        <div class="banner__item">
-                        @foreach (var r in relatedProductDtos)
-            {
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="/Source/img/product/@r.Image">
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a asp-action="Detail" asp-controller="Product" asp-route-id="@r.Id">@r.Name</a></h6>
-                                    <div class="product__price">@r.Price</div>
-                                </div>
-                            </div>
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Banner Section End -->
 </section>
 <!-- Product Details Section End -->
