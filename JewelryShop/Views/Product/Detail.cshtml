@@ -52,7 +52,6 @@
                     <div class="product__details__button">
                         <form asp-controller="Product" asp-action="AddtoCart" method="get">
                             <input type="text" value="@Model.Id" hidden name="id">
-
                             <div class="quantity">
                                 <span>Số lượng:</span>
                                 <div class="pro-qty">
@@ -60,10 +59,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="cart-btn"><span class="icon_bag_alt"></span> Thêm vào giỏ hàng</button>
-
                         </form>
-
-
                     </div>
                     <div class="product__details__widget">
                         <ul>
@@ -105,7 +101,7 @@
             </div>
             @foreach (var r in relatedProductDtos)
             {
-                <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                     <div class="product__item">
                         <div class="product__item__pic set-bg" data-setbg="/Source/img/product/@r.Image">
                         </div>

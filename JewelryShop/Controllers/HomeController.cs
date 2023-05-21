@@ -21,22 +21,18 @@ namespace JewelryShop.Controllers
 
 
         [HttpGet("")]
-        public async Task<IActionResult> Index(List<ProductHomePageDto> NhanBacs, List<ProductHomePageDto> DayChuyens,List<ProductHomePageDto> VongTays, string? cate = "Nhẫn bạc")
+        public async Task<IActionResult> Index(List<ProductHomePageDto> NhanBacs, List<ProductHomePageDto> DayChuyens, string? cate = "Nhẫn bạc")
         {
             List<ProductHomePageDto> productHomePageDtos1 = new List<ProductHomePageDto>();
             List<ProductHomePageDto> productHomePageDtos2 = new List<ProductHomePageDto>();
-            List<ProductHomePageDto> productHomePageDtos3 = new List<ProductHomePageDto>();
-
 
             productHomePageDtos1 = await _productService.GetProductsByCategoryName("Nhẫn bạc");
             productHomePageDtos2 = await _productService.GetProductsByCategoryName("Dây chuyền");
-            productHomePageDtos3 = await _productService.GetProductsBySubCategoryName("Vòng tay");
 
             HomeViewModel viewModel = new HomeViewModel
             {
                 NhanBacs = productHomePageDtos1,
                 DayChuyens = productHomePageDtos2,
-                VongTays = productHomePageDtos3
             };
             foreach (var product in productHomePageDtos1)
             {
@@ -46,10 +42,6 @@ namespace JewelryShop.Controllers
             {
                 product.FPrice = PriceFormatter.FormatPrice(product.Price);
             } 
-            foreach (var product in productHomePageDtos3)
-            {
-                product.FPrice = PriceFormatter.FormatPrice(product.Price);
-            }
             return View("Index", viewModel);                
         }
 

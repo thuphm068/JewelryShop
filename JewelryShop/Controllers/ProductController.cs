@@ -137,7 +137,7 @@ namespace JewelryShop.Controllers
 
 
 
-        [HttpGet("detail/{id?}")]
+        [HttpGet("chi-tiet/{id?}")]
         public async Task<IActionResult> Detail(Guid? id)
         {
             if (id == null)
@@ -151,9 +151,9 @@ namespace JewelryShop.Controllers
             {
                 p.FPrice = PriceFormatter.FormatPrice(p.Price);
             }
-                ViewData["RelatedProducts"] = productdtos;
+            productdtos = productdtos.Take(4).ToList();
+            ViewData["RelatedProducts"] = productdtos;
             return View(productdto);
-
 
         }
 
@@ -173,19 +173,19 @@ namespace JewelryShop.Controllers
             {
                 var listofP = JsonConvert.DeserializeObject<List<string>>(pro);
                 if (listofP != null)
-                { 
-                    for(int i = 0; i <count; i++)
+                {
+                    for (int i = 0; i < count; i++)
                     {
                         listofP.Add(((Guid)id).ToString());
 
                     }
                     HttpContext.Session.SetString("P_ID", JsonConvert.SerializeObject(listofP
-                ).ToString()              );
+                ).ToString());
                 }
             }
             else
             {
-                var temp  = new List<string>();
+                var temp = new List<string>();
                 for (int i = 0; i < count; i++)
                 {
                     temp.Add(((Guid)id).ToString());

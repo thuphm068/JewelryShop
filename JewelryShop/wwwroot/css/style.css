@@ -1245,7 +1245,8 @@ ol {
     }
 
 .product__item__pic {
-    height: 260px;
+    height: 200px;
+    width: 200px;
     position: relative;
     overflow: hidden;
 }

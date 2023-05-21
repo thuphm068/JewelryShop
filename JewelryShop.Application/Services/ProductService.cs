@@ -82,10 +82,8 @@ namespace JewelryShop.Application.Services
         {
             var product = await _productRepository.GetById(id);
             var warranty = await _warrantyRepository.GetById(product.WarrantyId);
-
             var productdto = _mapper.Map<ProductDto>(product);
             var subcategory = await _subcategoryRepository.GetById(product.SubCategoryId);
-
 
             productdto.SubCategoryName = subcategory.Name;
             productdto.SubCategoryId = subcategory.Id;
