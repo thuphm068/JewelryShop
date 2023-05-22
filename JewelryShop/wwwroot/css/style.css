@@ -2137,6 +2137,7 @@ option {
         width: 335px;
         background: #e1e1e1;
         content: "";
+        visibility: hidden;
     }
 
     .nav::after {
@@ -2147,6 +2148,7 @@ option {
         width: 335px;
         background: #e1e1e1;
         content: "";
+        visibility: hidden;
     }
 
 .nav-item {

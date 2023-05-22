@@ -26,7 +26,7 @@ namespace JewelryShop.Infrastructure.Entity_Framework_Core.DataSeed
                 if (!context._categories.Any())
                 {
                     var cate1 = new Category { Name = "Nhẫn bạc" };
-                    var cate2 = new Category { Name = "Khuyên tai" };
+                    var cate2 = new Category { Name = "Khuyên bạc" };
                     var cate3 = new Category { Name = "Dây chuyền" };
                     var cate4 = new Category { Name = "Vòng bạc" };
                     var categories = new Category[]
