@@ -34,11 +34,35 @@ public class UserService : IUserService
     {
         var user = await _customerRepository.GetCustomerByPhone(customerDto.Phone);
         if (user == null) { return null; }
-        if (user.Password == customerDto.Password && user.Phone == customerDto.Phone)
+
+        return _mapper.Map<CustomerDto>(user);
+
+
+    }  
+    public async Task<bool> EditAccount(CustomerDto customerDto)
+    {
+
+        var user = await _customerRepository.GetById(customerDto.Id);
+        if (user == null) { return false; }
+
+        user.Phone = customerDto.Phone;
+        user.Name = customerDto.Name;
+        user.Email = customerDto.Email;
+        user.Address = customerDto.Address;
+        user.Birthday = customerDto.Birthday;
+        user.Gender = customerDto.Gender;
+        try
         {
-            return _mapper.Map<CustomerDto>(user);
+            _customerRepository.Update(user);
+            return true;
+
         }
-        return null;
+        catch (Exception ex)
+        {
+            return false;
+        }
+
+
     }
 
     public async Task<bool> Register(CustomerDto customerDto)
@@ -58,5 +82,5 @@ public class UserService : IUserService
 
     }
 
-    
+
 }

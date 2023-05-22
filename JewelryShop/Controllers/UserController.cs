@@ -25,14 +25,40 @@ namespace JewelryShop.Controllers
 
         [HttpGet]
         [Route("/thong-tin-tai-khoan")]
-        public async Task<IActionResult> AccountInfo(string phone)
+        public async Task<IActionResult> AccountInfo()
         {
+            string? phone = HttpContext.Session.GetString("phone");
+            if(phone is null) { return RedirectToAction("Login"); }
             var cusInfo = await _userService.ManageAccount(new CustomerDto
             {
                 Phone = phone
             });
-            return View(cusInfo);
+            return View("Setting",cusInfo);
         }
+        [HttpPost]
+        [Route("/EditAccount")]
+        public async Task<IActionResult> EditAccount(CustomerDto customerDto, string gender)
+        {
+            if(gender == "Nam")
+            {
+                customerDto.Gender = Gender.Male;
+            }
+            else
+            {
+                customerDto.Gender = Gender.Female;
+
+            }
+            var result = await _userService.EditAccount(customerDto);
+            if(result == false)
+            {
+                ViewBag.isFail = true;
+            }
+            ViewBag.isSuccess = true;
+
+            return View("Setting", customerDto);
+        }
+
+
         [HttpGet("/dang-nhap")]
         public IActionResult Login()
         {
