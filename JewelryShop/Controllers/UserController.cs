@@ -23,6 +23,16 @@ namespace JewelryShop.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet]
+        [Route("/thong-tin-tai-khoan")]
+        public async Task<IActionResult> AccountInfo(string phone)
+        {
+            var cusInfo = await _userService.ManageAccount(new CustomerDto
+            {
+                Phone = phone
+            });
+            return View(cusInfo);
+        }
         [HttpGet("/dang-nhap")]
         public IActionResult Login()
         {
@@ -40,6 +50,7 @@ namespace JewelryShop.Controllers
             var result = await _userService.Login(customerDto);
             if(result)
             {
+                SetUp(customerDto.Name, customerDto.Phone);
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -50,7 +61,11 @@ namespace JewelryShop.Controllers
             }
         }
 
-
+        private void SetUp(string name, string phone)
+        {
+            HttpContext.Session.SetString("name", name);
+            HttpContext.Session.SetString("phone", phone);
+        }
 
         [HttpGet("/dang-ky")]
         public IActionResult Register()
@@ -83,6 +98,8 @@ namespace JewelryShop.Controllers
             var result = await _userService.Register(customerDto);
             if (result)
             {
+                SetUp(customerDto.Name, customerDto.Phone);
+
                 return RedirectToAction("Index", "Home");
             }
             else

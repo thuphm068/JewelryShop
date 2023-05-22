@@ -23,6 +23,8 @@ namespace JewelryShop.Controllers
         [HttpGet("")]
         public async Task<IActionResult> Index(List<ProductHomePageDto> NhanBacs, List<ProductHomePageDto> DayChuyens, string? cate = "Nhẫn bạc")
         {
+            HttpContext.Session.SetString("currentPage", "Home");
+
             List<ProductHomePageDto> productHomePageDtos1 = new List<ProductHomePageDto>();
             List<ProductHomePageDto> productHomePageDtos2 = new List<ProductHomePageDto>();
 

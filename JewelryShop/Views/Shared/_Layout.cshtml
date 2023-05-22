@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var name = Context.Session.GetString("name");
+    var phone = Context.Session.GetString("phone");
+    var currentPage = Context.Session.GetString("currentPage");
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -38,10 +43,25 @@
         <div class="offcanvas__close">+</div>
         <ul class="offcanvas__widget">
             <li><span class="icon_search search-switch"></span></li>
+            @if (name != null)
+            {
+                <li><h5>Hello @name</h5></li>
+
+            }
             <li>
-                <a href="/dang-nhap">
-                    <span class="fa fa-user-o"></span>
-                </a>
+                @if (name == null)
+                {
+                    <a href="/dang-nhap">
+                        <span class="fa fa-user-o"></span>
+                    </a>
+                }
+                else
+                {
+                    <a href="/thong-tin-tai-khoan">
+                        <span class="fa fa-user-o"></span>
+                    </a>
+                }
+
             </li>
             <li>
                 <a href="/gio-hang">
@@ -70,8 +90,8 @@
                 <div class="col-xl-6 col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="/">Trang chủ</a></li>
-                            <li>
+                            <li class=' @(currentPage == "Home" ? "active" : "") '><a href="/">Trang chủ</a></li>
+                            <li class=' @(currentPage == "Nhẫn bạc" ? "active" : "") '>
                                 <a href="/san-pham/?cate=Nhẫn%20bạc">Nhẫn bạc</a>
                                 <ul class="dropdown">
                                     <li><a href="/san-pham/?sub=Nhẫn%20nữ">Nhẫn nữ</a></li>
@@ -79,12 +99,17 @@
                                     <li><a href="/san-pham/?sub=Nhẫn%20đôi">Nhẫn đôi</a></li>
                                 </ul>
                             </li>
-                            <li><a href="/san-pham/?cate=Dây%20chuyền">Dây chuyền</a></li>
-                            <li>
+                            <li class=' @(currentPage == "Dây chuyền" ? "active" : "") '><a href="/san-pham/?cate=Dây%20chuyền">Dây chuyền</a></li>
+                            <li class=' @(currentPage == "Vòng bạc" ? "active" : "") '>
                                 <a href="/san-pham/?cate=Vòng%20bạc">Vòng bạc</a>
                                 <ul class="dropdown">
-                                    <li><a href="/san-pham/?sub=Vòng%20tay">Vòng - Lắc tay</a></li>
-                                    <li><a href="/san-pham/?sub=Vòng%20chân"> Vòng - Lắc chân</a></li>
+
+                                    <li class=' @(currentPage == "Vòng tay" ? "active" : "") '>
+                                        <a href="/san-pham/?sub=Vòng%20tay">Vòng - Lắc tay</a>
+                                    </li>
+                                    <li class=' @(currentPage == "Vòng chân" ? "active" : "") '>
+                                        <a href="/san-pham/?sub=Vòng%20chân"> Vòng - Lắc chân</a>
+                                    </li>
                                 </ul>
                             </li>
                             <li>
@@ -101,16 +126,30 @@
                     <div class="header__right">
                         <ul class="header__right__widget">
                             <li><span class="icon_search search-switch"></span></li>
+
                             <li>
-                                <a href="/dang-nhap">
-                                    <span class="fa fa-user-o"></span>
-                                </a>
+                                @if (name == null)
+                                {
+                                    <a href="/dang-nhap">
+                                        <span class="fa fa-user-o"></span>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="/thong-tin-tai-khoan">
+                                        @if (name != null)
+                                        {
+                                            <h5>Hello @name</h5>
+                                        }
+                                    </a>
+                                }
                             </li>
                             <li>
                                 <a href="/gio-hang">
                                     <span class="fa fa-shopping-cart"></span>
-@*                                    <div class="tip">2</div>
-*@                                </a>
+                                    @*                                    <div class="tip">2</div>
+                                    *@
+                                </a>
                             </li>
                         </ul>
                     </div>

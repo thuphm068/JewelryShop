@@ -72,6 +72,7 @@ namespace JewelryShop.Controllers
 
         public async Task<IActionResult> Index(string? searchString, string? cate, string? sub, string sortOrder, string min = "000", string max = "1500000000", int pageIndex = 1)
         {
+
             ViewData["CurrentSort"] = sortOrder;
 
             var realmin = Int32.Parse(new string(min.Substring(0, min.Length - 2).Where(x => x != ('.')).ToArray()));
@@ -85,6 +86,8 @@ namespace JewelryShop.Controllers
             {
                 productHomePageDtos = await _productService.GetProductsByCategoryName(cate);
                 ViewData["CurrentCate"] = cate;
+                HttpContext.Session.SetString("currentPage", cate);
+
             }
             else
             {
@@ -92,10 +95,14 @@ namespace JewelryShop.Controllers
                 {
                     productHomePageDtos = await _productService.GetProductsBySubCategoryName(sub);
                     ViewData["CurrentSub"] = sub;
+                    HttpContext.Session.SetString("currentPage", sub);
+
                 }
                 else
                 {
                     productHomePageDtos = await _productService.GetAllAvailableProducts();
+                    HttpContext.Session.SetString("currentPage", "Product");
+
                 }
             }
             if (productHomePageDtos != null)
