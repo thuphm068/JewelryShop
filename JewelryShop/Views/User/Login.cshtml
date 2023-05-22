@@ -3,24 +3,33 @@
 *@
 @{
     ViewData["Title"] = "Đăng nhập";
-
+    bool isFailedLogin = ViewBag.isFail ?? false;
 }
+@model LoginViewModel
 
 
 <div class="login_box">
     <div class="wrapper">
         <div class="title"><span>Đăng nhập</span></div>
+        @if (isFailedLogin)
+        {
+            <div class="alert alert-danger" role="alert">
+                Đăng nhập không thành công!
+            </div>
+        }
         <form asp-action="Login" asp-controller="User">
             <div class="row">
                 <i class="fa fa-user"></i>
-                <input type="text" placeholder="Số điện thoại" required>
+                <input type="text" placeholder="Số điện thoại" asp-for="userPhone" required>
             </div>
             <div class="row">
                 <i class="fa fa-lock"></i>
-                <input type="password" placeholder="Mật khẩu" required>
+                <input type="password" placeholder="Mật khẩu" asp-for="password" required>
             </div>
             @*            <div class="pass"><a href="#">Quên mật khẩu?</a></div>
-            *@            
+            *@     
+            
+            
             <div class="row button">
                 <input type="submit" value="Đăng nhập">
             </div>
