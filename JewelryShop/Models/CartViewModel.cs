@@ -6,6 +6,6 @@ namespace JewelryShop.Models
     {
         public List<CartModel> CartModels { get; set; }
 
-        public CustomerDto Customer { get; set; }
+        public CustomerDto Customer { get; set; } = new CustomerDto();
     }
 }

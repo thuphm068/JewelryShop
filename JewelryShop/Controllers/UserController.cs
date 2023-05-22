@@ -44,25 +44,26 @@ namespace JewelryShop.Controllers
 
         [HttpPost]
         [Route("/EditAccount")]
-        public async Task<IActionResult> EditAccount(CustomerDto customerDto, string gender)
+        public async Task<IActionResult> EditAccount(ProfileViewModel profileViewModel, string gender)
         {
             if(gender == "Nam")
             {
-                customerDto.Gender = Gender.Male;
+                profileViewModel.Customer.Gender = Gender.Male;
             }
             else
             {
-                customerDto.Gender = Gender.Female;
+                profileViewModel.Customer.Gender = Gender.Female;
 
             }
-            var result = await _userService.EditAccount(customerDto);
+            var result = await _userService.EditAccount(profileViewModel.Customer);
             if(result == false)
             {
                 ViewBag.isFail = true;
             }
             ViewBag.isSuccess = true;
-
-            return View("Setting", customerDto);
+            var orderDtos = await _orderService.GetAllCurrentOrder(profileViewModel.Customer.Phone);
+            profileViewModel.OrderDtos = orderDtos;
+            return View("Setting", profileViewModel);
         }
 
       
