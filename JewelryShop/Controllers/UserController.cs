@@ -30,12 +30,12 @@ namespace JewelryShop.Controllers
         public async Task<IActionResult> AccountInfo()
         {
             string? phone = HttpContext.Session.GetString("phone");
-            if(phone is null) { return Redirect("/dang-nhap"); }
+            if (phone is null) { return Redirect("/dang-nhap"); }
             var cusInfo = await _userService.ManageAccount(phone);
-            if(cusInfo is null) { return Redirect("/dang-nhap"); }
+            if (cusInfo is null) { return Redirect("/dang-nhap"); }
             var orderDtos = await _orderService.GetAllCurrentOrder(cusInfo.Phone);
 
-            return View("Setting",new ProfileViewModel
+            return View("Setting", new ProfileViewModel
             {
                 OrderDtos = orderDtos,
                 Customer = cusInfo
@@ -46,7 +46,7 @@ namespace JewelryShop.Controllers
         [Route("/EditAccount")]
         public async Task<IActionResult> EditAccount(ProfileViewModel profileViewModel, string gender)
         {
-            if(gender == "Nam")
+            if (gender == "Nam")
             {
                 profileViewModel.Customer.Gender = Gender.Male;
             }
@@ -56,7 +56,7 @@ namespace JewelryShop.Controllers
 
             }
             var result = await _userService.EditAccount(profileViewModel.Customer);
-            if(result == false)
+            if (result == false)
             {
                 ViewBag.isFail = true;
             }
@@ -66,7 +66,7 @@ namespace JewelryShop.Controllers
             return View("Setting", profileViewModel);
         }
 
-      
+
 
         [HttpGet("/dang-nhap")]
         public IActionResult Login()
@@ -76,6 +76,7 @@ namespace JewelryShop.Controllers
         [HttpPost("/AuthenticateToLogin")]
         public async Task<IActionResult> Login(LoginViewModel vm)
         {
+
             var customerDto = new CustomerDto
             {
                 Password = vm.password,
@@ -83,10 +84,17 @@ namespace JewelryShop.Controllers
             };
 
             var result = await _userService.Login(customerDto);
-            if(result)
+            if (result)
             {
                 SetUp(customerDto.Name, customerDto.Phone);
-                return RedirectToAction("Index", "Home");
+                if (TempData["ReturnUrl"] is null)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    return Redirect(TempData["ReturnUrl"] as string ?? "/");
+                }
             }
             else
             {
@@ -107,7 +115,7 @@ namespace JewelryShop.Controllers
         {
             return View();
         }
-                
+
         [HttpGet("/chinh-sua")]
         public IActionResult Setting()
         {
@@ -123,7 +131,7 @@ namespace JewelryShop.Controllers
                 Phone = vm.userPhone,
                 Name = vm.name,
                 Birthday = vm.birth,
-                
+
                 Address = vm.address,
                 Email = vm.email,
             };

@@ -74,6 +74,19 @@ namespace JewelryShop.Controllers
         public async Task<IActionResult> CheckOut(List<string> id, List<int> count)
         {
             var carviewModel = new CartViewModel();
+
+            var phone = HttpContext.Session.GetString("phone");
+            if (phone != null)
+            {
+                var user = await _userService.ManageAccount(phone);
+                if (user != null) { carviewModel.Customer = user; }
+            }
+            else
+            {
+                TempData["ReturnUrl"] = "/gio-hang";
+                return Redirect("/dang-nhap");
+            }
+
             var listofproduct = new List<CartModel>();
             double total = 0;
             if (id != null)
@@ -100,12 +113,7 @@ namespace JewelryShop.Controllers
             ViewBag.Total = (total);
 
             carviewModel.CartModels = listofproduct;
-            var phone = HttpContext.Session.GetString("phone");
-            if(phone != null)
-            {
-                var user = await _userService.ManageAccount(phone);
-                if(user != null) { carviewModel.Customer = user; }
-            }
+            
             return View("CheckOut", carviewModel);
         }
 
@@ -146,7 +154,6 @@ namespace JewelryShop.Controllers
                     Name = order.name,
                     Phone = order.phone,
                     Address = order.address + ", " + order.ward + ", " + order.district + ", " + order.city,
-
 
                 },
                 orderDetailDtos = listoforderDetailDto,
