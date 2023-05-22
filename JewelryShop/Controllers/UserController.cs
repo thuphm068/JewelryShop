@@ -72,6 +72,12 @@ namespace JewelryShop.Controllers
         {
             return View();
         }
+                
+        [HttpGet("/chinh-sua")]
+        public IActionResult Setting()
+        {
+            return View("Setting");
+        }
 
         [HttpPost("/Register")]
         public async Task<IActionResult> Register(RegisterViewModel vm, string gender)
