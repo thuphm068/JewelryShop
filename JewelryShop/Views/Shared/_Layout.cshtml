@@ -43,11 +43,6 @@
         <div class="offcanvas__close">+</div>
         <ul class="offcanvas__widget">
             <li><span class="icon_search search-switch"></span></li>
-            @if (name != null)
-            {
-                <li><h5>Hello @name</h5></li>
-
-            }
             <li>
                 @if (name == null)
                 {
@@ -66,7 +61,6 @@
             <li>
                 <a href="/gio-hang">
                     <span class="fa fa-shopping-cart"></span>
-                    <div class="tip">2</div>
                 </a>
             </li>
         </ul>
@@ -82,7 +76,7 @@
     <header class="header">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xl-3 col-lg-2">
+                <div class="col-xl-3 col-lg-3">
                     <div class="header__logo">
                         <a href="/"><img src="/Source/img/luminique.svg" alt=""></a>
                     </div>
@@ -139,7 +133,7 @@
                                     <a href="/thong-tin-tai-khoan">
                                         @if (name != null)
                                         {
-                                            <h5>Hello @name</h5>
+                                            <h5>Chào @name</h5>
                                         }
                                     </a>
                                 }
@@ -147,8 +141,6 @@
                             <li>
                                 <a href="/gio-hang">
                                     <span class="fa fa-shopping-cart"></span>
-                                    @*                                    <div class="tip">2</div>
-                                    *@
                                 </a>
                             </li>
                         </ul>
