@@ -30,9 +30,9 @@ namespace JewelryShop.Controllers
         public async Task<IActionResult> AccountInfo()
         {
             string? phone = HttpContext.Session.GetString("phone");
-            if(phone is null) { return RedirectToAction("Login"); }
+            if(phone is null) { return Redirect("/dang-nhap"); }
             var cusInfo = await _userService.ManageAccount(phone);
-            if(cusInfo is null) { return RedirectToAction("Login"); }
+            if(cusInfo is null) { return Redirect("/dang-nhap"); }
             var orderDtos = await _orderService.GetAllCurrentOrder(cusInfo.Phone);
 
             return View("Setting",new ProfileViewModel
