@@ -27,6 +27,12 @@ namespace JewelryShop.Controllers
         {
             return View("Register");
         }
+                
+        [HttpGet("/chinh-sua")]
+        public IActionResult Setting()
+        {
+            return View("Setting");
+        }
 
 
     }
