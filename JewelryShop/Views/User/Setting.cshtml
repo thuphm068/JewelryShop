@@ -35,9 +35,13 @@
                         <i class="fa  fa-user-circle-o text-center mr-1"></i>
                         Tài khoản
                     </a>
-                    <a class="nav-link" id="password-tab" data-toggle="pill" href="#password" role="tab" aria-controls="password" aria-selected="false">
+                    <a class="nav-link" id="orderhistory-tab" data-toggle="pill" href="#orderhistory" role="tab" aria-controls="orderhistory" aria-selected="false">
                         <i class="fa fa-history text-center mr-1"></i>
                         Lịch sử mua hàng
+                    </a>
+                    <a class="nav-link" id="password-tab" data-toggle="pill" href="#password" role="tab" aria-controls="password" aria-selected="false">
+                        <i class="fa fa-key text-center mr-1"></i>
+                        Đổi mật khẩu
                     </a>
                 </div>
                 <a class="btn btn-dark" asp-action="Logout">Đăng xuất</a>
@@ -117,12 +121,18 @@
 
                         <div>
                             <button type="submit" class="btn btn-dark">Cập nhật</button>
-                            <a class="" href="/">Huỷ</a>
+                            <a class="" style="
+ display: flex;
+    padding-left: 48%;
+    background: whitesmoke;
+    color: black;
+    border-radius: 5px;
+" href="/">Huỷ</a>
                         </div>
                     </form>
                 </div>
 
-                <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+                <div class="tab-pane fade" id="orderhistory" role="tabpanel" aria-labelledby="orderhistory-tab">
                     <h4 class="mb-4">Lịch sử mua hàng</h4>
                     <div class="row">
                         <div class="col-lg-12">
@@ -164,10 +174,35 @@
                             </div>
                         </div>
                     </div>
-                    @*                    <div>
-                    <button class="btn btn-dark">Cập nhật</button>
-                    <button class="btn btn-light">Huỷ</button>
-                    </div>*@
+                </div>
+                <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+                    <h4 class="mb-4">Đổi mật khẩu</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Mật khẩu cũ</label>
+                                <input type="password" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Mật khẩu mới</label>
+                                <input type="password" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Xác nhận mật khẩu</label>
+                                <input type="password" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-dark">Cập nhật</button>
+                        <button class="btn btn-light">Huỷ</button>
+                    </div>
                 </div>
             </div>
         </div>
