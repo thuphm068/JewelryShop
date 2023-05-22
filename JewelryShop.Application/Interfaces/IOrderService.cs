@@ -1,16 +1,11 @@
 ﻿using JewelryShop.Application.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+namespace JewelryShop.Application.Interfaces;
 
-namespace JewelryShop.Application.Interfaces
+public interface IOrderService
 {
-    public interface IOrderService
-    {
-        public Task<bool> AddOrder(OrderDto orderdto);
+    public Task<bool> AddOrder(OrderDto orderdto);
+    public Task<List<OrderDto>> GetAllCurrentOrder(string id);
 
+    public Task<List<OrderDetailDto>> GetDetailsInOrder(Guid Id);
 
-    }
 }

@@ -2,10 +2,9 @@
 
 namespace JewelryShop.Models
 {
-    public class CartViewModel
+    public class ProfileViewModel
     {
-        public List<CartModel> CartModels { get; set; }
-
         public CustomerDto Customer { get; set; }
+        public List<OrderDto> OrderDtos { get; set; }
     }
 }

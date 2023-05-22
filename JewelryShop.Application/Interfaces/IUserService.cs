@@ -8,7 +8,7 @@ public interface IUserService
 {
     Task<bool> Login(CustomerDto customerDto);
     Task<bool> Register(CustomerDto customerDto);
-    Task<CustomerDto?> ManageAccount(CustomerDto customerDto);
+    Task<CustomerDto?> ManageAccount(string phone);
     Task<bool> EditAccount(CustomerDto customerDto);
 
 }

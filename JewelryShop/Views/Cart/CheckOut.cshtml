@@ -1,7 +1,7 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@model List<CartViewModel>
+@model CartViewModel
 
 @{
     ViewData["Title"] = "Thông tin đặt hàng";
@@ -15,7 +15,7 @@
 <section class="checkout spad">
     <div class="container">
         <form asp-action="LastCheckOut" class="checkout__form" asp-controller="Cart" method="post">
-            @foreach (var e in Model)
+            @foreach (var e in Model.CartModels)
             {
 
                 <input type="text" value="@e.Product.Id" name="id" hidden>
@@ -23,71 +23,143 @@
 
 
             }
+            @if(Model.Customer != null)
+            {
 
-            <div class="row">
-                <div class="col-lg-7">
-                    <h5>Thông tin đặt hàng</h5>
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                            <div class="checkout__form__input">
-                                <p>Họ tên <span>*</span></p>
-                                <input type="text" name="name" required>
+                <div class="row">
+                    <div class="col-lg-7">
+                        <h5>Thông tin đặt hàng</h5>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                <div class="checkout__form__input">
+                                    <p>Họ tên <span>*</span></p>
+                                    <input type="text" name="name" value="@Model.Customer.Name" required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                            <div class="checkout__form__input">
-                                <p>Số điện thoại <span>*</span></p>
-                                <input type="text" name="phone" required>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                <div class="checkout__form__input">
+                                    <p>Số điện thoại <span>*</span></p>
+                                    <input type="text" name="phone" value="@Model.Customer.Phone" required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="checkout__form__input">
-                                <p>Địa chỉ cụ thể <span>*</span></p>
-                                <input type="text" name="address" required>
+                            <div class="col-lg-12">
+                                <div class="checkout__form__input">
+                                    <p>Địa chỉ cụ thể <span>*</span></p>
+                                    <input type="text" name="address" value="@Model.Customer.Address" required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="checkout__form__input">
-                                <p>Ghi chú</p>
-                                <input type="text"
-                                       placeholder="Ghi chú cho đơn hàng" name="note" >
+                            <div class="col-lg-12">
+                                <div class="checkout__form__input">
+                                    <p>Ghi chú</p>
+                                    <input type="text"
+                                           placeholder="Ghi chú cho đơn hàng" name="note">
+                                </div>
                             </div>
-                        </div>
 
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="checkout__order">
+                            <h5>Đơn hàng</h5>
+                            <div class="checkout__order__product">
+                                <ul>
+                                    <li>
+                                        <span class="top__text">Sản phẩm</span>
+                                        <span class="top__text__right">Tổng cộng</span>
+                                    </li>
+                                    @foreach (var i in Model.CartModels)
+                                    {
+                                        <li>@i.Product.Name <span>@i.Product.FPrice đ</span></li>
+
+                                    }
+
+                                </ul>
+                            </div>
+                            <div class="checkout__order__total">
+                                <ul>
+                                    <input name="total" value="@total" hidden />
+                                    <li>Phí giao hàng <span>40.000 đ</span></li>
+                                    <li>Tổng cộng <span>@ftotal đ</span></li>
+                                </ul>
+                            </div>
+                            <div class="checkout__order__widget">
+                                <p> Thanh toán khi nhận hàng (COD)</p>
+
+                            </div>
+                            <button type="submit" class="site-btn">Đặt hàng</button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-5">
-                    <div class="checkout__order">
-                        <h5>Đơn hàng</h5>
-                        <div class="checkout__order__product">
-                            <ul>
-                                <li>
-                                    <span class="top__text">Sản phẩm</span>
-                                    <span class="top__text__right">Tổng cộng</span>
-                                </li>
-                                @foreach (var i in Model)
-                                {
-                                    <li>@i.Product.Name <span>@i.Product.FPrice đ</span></li>
 
-                                }
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col-lg-7">
+                        <h5>Thông tin đặt hàng</h5>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                <div class="checkout__form__input">
+                                    <p>Họ tên <span>*</span></p>
+                                    <input type="text" name="name" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                <div class="checkout__form__input">
+                                    <p>Số điện thoại <span>*</span></p>
+                                    <input type="text" name="phone" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="checkout__form__input">
+                                    <p>Địa chỉ cụ thể <span>*</span></p>
+                                    <input type="text" name="address" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="checkout__form__input">
+                                    <p>Ghi chú</p>
+                                    <input type="text"
+                                           placeholder="Ghi chú cho đơn hàng" name="note">
+                                </div>
+                            </div>
 
-                            </ul>
                         </div>
-                        <div class="checkout__order__total">
-                            <ul>
-                                <input name="total" value="@total" hidden />
-                                <li>Phí giao hàng <span>40.000 đ</span></li>
-                                <li>Tổng cộng <span>@ftotal đ</span></li>
-                            </ul>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="checkout__order">
+                            <h5>Đơn hàng</h5>
+                            <div class="checkout__order__product">
+                                <ul>
+                                    <li>
+                                        <span class="top__text">Sản phẩm</span>
+                                        <span class="top__text__right">Tổng cộng</span>
+                                    </li>
+                                    @foreach (var i in Model.CartModels)
+                                    {
+                                        <li>@i.Product.Name <span>@i.Product.FPrice đ</span></li>
+
+                                    }
+
+                                </ul>
+                            </div>
+                            <div class="checkout__order__total">
+                                <ul>
+                                    <input name="total" value="@total" hidden />
+                                    <li>Phí giao hàng <span>40.000 đ</span></li>
+                                    <li>Tổng cộng <span>@ftotal đ</span></li>
+                                </ul>
+                            </div>
+                            <div class="checkout__order__widget">
+                                <p> Thanh toán khi nhận hàng (COD)</p>
+
+                            </div>
+                            <button type="submit" class="site-btn">Đặt hàng</button>
                         </div>
-                        <div class="checkout__order__widget">
-                            <p> Thanh toán khi nhận hàng (COD)</p>
-                           
-                        </div>
-                        <button type="submit" class="site-btn">Đặt hàng</button>
                     </div>
                 </div>
-            </div>
+
+            }
         </form>
     </div>
 </section>

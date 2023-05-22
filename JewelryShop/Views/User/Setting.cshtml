@@ -3,7 +3,7 @@
 *@
 @using JewelryShop.Application.Contracts
 @using JewelryShop.Domain.Shared
-@model CustomerDto
+@model ProfileViewModel
 @{
     bool isFail = ViewBag.isFail ?? false;
     bool isSuccess = ViewBag.isSuccess ?? false;
@@ -28,7 +28,7 @@
         <div class="bg-white shadow rounded-lg d-block d-sm-flex">
             <div class="profile-tab-nav border-right">
                 <div class="p-4">
-                    <h5 class="text-center">Tên tài khoản</h5>
+                    <h5 class="text-center">@Model.Customer.Name</h5>
                 </div>
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <a class="nav-link active" id="account-tab" data-toggle="pill" href="#account" role="tab" aria-controls="account" aria-selected="true">
@@ -50,38 +50,38 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Tên</label>
-                                    <input type="text" class="form-control" asp-for="Name">
+                                    <input type="text" class="form-control" asp-for="Customer.Name">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Ngày sinh</label>
-                                    <input type="date" class="form-control" asp-for="Birthday">
+                                    <input type="date" class="form-control" asp-for="Customer.Birthday">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Số điện thoại</label>
-                                    <input type="text" class="form-control" asp-for="Phone">
+                                    <input type="text" class="form-control" asp-for="Customer.Phone">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input type="email" class="form-control" asp-for="Email">
+                                    <input type="email" class="form-control" asp-for="Customer.Email">
                                 </div>
                             </div>
                             <div class="col-md-9">
                                 <div class="form-group">
                                     <label>Địa chỉ</label>
-                                    <input type="text" class="form-control" asp-for="Address">
+                                    <input type="text" class="form-control" asp-for="Customer.Address">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Giới tính</label>
                                     <div class="gender-box">
-                                        @if (Model.Gender == JewelryShop.Domain.Shared.Const.Gender.Male)
+                                        @if (Model.Customer.Gender == JewelryShop.Domain.Shared.Const.Gender.Male)
                                         {
                                             <div class="gender-option">
                                                 <div class="gender">
@@ -112,7 +112,7 @@
                                 </div>
                             </div>
                         </div>
-                        <input type="text" value="@Model.Id" asp-for="Id" hidden />
+                        <input type="text" value="@Model.Customer.Id" asp-for="Customer.Id" hidden />
 
                         <div>
                             <button type="submit" class="btn btn-dark">Cập nhật</button>
@@ -136,20 +136,26 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td class="history__order">
-                                                <div class="history__order__id">
-                                                    <a><h6>ĐH111</h6></a>
+                                        @foreach(var i in Model.OrderDtos)
+                                        {
+                                            <tr>
+                                                <td class="history__order">
+                                                    <div class="history__order__id">
+                                                        <a><h6>@i.Id.ToString().Substring(0,5)</h6></a>
 
-                                                </div>
-                                            </td>
-                                            <td class="history__order__date">
-                                                <input type="date" value="" readonly>
-                                            </td>
-                                            <td class="history__order_status">Chưa
-                                            </td>
-                                            <td class="history__order__total">200.000đ</td>
-                                        </tr>
+                                                    </div>
+                                                </td>
+                                                <td class="history__order__date">
+                                                    <p type="text" value="@i.Date" readonly>
+                                                </td>
+                                                <td class="history__order_status">
+                                                    @i.Status.ToString()
+                                                </td>
+                                                <td class="history__order__total">@i.Total</td>
+                                            </tr>
+                                        }
+
+                                      
 
 
                                     </tbody>

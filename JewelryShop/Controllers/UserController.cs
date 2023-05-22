@@ -15,11 +15,13 @@ namespace JewelryShop.Controllers
     {
 
         private readonly IUserService _userService;
+        private readonly IOrderService _orderService;
         private readonly IMapper _mapper;
 
-        public UserController(IUserService userService, IMapper mapper)
+        public UserController(IUserService userService, IMapper mapper, IOrderService orderService)
         {
             _userService = userService;
+            _orderService = orderService;
             _mapper = mapper;
         }
 
@@ -29,12 +31,17 @@ namespace JewelryShop.Controllers
         {
             string? phone = HttpContext.Session.GetString("phone");
             if(phone is null) { return RedirectToAction("Login"); }
-            var cusInfo = await _userService.ManageAccount(new CustomerDto
+            var cusInfo = await _userService.ManageAccount(phone);
+            if(cusInfo is null) { return RedirectToAction("Login"); }
+            var orderDtos = await _orderService.GetAllCurrentOrder(cusInfo.Phone);
+
+            return View("Setting",new ProfileViewModel
             {
-                Phone = phone
+                OrderDtos = orderDtos,
+                Customer = cusInfo
             });
-            return View("Setting",cusInfo);
         }
+
         [HttpPost]
         [Route("/EditAccount")]
         public async Task<IActionResult> EditAccount(CustomerDto customerDto, string gender)
@@ -58,6 +65,7 @@ namespace JewelryShop.Controllers
             return View("Setting", customerDto);
         }
 
+      
 
         [HttpGet("/dang-nhap")]
         public IActionResult Login()
