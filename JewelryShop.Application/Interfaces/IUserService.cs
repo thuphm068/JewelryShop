@@ -10,5 +10,6 @@ public interface IUserService
     Task<bool> Register(CustomerDto customerDto);
     Task<CustomerDto?> ManageAccount(string phone);
     Task<bool> EditAccount(CustomerDto customerDto);
+    Task<bool> ChangePassword(CustomerDto customerDto, string newP);
 
 }

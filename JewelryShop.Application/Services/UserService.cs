@@ -82,5 +82,12 @@ public class UserService : IUserService
 
     }
 
-
+    public async Task<bool> ChangePassword(CustomerDto customerDto, string newP)
+    {
+        var user = await _customerRepository.GetById(customerDto.Id);
+        if (user == null || user.Password != customerDto.Password) { return false; }
+        user.Password = newP;
+        _customerRepository.Update(user);
+        return true;
+    }
 }

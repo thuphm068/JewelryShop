@@ -6,5 +6,7 @@ namespace JewelryShop.Models
     {
         public CustomerDto Customer { get; set; }
         public List<OrderDto> OrderDtos { get; set; }
+
+        public ChangePasswordViewModel ChangePassword { get; set; }
     }
 }

@@ -6,6 +6,7 @@
 @model ProfileViewModel
 @{
     bool isFail = ViewBag.isFail ?? false;
+    bool isPassowordFail = ViewBag.isPassowordFail ?? false;
     bool isSuccess = ViewBag.isSuccess ?? false;
 }
 
@@ -22,6 +23,12 @@
         {
             <div class="alert alert-success" role="alert">
                 Cập nhật thành công
+            </div>
+        }
+        else if (isPassowordFail)
+        {
+            <div class="alert alert-warning" role="alert">
+                Đổi mật khẩu thất bại
             </div>
         }
 
@@ -175,35 +182,39 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
-                    <h4 class="mb-4">Đổi mật khẩu</h4>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Mật khẩu cũ</label>
-                                <input type="password" class="form-control">
+                <form asp-action="ChangePassword">
+                    <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+                        <h4 class="mb-4">Đổi mật khẩu</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Mật khẩu cũ</label>
+                                    <input type="password" name="oldP" class="form-control">
+                                    <input type="text" name="id" class="form-control" value="@Model.Customer.Id" hidden>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Mật khẩu mới</label>
-                                <input type="password" class="form-control">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Mật khẩu mới</label>
+                                    <input type="password" name="newP" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Xác nhận mật khẩu</label>
+                                    <input type="password" name="conformP" class="form-control">
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Xác nhận mật khẩu</label>
-                                <input type="password" class="form-control">
-                            </div>
+                        <div>
+                            <button type="submit" class="btn btn-dark">Cập nhật</button>
+                            <button class="btn btn-light">Huỷ</button>
                         </div>
                     </div>
-                    <div>
-                        <button class="btn btn-dark">Cập nhật</button>
-                        <button class="btn btn-light">Huỷ</button>
-                    </div>
-                </div>
+                </form>
+               
             </div>
         </div>
     </div>

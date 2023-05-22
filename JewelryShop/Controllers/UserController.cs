@@ -41,6 +41,55 @@ namespace JewelryShop.Controllers
                 Customer = cusInfo
             });
         }
+        [HttpPost]
+        [Route("ChangePassword")]
+        public async Task<IActionResult> ChangePassword(string oldP, string newP, string conformP, string id)
+        {
+            if (newP != conformP)
+            {
+                ViewBag.isPassowordFail = true;
+
+                string? phone1 = HttpContext.Session.GetString("phone");
+                if (phone1 is null) { return Redirect("/dang-nhap"); }
+                var cusInfo1 = await _userService.ManageAccount(phone1);
+                if (cusInfo1 is null) { return Redirect("/dang-nhap"); }
+                var orderDtos1 = await _orderService.GetAllCurrentOrder(cusInfo1.Phone);
+
+                return View("Setting", new ProfileViewModel
+                {
+                    OrderDtos = orderDtos1,
+                    Customer = cusInfo1
+                });
+            }
+
+            var result = await _userService.ChangePassword(new CustomerDto
+            {
+                Password = oldP,
+                Id = new Guid(id)
+            },
+            newP);
+            if (result is false)
+            {
+
+                ViewBag.isPassowordFail = true;
+            }
+            else
+            {
+                ViewBag.isSuccess = true;
+            }
+            string? phone = HttpContext.Session.GetString("phone");
+            if (phone is null) { return Redirect("/dang-nhap"); }
+            var cusInfo = await _userService.ManageAccount(phone);
+            if (cusInfo is null) { return Redirect("/dang-nhap"); }
+            var orderDtos = await _orderService.GetAllCurrentOrder(cusInfo.Phone);
+
+            return View("Setting", new ProfileViewModel
+            {
+                OrderDtos = orderDtos,
+                Customer = cusInfo
+            });
+
+        }
 
         [HttpPost]
         [Route("/EditAccount")]
