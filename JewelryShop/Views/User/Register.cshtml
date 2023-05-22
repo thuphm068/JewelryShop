@@ -4,46 +4,55 @@
 @{
     ViewData["Title"] = "Đăng ký tài khoản";
 }
+@using JewelryShop.Domain.Shared.Const
+@model RegisterViewModel
 
 <section class="container">
     <header>Đăng ký tài khoản</header>
-    <form action="#" class="form">
-            <div class="input-box">
-                <label>Tên <span>*</span></label>
-                <input type="text" placeholder="Nhập tên" required />
-            </div>
+    <form asp-action="Register" class="form">
+        <div class="input-box">
+            <label>Tên <span>*</span></label>
+            <input type="text" placeholder="Nhập tên" asp-for="name" required />
+        </div>
         <div class="column">
 
             <div class="input-box">
                 <label>Số điện thoại <span>*</span></label>
-                <input type="text" placeholder="Nhập số điện thoại" required />
+                <input type="text" placeholder="Nhập số điện thoại" asp-for="userPhone" required />
+            </div>
+            <div class="input-box">
+                <label>Mật khẩu <span>*</span></label>
+                <input type="password" placeholder="Nhập số mật khẩu" asp-for="password" required />
             </div>
             <div class="input-box">
                 <label>Email</label>
-                <input type="text" placeholder="Nhập email" />
+                <input type="text" placeholder="Nhập email" asp-for="email" />
             </div>
         </div>
-     
+        <div class="input-box">
+            <label>Tên <span>*</span></label>
+            <input type="text" placeholder="Nhập địa chỉ" asp-for="address" required />
+        </div>
         <div class="column">
             <div class="input-box">
                 <label>Ngày sinh <span>*</span></label>
-                <input type="date" placeholder="dd-mm-yyyy" required />
+                <input type="date" placeholder="dd-mm-yyyy" asp-for="birth" required />
             </div>
             <div class="gender-box">
                 <h3>Giới tính</h3>
                 <div class="gender-option">
                     <div class="gender">
-                        <input type="radio" id="check-male" name="gender" checked />
+                        <input type="radio" id="check-male" value="@Gender.Male" asp-for="gender" name="gender" checked />
                         <label for="check-male">Nam</label>
                     </div>
                     <div class="gender">
-                        <input type="radio" id="check-female" name="gender" />
+                        <input type="radio" id="check-female" value="@Gender.Female" asp-for="gender" name="gender" />
                         <label for="check-female">Nữ</label>
                     </div>
                 </div>
             </div>
         </div>
-        <button>Đăng ký</button>
+        <button type="submit">Đăng ký</button>
         <div class="register-link" style="text-align: center; margin-top: 15px;">
             Đã có tài khoản? <a href="/dang-nhap">Đăng nhập ngay</a>
         </div>
@@ -55,98 +64,115 @@
 <style>
     .container header {
         margin-top: 70px;
-  text-align: center;
+        text-align: center;
         height: 90px;
         border-radius: 5px 5px 0 0;
         color: black;
         font-size: 28px;
         font-weight: 400;
     }
-.container .form {
+
+    .container .form {
         max-width: max-content;
         margin: 100px auto;
         margin-top: 20px !important;
     }
-.form .input-box {
-  width: 100%;
-  margin-top: 20px;
-}
-.input-box label {
-  color: #333;
-}
-.form :where(.input-box input, .select-box) {
-  position: relative;
-  height: 50px;
-  width: 100%;
-  outline: none;
-  font-size: 1rem;
-  color: #707070;
-  margin-top: 8px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 0 15px;
-}
-.input-box input:focus {
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-}
-.form .column {
-  display: flex;
-  column-gap: 15px;
-}
-.form .gender-box {
-  margin-top: 20px;
+
+    .form .input-box {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .input-box label {
+        color: #333;
+    }
+
+    .form :where(.input-box input, .select-box) {
+        position: relative;
+        height: 50px;
+        width: 100%;
+        outline: none;
+        font-size: 1rem;
+        color: #707070;
+        margin-top: 8px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 0 15px;
+    }
+
+    .input-box input:focus {
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .form .column {
+        display: flex;
+        column-gap: 15px;
+    }
+
+    .form .gender-box {
+        margin-top: 20px;
         width: -webkit-fill-available;
     }
-.gender-box h3 {
-  color: #333;
-  font-size: 1rem;
-  font-weight: 400;
-  margin-bottom: 8px;
-}
-.form :where(.gender-option, .gender) {
+
+    .gender-box h3 {
+        color: #333;
+        font-size: 1rem;
+        font-weight: 400;
+        margin-bottom: 8px;
+    }
+
+    .form :where(.gender-option, .gender) {
         display: -webkit-box;
         align-items: center;
-  column-gap: 50px;
-  flex-wrap: wrap;
+        column-gap: 50px;
+        flex-wrap: wrap;
         display: block;
     }
-.form .gender {
-  column-gap: 5px;
-}
-.gender input {
-  accent-color: black;
-}
-.form :where(.gender input, .gender label) {
-  cursor: pointer;
-}
-.gender label {
-  color: #707070;
-}
-.address :where(input, .select-box) {
-  margin-top: 15px;
-}
-.select-box select {
-  height: 100%;
-  width: 100%;
-  outline: none;
-  border: none;
-  color: #707070;
-  font-size: 1rem;
-}
-.form button {
-  height: 55px;
-  width: 100%;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 400;
-  margin-top: 30px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
+
+    .form .gender {
+        column-gap: 5px;
+    }
+
+    .gender input {
+        accent-color: black;
+    }
+
+    .form :where(.gender input, .gender label) {
+        cursor: pointer;
+    }
+
+    .gender label {
+        color: #707070;
+    }
+
+    .address :where(input, .select-box) {
+        margin-top: 15px;
+    }
+
+    .select-box select {
+        height: 100%;
+        width: 100%;
+        outline: none;
+        border: none;
+        color: #707070;
+        font-size: 1rem;
+    }
+
+    .form button {
+        height: 55px;
+        width: 100%;
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 400;
+        margin-top: 30px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
         background: #545454;
-}
-.form button:hover {
-  background: black;
-}
+    }
+
+        .form button:hover {
+            background: black;
+        }
 
 </style>
