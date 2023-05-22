@@ -68,6 +68,59 @@ namespace JewelryShop.Controllers
             return View("ShopCart", listofproduct);
         }
 
+        [HttpGet]
+        [Route("cap-nhat")]
+        public async Task<IActionResult> EleminateItem(string id)
+        {
+            var serializedString = HttpContext.Session.GetString("P_ID");
+            var listofproduct = new List<CartModel>();
+            int countIndex = 0;
+
+            var newListId = new List<string>();
+
+
+            if (serializedString != null)
+            {
+                var listofid = JsonConvert.DeserializeObject<List<string>>(serializedString);
+               
+
+                if (listofid != null)
+                {
+                    listofid = listofid.Where(x => x != id).ToList();
+                    var reallist =
+                    listofid.GroupBy(x => x)
+                   .Select(x => new
+                   {
+                       id = x.Key,
+                       count = x.Count()
+                   }).ToList();
+
+                    foreach (var r in reallist)
+                    {
+                        var product = await _productService.GetProductDetails(new Guid(r.id));
+                        product.FPrice = PriceFormatter.FormatPrice(product.Price);
+                        listofproduct.Add(
+                            new CartModel
+                            {
+                                count = r.count,
+                                Product = product,
+                                totalprice = PriceFormatter.FormatPrice(r.count * product.Price),
+                            }
+                            );
+
+                    }
+                    HttpContext.Session.SetString("P_ID", JsonConvert.SerializeObject(listofid).ToString());
+
+                }
+
+
+
+
+            }
+
+            return View("ShopCart", listofproduct);
+        }
+
         [HttpPost]
         [Route("gio-hang")]
         public async Task<IActionResult> Index(List<string> id, List<int> count)
@@ -105,6 +158,8 @@ namespace JewelryShop.Controllers
             }
             return View("ShopCart", listofproduct);
         }
+       
+
 
 
         [HttpPost("dat-hang")]
@@ -154,6 +209,9 @@ namespace JewelryShop.Controllers
             return View("CheckOut", carviewModel);
         }
 
+
+
+
         [HttpPost("LastCheckOut")]
         public async Task<IActionResult> LastCheckOut(OrderViewModel order)
         {
@@ -200,7 +258,7 @@ namespace JewelryShop.Controllers
             };
 
             await _orderService.AddOrder(orderDto);
-            HttpContext.Session.SetString("P_ID", null);
+            HttpContext.Session.Remove("P_ID");
 
             return View("OrderSuccess");
         }

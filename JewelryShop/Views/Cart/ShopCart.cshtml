@@ -44,7 +44,11 @@
                                             </div>
                                         </td>
                                         <td class="cart__total">@e.totalprice đ</td>
-                                        <td class="cart__close"><span class="icon_close"></span></td>
+                                        <td class="cart__close">
+                                            <a asp-action="EleminateItem" asp-route-id ="@e.Product.Id">
+                                                <span class="icon_close"></span>
+                                            </a>
+                                        </td>
                                     </tr>
 
                                 }
