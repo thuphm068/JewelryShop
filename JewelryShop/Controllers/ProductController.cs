@@ -70,15 +70,13 @@ namespace JewelryShop.Controllers
         [HttpGet]
         [Route("")]
 
-        public async Task<IActionResult> Index(string? searchString, string? cate, string? sub, string sortOrder, string min = "000", string max = "1500000000", int pageIndex = 1)
+        public async Task<IActionResult> Index(string? searchString, string? cate, string? sub, string sortOrder, string range = "", int pageIndex = 1)
         {
 
             ViewData["CurrentSort"] = sortOrder;
 
-            var realmin = Int32.Parse(new string(min.Substring(0, min.Length - 2).Where(x => x != ('.')).ToArray()));
-            var realmax = Int32.Parse(new string(max.Substring(0, max.Length - 2).Where(x => x != ('.')).ToArray()));
-            ViewData["CurrentMin"] = realmin.ToString();
-            ViewData["CurrentMax"] = realmax.ToString();
+
+            ViewData["CurrentRange"] = range;
             ViewData["CurrentSearch"] = searchString;
 
             List<ProductHomePageDto> productHomePageDtos = new List<ProductHomePageDto>();
@@ -119,8 +117,23 @@ namespace JewelryShop.Controllers
                     default:
                         break;
                 }
+                switch (range)
+                {
+                    case "< 500.000đ":
+                        productHomePageDtos = productHomePageDtos.Where(x => x.Price < 500000).ToList();
 
-                productHomePageDtos = productHomePageDtos.Where(x => x.Price < realmax && x.Price > realmin).ToList();
+                        break;
+                    case "500.000đ - 1.000.000đ":
+                        productHomePageDtos = productHomePageDtos.Where(x => x.Price < 1000000 && x.Price > 500000).ToList();
+
+                        break;
+
+                    case "> 1.000.000đ":
+                        productHomePageDtos = productHomePageDtos.Where(x => x.Price > 1000000).ToList();
+
+                        break;
+
+                }
             }
             if (searchString != null)
             {
