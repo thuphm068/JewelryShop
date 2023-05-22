@@ -15,11 +15,13 @@ namespace JewelryShop.Controllers
     {
 
         private readonly IUserService _userService;
+        private readonly IOrderService _orderService;
         private readonly IMapper _mapper;
 
-        public UserController(IUserService userService, IMapper mapper)
+        public UserController(IUserService userService, IMapper mapper, IOrderService orderService)
         {
             _userService = userService;
+            _orderService = orderService;
             _mapper = mapper;
         }
 
@@ -28,35 +30,42 @@ namespace JewelryShop.Controllers
         public async Task<IActionResult> AccountInfo()
         {
             string? phone = HttpContext.Session.GetString("phone");
-            if(phone is null) { return RedirectToAction("Login"); }
-            var cusInfo = await _userService.ManageAccount(new CustomerDto
+            if (phone is null) { return Redirect("/dang-nhap"); }
+            var cusInfo = await _userService.ManageAccount(phone);
+            if (cusInfo is null) { return Redirect("/dang-nhap"); }
+            var orderDtos = await _orderService.GetAllCurrentOrder(cusInfo.Phone);
+
+            return View("Setting", new ProfileViewModel
             {
-                Phone = phone
+                OrderDtos = orderDtos,
+                Customer = cusInfo
             });
-            return View("Setting",cusInfo);
         }
+
         [HttpPost]
         [Route("/EditAccount")]
-        public async Task<IActionResult> EditAccount(CustomerDto customerDto, string gender)
+        public async Task<IActionResult> EditAccount(ProfileViewModel profileViewModel, string gender)
         {
-            if(gender == "Nam")
+            if (gender == "Nam")
             {
-                customerDto.Gender = Gender.Male;
+                profileViewModel.Customer.Gender = Gender.Male;
             }
             else
             {
-                customerDto.Gender = Gender.Female;
+                profileViewModel.Customer.Gender = Gender.Female;
 
             }
-            var result = await _userService.EditAccount(customerDto);
-            if(result == false)
+            var result = await _userService.EditAccount(profileViewModel.Customer);
+            if (result == false)
             {
                 ViewBag.isFail = true;
             }
             ViewBag.isSuccess = true;
-
-            return View("Setting", customerDto);
+            var orderDtos = await _orderService.GetAllCurrentOrder(profileViewModel.Customer.Phone);
+            profileViewModel.OrderDtos = orderDtos;
+            return View("Setting", profileViewModel);
         }
+
 
 
         [HttpGet("/dang-nhap")]
@@ -67,6 +76,7 @@ namespace JewelryShop.Controllers
         [HttpPost("/AuthenticateToLogin")]
         public async Task<IActionResult> Login(LoginViewModel vm)
         {
+
             var customerDto = new CustomerDto
             {
                 Password = vm.password,
@@ -74,10 +84,17 @@ namespace JewelryShop.Controllers
             };
 
             var result = await _userService.Login(customerDto);
-            if(result)
+            if (result)
             {
                 SetUp(customerDto.Name, customerDto.Phone);
-                return RedirectToAction("Index", "Home");
+                if (TempData["ReturnUrl"] is null)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    return Redirect(TempData["ReturnUrl"] as string ?? "/");
+                }
             }
             else
             {
@@ -98,7 +115,7 @@ namespace JewelryShop.Controllers
         {
             return View();
         }
-                
+
         [HttpGet("/chinh-sua")]
         public IActionResult Setting()
         {
@@ -114,7 +131,7 @@ namespace JewelryShop.Controllers
                 Phone = vm.userPhone,
                 Name = vm.name,
                 Birthday = vm.birth,
-                
+
                 Address = vm.address,
                 Email = vm.email,
             };
@@ -138,6 +155,15 @@ namespace JewelryShop.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpGet]
+        [Route("Logout")]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            HttpContext.Session.CommitAsync();
+            return Redirect("/dang-nhap");
         }
 
     }

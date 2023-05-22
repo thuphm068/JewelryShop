@@ -30,9 +30,9 @@ public class UserService : IUserService
         return false;
     }
 
-    public async Task<CustomerDto?> ManageAccount(CustomerDto customerDto)
+    public async Task<CustomerDto?> ManageAccount(string phone )
     {
-        var user = await _customerRepository.GetCustomerByPhone(customerDto.Phone);
+        var user = await _customerRepository.GetCustomerByPhone(phone);
         if (user == null) { return null; }
 
         return _mapper.Map<CustomerDto>(user);

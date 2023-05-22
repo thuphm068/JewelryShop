@@ -1,5 +1,6 @@
 ﻿using JewelryShop.Application.Contracts;
 using JewelryShop.Application.Interfaces;
+using JewelryShop.Application.Services;
 using JewelryShop.Helper;
 using JewelryShop.Models;
 using MapsterMapper;
@@ -13,15 +14,17 @@ namespace JewelryShop.Controllers
     public class CartController : Controller
     {
         private readonly IProductService _productService;
+        private readonly IUserService _userService;
         private readonly IOrderService _orderService;
         private readonly IMapper _mapper;
 
-        public CartController(IProductService productService, IOrderService orderService, IMapper mapper)
+        public CartController(IProductService productService, IOrderService orderService, IMapper mapper, IUserService userService)
         {
 
             _mapper = mapper;
             _productService = productService;
             _orderService = orderService;
+            _userService = userService;
         }
 
 
@@ -29,7 +32,7 @@ namespace JewelryShop.Controllers
         public async Task<IActionResult> Index()
         {
             var serializedString = HttpContext.Session.GetString("P_ID");
-            var listofproduct = new List<CartViewModel>();
+            var listofproduct = new List<CartModel>();
             int quantity = 0;
 
             if (serializedString != null)
@@ -50,7 +53,7 @@ namespace JewelryShop.Controllers
                         var product = await _productService.GetProductDetails(new Guid(id.id));
                         product.FPrice = PriceFormatter.FormatPrice(product.Price);
                         listofproduct.Add(
-                            new CartViewModel
+                            new CartModel
                             {
                                 count = id.count,
                                 Product = product,
@@ -70,7 +73,21 @@ namespace JewelryShop.Controllers
         [HttpPost("dat-hang")]
         public async Task<IActionResult> CheckOut(List<string> id, List<int> count)
         {
-            var listofproduct = new List<CartViewModel>();
+            var carviewModel = new CartViewModel();
+
+            var phone = HttpContext.Session.GetString("phone");
+            if (phone != null)
+            {
+                var user = await _userService.ManageAccount(phone);
+                if (user != null) { carviewModel.Customer = user; }
+            }
+            else
+            {
+                TempData["ReturnUrl"] = "/gio-hang";
+                return Redirect("/dang-nhap");
+            }
+
+            var listofproduct = new List<CartModel>();
             double total = 0;
             if (id != null)
             {
@@ -81,7 +98,7 @@ namespace JewelryShop.Controllers
                     product.FPrice = PriceFormatter.FormatPrice(product.Price);
                     var currentprice = count.ElementAt(index) * product.Price;
                     listofproduct.Add(
-                        new CartViewModel
+                        new CartModel
                         {
                             count = count.ElementAt(index++),
                             Product = product,
@@ -95,8 +112,11 @@ namespace JewelryShop.Controllers
             ViewBag.FTotal = PriceFormatter.FormatPrice(total);
             ViewBag.Total = (total);
 
-            return View("CheckOut", listofproduct);
+            carviewModel.CartModels = listofproduct;
+            
+            return View("CheckOut", carviewModel);
         }
+
         [HttpPost("LastCheckOut")]
         public async Task<IActionResult> LastCheckOut(OrderViewModel order)
         {
@@ -134,7 +154,6 @@ namespace JewelryShop.Controllers
                     Name = order.name,
                     Phone = order.phone,
                     Address = order.address + ", " + order.ward + ", " + order.district + ", " + order.city,
-
 
                 },
                 orderDetailDtos = listoforderDetailDto,

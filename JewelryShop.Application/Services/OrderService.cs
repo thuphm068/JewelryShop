@@ -80,6 +80,25 @@ namespace JewelryShop.Application.Services
 
         }
 
+        public async Task<List<OrderDto>> GetAllCurrentOrder(string phone)
+        {
+            var orderDtos = new List<OrderDto>();
+            var user = await _customerRepository.GetCustomerByPhone(phone);
+            if(user == null) return orderDtos;
+
+            var orders = from o in _orderRepository.GetAll()
+                         where o.CustomerId == user.Id
+                         select o;
+            foreach (var od in orders)
+            {
+                var order = _mapper.Map<OrderDto>(od);
+                if (order == null) continue;
+                orderDtos.Add(order);
+            }
+
+            return orderDtos;
+        }
+
         public async Task<List<OrderDetailDto>> GetDetailsInOrder(Guid Id)
         {
             var orderdetails = await _orderdetailsRepository.GetDetailsInOrder(Id);
