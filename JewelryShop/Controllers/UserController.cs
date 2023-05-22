@@ -148,5 +148,14 @@ namespace JewelryShop.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("Logout")]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            HttpContext.Session.CommitAsync();
+            return Redirect("/dang-nhap");
+        }
+
     }
 }
