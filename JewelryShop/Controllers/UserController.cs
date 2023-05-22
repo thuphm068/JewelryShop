@@ -87,13 +87,15 @@ namespace JewelryShop.Controllers
             if (result)
             {
                 SetUp(customerDto.Name, customerDto.Phone);
-                if (TempData["ReturnUrl"] is null)
+                if (HttpContext.Session.GetString("ReturnUrl") is null)
                 {
                     return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    return Redirect(TempData["ReturnUrl"] as string ?? "/");
+                    var returnURL = HttpContext.Session.GetString("ReturnUrl");
+                    HttpContext.Session.SetString("ReturnUrl", "/");
+                    return Redirect(returnURL);
                 }
             }
             else

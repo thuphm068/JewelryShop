@@ -38,16 +38,17 @@ namespace JewelryShop.Controllers
             if (serializedString != null)
             {
                 var listofid = JsonConvert.DeserializeObject<List<string>>(serializedString);
-                var reallist =
-                listofid.GroupBy(x => x)
-                    .Select(x => new
-                    {
-                        id = x.Key,
-                        count = x.Count()
-                    }).ToList();
+
 
                 if (listofid != null)
                 {
+                    var reallist =
+               listofid?.GroupBy(x => x)
+                   .Select(x => new
+                   {
+                       id = x.Key,
+                       count = x.Count()
+                   }).ToList();
                     foreach (var id in reallist)
                     {
                         var product = await _productService.GetProductDetails(new Guid(id.id));
@@ -77,9 +78,9 @@ namespace JewelryShop.Controllers
 
             var newListId = new List<string>();
 
-            for (int i =0; i < id.Count; i++)
+            for (int i = 0; i < id.Count; i++)
             {
-                for(int j = 0; j < count[i]; j++)
+                for (int j = 0; j < count[i]; j++)
                 {
                     newListId.Add(id[i]);
                 }
@@ -119,7 +120,7 @@ namespace JewelryShop.Controllers
             }
             else
             {
-                TempData["ReturnUrl"] = "/gio-hang";
+                HttpContext.Session.SetString("ReturnUrl", "/gio-hang");
                 return Redirect("/dang-nhap");
             }
 
@@ -199,7 +200,7 @@ namespace JewelryShop.Controllers
             };
 
             await _orderService.AddOrder(orderDto);
-
+            HttpContext.Session.SetString("P_ID", null);
 
             return View("OrderSuccess");
         }
