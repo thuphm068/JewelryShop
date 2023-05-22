@@ -2,88 +2,98 @@
 @model List<CartModel>
 @{
     ViewData["Title"] = "Liên hệ";
-    
+
 }
 <!-- Shop Cart Section Begin -->
 <section class="shop-cart spad">
     <div class="container">
-        <form asp-controller="Cart" asp-action="CheckOut" method="post">
+        <form asp-controller="Cart" asp-action="Index" method="post">
 
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="shop__cart__table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Sản phẩm</th>
-                                <th>Giá</th>
-                                <th>Số lượng</th>
-                                <th>Tổng cộng</th>
-                                <th></th>
-                            </tr>
-                        </thead>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shop__cart__table">
 
-                        <tbody>
-                           
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Sản phẩm</th>
+                                    <th>Giá</th>
+                                    <th>Số lượng</th>
+                                    <th>Tổng cộng</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
                                 @foreach (var e in Model)
                                 {
-                                <tr>
-                                    <td class="cart__product__item">
-                                        <img style="width: 70px; height: 70px;" src="/Source/img/product/@e.Product.Image"/>
+                                    <tr>
+                                        <td class="cart__product__item">
+                                            <img style="width: 70px; height: 70px;" src="/Source/img/product/@e.Product.Image" />
 
-                                        <div class="cart__product__item__title">
-                                            <a asp-action="Detail" asp-controller="Product" asp-route-id="@e.Product.Id"> <h6>@e.Product.Name</h6></a>
-                                        </div>
-                                    </td>
-                                    <td class="cart__price">@e.Product.FPrice đ</td>
-                                    <td class="cart__quantity">
-                                        <div class="pro-qty">
-                                            <input type="text" value="@e.Product.Id" name="id" hidden >
-                                            <input type="text" value="@e.count" name="count" id="pcount">
-                                        </div>
-                                    </td>
-                                    <td class="cart__total">@e.totalprice đ</td>
-                                    <td class="cart__close"><span class="icon_close"></span></td>
-                                </tr>
+                                            <div class="cart__product__item__title">
+                                                <a asp-action="Detail" asp-controller="Product" asp-route-id="@e.Product.Id"> <h6>@e.Product.Name</h6></a>
+                                            </div>
+                                        </td>
+                                        <td class="cart__price">@e.Product.FPrice đ</td>
+                                        <td class="cart__quantity">
+                                            <div class="pro-qty">
+                                                <input type="text" value="@e.Product.Id" name="id" hidden>
+                                                <input type="number" value="@e.count" name="count" id="pcount">
+                                            </div>
+                                        </td>
+                                        <td class="cart__total">@e.totalprice đ</td>
+                                        <td class="cart__close"><span class="icon_close"></span></td>
+                                    </tr>
 
                                 }
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="cart__btn">
-                    <a href="/">Tiếp tục mua sắm</a>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="cart__btn">
+                        <a href="/">Tiếp tục mua sắm</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="cart__btn update__btn">
+                        <button type="submit"><span class="icon_loading"></span>Cập nhật ( if u change the ammount )</button>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="cart__btn update__btn">
-                    <a ><span class="icon_loading"></span>Cập nhật</a>
-                </div>
-            </div>
-        </div>
+        </form>
+
         <div class="row">
             <div class="col-lg-6">
                 <div class="discount__content">
-
                 </div>
             </div>
             <div class="col-lg-4 offset-lg-2">
-                <div class="cart__total__procced">
-                    <h6>Tổng thanh toán</h6>
-                    <ul>
-@*                        <li>Subtotal <span>$ 750.0</span></li>
-*@                        <li>Số lượng <span>4</span></li>
-                          <li>Tạm tính <span>$ 750.0</span></li>
-                    </ul>
-                    <button type="submit" class="primary-btn">Tiếp tục</button>
-                </div>
+                <form asp-controller="Cart" asp-action="CheckOut" method="post">
+                    @foreach (var e in Model)
+                    {
+                        <input type="text" value="@e.Product.Id" name="id" hidden>
+                        <input type="text" value="@e.count" name="count" id="pcount" hidden>
+                    }
+
+                    <div class="cart__total__procced">
+                        <h6>Tổng thanh toán</h6>
+                        <ul>
+                            @*                        <li>Subtotal <span>$ 750.0</span></li>
+                            *@
+                            <li>Số lượng <span>@Model.Sum(x => x.count)</span></li>
+                            <li>Tạm tính <span>@Model.Sum(x => (x.count * x.Product.Price))</span></li>
+                        </ul>
+                        <button type="submit" class="primary-btn">Tiếp tục</button>
+                    </div>
+                </form>
             </div>
         </div>
-        </form>
     </div>
 </section>
 <!-- Shop Cart Section End -->

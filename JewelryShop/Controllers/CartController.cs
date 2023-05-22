@@ -67,7 +67,43 @@ namespace JewelryShop.Controllers
             return View("ShopCart", listofproduct);
         }
 
+        [HttpPost]
+        [Route("gio-hang")]
+        public async Task<IActionResult> Index(List<string> id, List<int> count)
+        {
 
+            int countIndex = 0;
+            var listofproduct = new List<CartModel>();
+
+            var newListId = new List<string>();
+
+            for (int i =0; i < id.Count; i++)
+            {
+                for(int j = 0; j < count[i]; j++)
+                {
+                    newListId.Add(id[i]);
+                }
+            }
+
+            HttpContext.Session.SetString("P_ID", JsonConvert.SerializeObject(newListId).ToString());
+
+            foreach (var i in id)
+            {
+
+                var product = await _productService.GetProductDetails(new Guid(i));
+                product.FPrice = PriceFormatter.FormatPrice(product.Price);
+                listofproduct.Add(
+                    new CartModel
+                    {
+                        count = count.ElementAt(countIndex),
+                        Product = product,
+                        totalprice = PriceFormatter.FormatPrice(count.ElementAt(countIndex++) * product.Price),
+                    }
+                    );
+
+            }
+            return View("ShopCart", listofproduct);
+        }
 
 
         [HttpPost("dat-hang")]
@@ -113,7 +149,7 @@ namespace JewelryShop.Controllers
             ViewBag.Total = (total);
 
             carviewModel.CartModels = listofproduct;
-            
+
             return View("CheckOut", carviewModel);
         }
 
