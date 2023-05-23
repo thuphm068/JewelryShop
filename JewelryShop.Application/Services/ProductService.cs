@@ -44,11 +44,9 @@ namespace JewelryShop.Application.Services
         public async Task<List<ProductHomePageDto>> GetProductsBySubCategoryName(string subCategoryName)
         {
             var products = await _productRepository.GetAllList();
-            var categorys = await _categoryRepository.GetAllList();
             var subcategorys = await _subcategoryRepository.GetAllList();
 
             var subcategory = subcategorys.FirstOrDefault(x => x.Name == subCategoryName);
-           
 
             products = products.Where(x => x.SubCategoryId.Equals(subcategory.Id)).ToList();
 

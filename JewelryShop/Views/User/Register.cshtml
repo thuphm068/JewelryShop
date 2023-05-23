@@ -22,17 +22,11 @@
             </div>
             <div class="input-box">
                 <label>Mật khẩu <span>*</span></label>
-                <input type="password" placeholder="Nhập số mật khẩu" asp-for="password" required />
+                <input type="password" placeholder="Nhập mật khẩu" asp-for="password" required />
             </div>
-            <div class="input-box">
-                <label>Email</label>
-                <input type="text" placeholder="Nhập email" asp-for="email" hidden value="trống" />
-            </div>
+
         </div>
-        <div class="input-box">
-            <label>Tên <span>*</span></label>
-            <input type="text" placeholder="Nhập địa chỉ" asp-for="address" hidden value="trống" required />
-        </div>
+       
         <div class="column">
             <div class="input-box">
                 <label>Ngày sinh <span>*</span></label>
@@ -51,6 +45,14 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="input-box">
+            @*                <label>Email</label>
+            *@                <input type="text" placeholder="Nhập email" asp-for="email" hidden value="trống" />
+        </div>
+        <div class="input-box">
+            @*            <label>Tên <span>*</span></label>
+            *@            <input type="text" placeholder="Nhập địa chỉ" asp-for="address" hidden value="trống" />
         </div>
         <button type="submit">Đăng ký</button>
         <div class="register-link" style="text-align: center; margin-top: 15px;">
