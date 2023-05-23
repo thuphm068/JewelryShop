@@ -3,11 +3,16 @@
 *@
 @using JewelryShop.Application.Contracts
 @using JewelryShop.Domain.Shared
+@using JewelryShop.Helper
+
 @model ProfileViewModel
 @{
+    ViewData["Title"] = "Thông tin tài khoản";
+
     bool isFail = ViewBag.isFail ?? false;
     bool isPassowordFail = ViewBag.isPassowordFail ?? false;
     bool isSuccess = ViewBag.isSuccess ?? false;
+
 }
 
 
@@ -51,7 +56,11 @@
                         Đổi mật khẩu
                     </a>
                 </div>
-                <a class="btn btn-dark" asp-action="Logout">Đăng xuất</a>
+                <a class="btn btn-dark" style="
+    width: 80%;
+    margin: 10px auto;
+    display: block;
+" asp-action="Logout">Đăng xuất</a>
             </div>
             <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
                 <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
@@ -142,15 +151,15 @@
                 <div class="tab-pane fade" id="orderhistory" role="tabpanel" aria-labelledby="orderhistory-tab">
                     <h4 class="mb-4">Lịch sử mua hàng</h4>
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-lg-12" style="padding-right: 0px; padding-left: 0px;">
                             <div class="history__table">
                                 <table>
                                     <thead>
                                         <tr>
                                             <th>Đơn hàng</th>
-                                            <th>Ngày đặt</th>
+                                            <th style="padding-left: 10px;">Ngày đặt</th>
                                             <th>Tình trạng</th>
-                                            <th>Tổng cộng</th>
+                                            <th style="text-align: right;">Tổng cộng</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -164,26 +173,23 @@
                                                     </div>
                                                 </td>
                                                 <td class="history__order__date">
-                                                    <p type="text" value="@i.Date" readonly>
+                                                    @i.Date.ToShortDateString()
                                                 </td>
                                                 <td class="history__order_status">
                                                     @i.Status.ToString()
                                                 </td>
-                                                <td class="history__order__total">@i.Total</td>
+                                                <td class="history__order__total">@PriceFormatter.FormatPrice(i.Total) đ</td>
                                             </tr>
                                         }
-
-                                      
-
-
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
-                <form asp-action="ChangePassword">
                     <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+                                        <form asp-action="ChangePassword">
+
                         <h4 class="mb-4">Đổi mật khẩu</h4>
                         <div class="row">
                             <div class="col-md-6">
@@ -212,8 +218,9 @@
                             <button type="submit" class="btn btn-dark">Cập nhật</button>
                             <button class="btn btn-light">Huỷ</button>
                         </div>
+                    </form>
+
                     </div>
-                </form>
                
             </div>
         </div>
@@ -278,7 +285,6 @@
                 font-size: 15px;
                 color: #111111;
                 font-weight: 600;
-                text-transform: uppercase;
                 padding-bottom: 20px;
                 padding-top: 20px;
             }
@@ -294,11 +300,12 @@
 
             .history__table tbody tr .history__order {
                 overflow: hidden;
-                width: 160px;
+                width: 150px;
                 margin-bottom: 15px;
             }
 
             .history__table tbody tr .history__order__date {
+                margin-left: 10px;
                 overflow: hidden;
                 width: 200px;
                 margin-bottom: 15px;
@@ -309,6 +316,7 @@
                 color: #9A4747;
                 font-weight: 600;
                 width: 150px;
+                text-align: right;
             }
 
 

@@ -2,7 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @model CartViewModel
-
+@using JewelryShop.Helper
 @{
     ViewData["Title"] = "Thông tin đặt hàng";
     var total = ViewBag.Total;
@@ -69,7 +69,7 @@
                                     </li>
                                     @foreach (var i in Model.CartModels)
                                     {
-                                        <li>@i.Product.Name <span>@i.Product.FPrice đ</span></li>
+                                        <li>@i.Product.Name <span>@PriceFormatter.FormatPrice((i.Product.Price * i.count)) đ</span></li>
 
                                     }
 
@@ -78,7 +78,6 @@
                             <div class="checkout__order__total">
                                 <ul>
                                     <input name="total" value="@total" hidden />
-                                    <li>Phí giao hàng <span>40.000 đ</span></li>
                                     <li>Tổng cộng <span>@ftotal đ</span></li>
                                 </ul>
                             </div>
@@ -137,7 +136,7 @@
                                     </li>
                                     @foreach (var i in Model.CartModels)
                                     {
-                                        <li>@i.Product.Name <span>@i.Product.FPrice đ</span></li>
+                                        <li>@i.Product.Name <span>@i.totalprice</span></li>
 
                                     }
 

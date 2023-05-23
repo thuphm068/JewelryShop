@@ -2064,7 +2064,15 @@ pre {
     }
 
 @media (max-width:575.98px) {
-    .table-responsive-sm {
+    .shop__cart__table thead th {
+        font-size: 14px;
+        color: #111111;
+        font-weight: 500;
+        text-transform: uppercase;
+        padding-bottom: 10px;
+    }
+
+        .table-responsive-sm {
         display: block;
         width: 100%;
         overflow-x: auto;

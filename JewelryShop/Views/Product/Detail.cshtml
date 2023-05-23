@@ -1,6 +1,7 @@
 ﻿@using JewelryShop.Application.Contracts
 @model ProductDto
 @{
+        ViewData["Title"] = Model.Name;
     var relatedProductDtos = ViewData["RelatedProducts"] as List<ProductHomePageDto> ?? new List<ProductHomePageDto>();
 }
 
