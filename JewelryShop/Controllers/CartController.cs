@@ -38,8 +38,6 @@ namespace JewelryShop.Controllers
             if (serializedString != null)
             {
                 var listofid = JsonConvert.DeserializeObject<List<string>>(serializedString);
-
-
                 if (listofid != null)
                 {
                     var reallist =
@@ -61,7 +59,6 @@ namespace JewelryShop.Controllers
                                 totalprice = PriceFormatter.FormatPrice(id.count * product.Price),
                             }
                             );
-
                     }
                 }
             }
@@ -75,15 +72,11 @@ namespace JewelryShop.Controllers
             var serializedString = HttpContext.Session.GetString("P_ID");
             var listofproduct = new List<CartModel>();
             int countIndex = 0;
-
             var newListId = new List<string>();
-
 
             if (serializedString != null)
             {
                 var listofid = JsonConvert.DeserializeObject<List<string>>(serializedString);
-               
-
                 if (listofid != null)
                 {
                     listofid = listofid.Where(x => x != id).ToList();
@@ -110,12 +103,7 @@ namespace JewelryShop.Controllers
 
                     }
                     HttpContext.Session.SetString("P_ID", JsonConvert.SerializeObject(listofid).ToString());
-
                 }
-
-
-
-
             }
 
             return View("ShopCart", listofproduct);
@@ -158,9 +146,6 @@ namespace JewelryShop.Controllers
             }
             return View("ShopCart", listofproduct);
         }
-       
-
-
 
         [HttpPost("dat-hang")]
         public async Task<IActionResult> CheckOut(List<string> id, List<int> count)

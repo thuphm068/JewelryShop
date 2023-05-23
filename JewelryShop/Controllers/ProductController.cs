@@ -24,58 +24,12 @@ namespace JewelryShop.Controllers
 
 
 
-        [Route("Sort")]
-        [HttpGet]
-        public async Task<IActionResult> Sort(string sortOrder, string min = "000", string max = "1500000000", int pageIndex = 1)
-        {
-            ViewData["CurrentSort"] = sortOrder;
-            var productHomePageDtos = await _productService.GetAllAvailableProducts();
-
-            var realmin = Int32.Parse(new string(min.Substring(0, min.Length - 2).Where(x => x != ('.')).ToArray()));
-            var realmax = Int32.Parse(new string(max.Substring(0, max.Length - 2).Where(x => x != ('.')).ToArray()));
-            ViewData["CurrentMin"] = realmin.ToString();
-            ViewData["CurrentMax"] = realmax.ToString();
-
-            if (productHomePageDtos != null)
-            {
-
-                switch (sortOrder)
-                {
-                    case "price_desc":
-                        productHomePageDtos = productHomePageDtos.OrderByDescending(s => s.Price).ToList();
-                        break;
-
-                    case "price_asc":
-                        productHomePageDtos = productHomePageDtos.OrderBy(s => s.Price).ToList();
-                        break;
-                    default:
-                        break;
-                }
-
-                if (realmax < realmin)
-                {
-                    return NotFound();
-                }
-                productHomePageDtos = productHomePageDtos.Where(x => x.Price < realmax && x.Price > realmin).ToList();
-
-                int pageSize = 6;
-
-                var objs = PaginatedList<ProductHomePageDto>.CreateAsync(productHomePageDtos, pageIndex, pageSize);
-
-                return View("Index", objs);
-            }
-            return NotFound();
-        }
-
         [HttpGet]
         [Route("")]
 
         public async Task<IActionResult> Index(string? searchString, string? cate, string? sub, string sortOrder, string range = "", int pageIndex = 1)
         {
-
             ViewData["CurrentSort"] = sortOrder;
-
-
             ViewData["CurrentRange"] = range;
             ViewData["CurrentSearch"] = searchString;
 
@@ -85,7 +39,6 @@ namespace JewelryShop.Controllers
                 productHomePageDtos = await _productService.GetProductsByCategoryName(cate);
                 ViewData["CurrentCate"] = cate;
                 HttpContext.Session.SetString("currentPage", cate);
-
             }
             else
             {
@@ -94,13 +47,11 @@ namespace JewelryShop.Controllers
                     productHomePageDtos = await _productService.GetProductsBySubCategoryName(sub);
                     ViewData["CurrentSub"] = sub;
                     HttpContext.Session.SetString("currentPage", sub);
-
                 }
                 else
                 {
                     productHomePageDtos = await _productService.GetAllAvailableProducts();
                     HttpContext.Session.SetString("currentPage", "Product");
-
                 }
             }
             if (productHomePageDtos != null)
@@ -121,18 +72,15 @@ namespace JewelryShop.Controllers
                 {
                     case "< 500.000đ":
                         productHomePageDtos = productHomePageDtos.Where(x => x.Price < 500000).ToList();
-
                         break;
+
                     case "500.000đ - 1.000.000đ":
                         productHomePageDtos = productHomePageDtos.Where(x => x.Price < 1000000 && x.Price > 500000).ToList();
-
                         break;
 
                     case "> 1.000.000đ":
-                        productHomePageDtos = productHomePageDtos.Where(x => x.Price > 1000000).ToList();
 
                         break;
-
                 }
             }
             if (searchString != null)
@@ -146,11 +94,7 @@ namespace JewelryShop.Controllers
             {
                 product.FPrice = PriceFormatter.FormatPrice(product.Price);
             }
-
             return View("Index", objs);
-
-            //return View(PaginatedList<ProductHomePageDto>.CreateAsync(productHomePageDtos, 1, 6));
-
         }
 
 

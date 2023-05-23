@@ -9,9 +9,6 @@ namespace JewelryShop.Infrastructure.Entity_Framework_Core.DataSeed
         {
             context.Database.EnsureCreated();
 
-
-
-
             if (!context._warrantys.Any())
             {
                 var warranty1 = new Warranty { Period = 6, Description = "Bảo hành 6 tháng đầu với mọi sai hỏng do lỗi kỹ thuật chế tác (KHÔNG áp dụng cho sản phẩm giảm giá và sản phẩm gia công theo yêu cầu; KHÔNG áp dụng cho nguyên nhân như khách hàng bị ứng bạc, đổi ý, té ngã móp méo)" };
@@ -21,8 +18,6 @@ namespace JewelryShop.Infrastructure.Entity_Framework_Core.DataSeed
                 {
                     context._warrantys.Add(s);
                 }
-
-
                 if (!context._categories.Any())
                 {
                     var cate1 = new Category { Name = "Nhẫn bạc" };
@@ -33,13 +28,7 @@ namespace JewelryShop.Infrastructure.Entity_Framework_Core.DataSeed
                     {
                     cate1 , cate2, cate3, cate4
                     };
-
-
                     context._categories.AddRange(categories);
-
-
-                    //context.SaveChanges();
-
                     var subcate1 = new SubCategory { CategoryId = cate1.Id, Name = "Nhẫn nữ" };
                     var subcate2 = new SubCategory { CategoryId = cate1.Id, Name = "Nhẫn nam" };
                     var subcate3 = new SubCategory { CategoryId = cate1.Id, Name = "Nhẫn đôi" };
@@ -75,8 +64,6 @@ new Product() {WarrantyId=warranty2.Id, Name="Nhẫn Bạc Nữ hình bông hoa 
 new Product() {WarrantyId=warranty2.Id, Name="Nhẫn Bạc Nữ đính đá mùa xuân", Price=530000, SubCategoryId=subcate1.Id, Material="Bạc 925", Image="n-bacmuaxuan-001.png", Description="Với kiểu dáng thời thượng cùng những viên đá đính xung quanh bề mặt chiếc nhẫn trên chất liệu bạc 92.5, Luminique mang đến chiếc nhẫn với vẻ đẹp trẻ trung nhưng không kém phần phá cách, giúp các cô gái trông thật nổi bật. Luminique hiểu rằng, các cô gái luôn có đặc quyền được làm đẹp và tỏa sáng để tạo nên phong cách riêng của chính mình. Để thỏa sức sáng tạo với lựa chọn riêng của từng cô gái, nàng có thể kết hợp nhiều items khác để dễ dàng mix&match với nhau tùy theo cá tính thời trang và luôn refresh diện mạo mỗi ngày nhé."},
 new Product() {WarrantyId=warranty2.Id, Name="Nhẫn Bạc Nữ có hạt đính đá", Price=610000, SubCategoryId=subcate1.Id, Material="Bạc 925", Image="n-bachatdinhda-001.png", Description="Với kiểu dáng thời thượng cùng những viên đá đính xung quanh bề mặt chiếc nhẫn trên chất liệu bạc 92.5, Luminique mang đến chiếc nhẫn với vẻ đẹp trẻ trung nhưng không kém phần phá cách, giúp các cô gái trông thật nổi bật. Luminique hiểu rằng, các cô gái luôn có đặc quyền được làm đẹp và tỏa sáng để tạo nên phong cách riêng của chính mình. Để thỏa sức sáng tạo với lựa chọn riêng của từng cô gái, nàng có thể kết hợp nhiều items khác để dễ dàng mix&match với nhau tùy theo cá tính thời trang và luôn refresh diện mạo mỗi ngày nhé."},
 
-
-
                         //Nhẫn nam
 new Product() {WarrantyId=warranty2.Id, Name="Nhẫn Bạc Nam đính đá xanh", Price=630000, SubCategoryId=subcate2.Id, Material="Bạc 925", Image="n-bacdaxanh-001.png", Description="Lấy ý tưởng từ những đường cong tuyệt đẹp, Luminique cho ra mắt mẫu nhẫn bạc đính đá được thiết kế với đường cong ôm sát một cách mềm mại và được điểm xuyến bằng những viên đá màu đen nam tính, tạo nên vẻ đẹp trẻ trung. Đây chính là mẫu trang sức được nhiều chàng trai ưa chuộng phong cách hiện đại.Nhẫn bạc Luminique thuộc sở hữu thiết kế trẻ trung và năng động với kiểu dáng tròn được điểm xuyến bằng những viên đá tạo nên vẻ đẹp tinh tế và thời trang. Với chiếc nhẫn bạc này, chàng có thể “sốc” lại phong độ của mình để phá vỡ giới hạn đã níu chân bấy lâu nay và tiến đến một mối quan hệ mới trong tương lai."},
 new Product() {WarrantyId=warranty2.Id, Name="Nhẫn Bạc Nam đính đá đen", Price=700000, SubCategoryId=subcate2.Id, Material="Bạc 925", Image="n-bacdaden-001.png", Description="Lấy ý tưởng từ những đường cong tuyệt đẹp, Luminique cho ra mắt mẫu nhẫn bạc đính đá được thiết kế với đường cong ôm sát một cách mềm mại và được điểm xuyến bằng những viên đá màu đen nam tính, tạo nên vẻ đẹp trẻ trung. Đây chính là mẫu trang sức được nhiều chàng trai ưa chuộng phong cách hiện đại.Nhẫn bạc Luminique thuộc sở hữu thiết kế trẻ trung và năng động với kiểu dáng tròn được điểm xuyến bằng những viên đá tạo nên vẻ đẹp tinh tế và thời trang. Với chiếc nhẫn bạc này, chàng có thể “sốc” lại phong độ của mình để phá vỡ giới hạn đã níu chân bấy lâu nay và tiến đến một mối quan hệ mới trong tương lai."},
@@ -84,7 +71,6 @@ new Product() {WarrantyId=warranty2.Id, Name="Nhẫn Bạc Nam đính đá đen 
 new Product() {WarrantyId=warranty2.Id, Name="Nhẫn Bạc Nam đính đá", Price=900000, SubCategoryId=subcate2.Id, Material="Bạc 925", Image="n-bacnamdinhda-001.png", Description="Một lựa chọn tối giản, rất phù hợp cho những ai muốn sử dụng phụ kiện mà không sợ bị chê là đỏm dáng. Chiếc nhẫn bạc Luminique với nhiều thiết kế phá cách sẽ là item giúp cho bạn thể hiện sự mạnh mẽ cũng như cá tính của mình. Nhẫn vốn là món trang sức không chỉ thể hiện lòng chung thủy và sự gắn kết mà còn là điểm nhấn cho trang phục tối giản, toát lên gu thẩm mỹ cũng như phong cách cách riêng của mỗi người. Lựa chọn phụ kiện đúng đắn sẽ giúp bạn thêm nổi bật và khiến người khác phải ngoái nhìn."},
 new Product() {WarrantyId=warranty2.Id, Name="Nhẫn Bạc Nam đính đá đỏ", Price=690000, SubCategoryId=subcate2.Id, Material="Bạc 925", Image="n-bacdado-001.png", Description="Lấy ý tưởng từ những đường cong tuyệt đẹp, Luminique cho ra mắt mẫu nhẫn bạc đính đá được thiết kế với đường cong ôm sát một cách mềm mại và được điểm xuyến bằng những viên đá màu đen nam tính, tạo nên vẻ đẹp trẻ trung. Đây chính là mẫu trang sức được nhiều chàng trai ưa chuộng phong cách hiện đại.Nhẫn bạc Luminique thuộc sở hữu thiết kế trẻ trung và năng động với kiểu dáng tròn được điểm xuyến bằng những viên đá tạo nên vẻ đẹp tinh tế và thời trang. Với chiếc nhẫn bạc này, chàng có thể “sốc” lại phong độ của mình để phá vỡ giới hạn đã níu chân bấy lâu nay và tiến đến một mối quan hệ mới trong tương lai."},
 new Product() {WarrantyId=warranty2.Id, Name="Nhẫn Bạc Nam cổ điển", Price=630000, SubCategoryId=subcate2.Id, Material="Bạc 925", Image="n-bacdacodien-001.png", Description="Lấy ý tưởng từ những đường cong tuyệt đẹp, Luminique cho ra mắt mẫu nhẫn bạc đính đá được thiết kế với đường cong ôm sát một cách mềm mại và được điểm xuyến bằng những viên đá màu đen nam tính, tạo nên vẻ đẹp trẻ trung. Đây chính là mẫu trang sức được nhiều chàng trai ưa chuộng phong cách hiện đại.Nhẫn bạc Luminique thuộc sở hữu thiết kế trẻ trung và năng động với kiểu dáng tròn được điểm xuyến bằng những viên đá tạo nên vẻ đẹp tinh tế và thời trang. Với chiếc nhẫn bạc này, chàng có thể “sốc” lại phong độ của mình để phá vỡ giới hạn đã níu chân bấy lâu nay và tiến đến một mối quan hệ mới trong tương lai."},
-
 
                         //Nhẫn đôi 
 new Product() {WarrantyId=warranty2.Id, Name="Nhẫn Bạc Đôi True Love", Price=1000000, SubCategoryId=subcate3.Id, Material="Bạc 925", Image="n-baccaptruelove-001.png", Description="Vượt qua hành trình mài giũa dưới bàn tay của các nghệ nhân, nhẫn đôi gắn liền với biểu tượng của tình yêu thủy chung, son sắt. Không chỉ có vai trò là vật đính ước thiêng liêng, nhẫn cưới kim cương còn thể hiện cá tính và phong cách của mỗi cặp đôi. Tại Luminique, các cặp đôi luôn có thể sở hữu những thiết kế nhẫn cặp vừa hợp lí về tài chính, vừa đẹp về mẫu mã."},
@@ -94,7 +80,6 @@ new Product() {WarrantyId=warranty2.Id, Name="Nhẫn Bạc Đôi Nhịp Tim", Pr
 new Product() {WarrantyId=warranty2.Id, Name="Nhẫn Bạc Đôi Together", Price=750000, SubCategoryId=subcate3.Id, Material="Bạc 925", Image="n-baccaptogether-001.png", Description="Tình yêu là sự đồng điệu của hai cá thể khác biệt, tìm thấy nhau, yêu thương nhau và chỉ của riêng nhau. Nhẫn đôi bạc Luminique là biểu tượng tình yêu hiện đại với những điểm tương đồng được cách điệu đầy tinh tế, đủ khác biệt để thấy cá tính, đủ hòa hợp để thấy “ta là của nhau”."},
 new Product() {WarrantyId=warranty2.Id, Name="Nhẫn Bạc Đôi Vòng tròn Tình Yêu", Price=770000, SubCategoryId=subcate3.Id, Material="Bạc 925", Image="n-baccapvtty-001.png", Description="Nhẫn cặp đó là kỷ vật tượng trưng cho tình yêu đôi đang chín muồi. Nhẫn đôi tượng trưng cho một vòng tay dịu êm, một cái nhìn trìu mến, lời quan tâm ngọt ngào… kể cả khi người ấy không gần bên. Nếu như nhẫn cưới tượng trưng cho tình yêu đã kết trái ngọt thì nhẫn đôi lại là minh chứng cho chuyện tình yêu đang thăng hoa. Đặc biệt hơn nữa, sản phẩm có giá thành khá bình dân phù hợp với nhiều đối tượng nên cũng rất dễ tặng và cũng dễ nhận."},
 
-
                         //Vòng tay
 new Product() {WarrantyId=warranty2.Id, Name="Vòng tay Nữ Hoa cúc", Price=615000, SubCategoryId=subcate6.Id, Material="Bạc 925", Image="v-bachoacuc-001.png", Description="Sở hữu kiểu dáng không quá xa lạ nhưng lại cực kỳ độc đáo, chiếc lắc tay Luminique được chế tác từ chất liệu bạc 92.5 khoác lên mình vẻ ngoài trẻ trung, phá cách và “high fashion”. Điểm tô cho cổ tay nàng với chiếc lắc bạc xinh xắn, đây chắc chắn sẽ là một nét chấm phá tinh tế tô điểm thêm nét cá tính, năng động và trẻ trung cho các cô gái. Tuy chỉ sở hữu thiết kế đơn giản với điểm nhấn đính đá nho nhỏ, nhưng nó lại là phụ kiện giúp các cô nàng có vẻ ngoài thanh lịch, nữ tính và trở nên nổi bật hơn bao giờ hết."},
 new Product() {WarrantyId=warranty2.Id, Name="Vòng tay bạc Ý", Price=320000, SubCategoryId=subcate6.Id, Material="Bạc 925", Image="v-bacY-001.png", Description="Đằng sau nhửng mẫu thiết kế của mỗi sản phẩm trang sức của Luminique đều ẩn chứa những vẻ đẹp và xúc cảm khác nhau. Lắc tay bạc Luminique mang trong mình kiểu dáng hiện đại cùng với sắc bạc sáng bóng đã tạo nên điểm nhấn riêng cho cả sợi lắc bạc."},
@@ -103,7 +88,6 @@ new Product() {WarrantyId=warranty2.Id, Name="Vòng tay trẻ em bạc", Price=4
 new Product() {WarrantyId=warranty2.Id, Name="Lắc tay Bạc đính đá vuông", Price=634600, SubCategoryId=subcate6.Id, Material="Bạc 925", Image="v-davuong-001.png", Description="Tỏa sáng như vì sao, lan tỏa sự tin yêu mãnh liệt, với Luminique nàng chính là biểu tượng của niềm tin và những điều tốt đẹp nhất. Để tôn vinh niềm tin ấy, Luminique cho ra đời thiết kế lắc tinh tế, là sự phối trộn hài hoà giữa những viên đá CZ màu trắng hoàn hảo và chất liệu Bạc 925 chuẩn mực. Với sự sáng tạo không giới hạn, chiếc lắc với phong cách riêng trở thành món trang sức thật đặc biệt, giúp nàng tỏa sáng, lan tỏa niềm tin cùng nét riêng để bắt trọn ánh nhìn trong mọi khoảnh khắc."},
 new Product() {WarrantyId=warranty2.Id, Name="Vòng tay bạc đính đá Disney", Price=1145000, SubCategoryId=subcate6.Id, Material="Bạc 925", Image="v-bacdinhdadisney-001.png", Description="Sở hữu kiểu dáng không quá xa lạ nhưng lại cực kỳ độc đáo, chiếc lắc tay Disney được chế tác từ chất liệu bạc 92.5 khoác lên mình vẻ ngoài trẻ trung, phá cách và “high fashion”. Điểm tô cho cổ tay nàng với chiếc lắc bạc Frozen xinh xắn, đây chắc chắn sẽ là một nét chấm phá tinh tế tô điểm thêm nét cá tính, năng động và trẻ trung cho các cô gái. Tuy chỉ sở hữu thiết kế đơn giản với điểm nhấn đính đá nho nhỏ, nhưng nó lại là phụ kiện giúp các cô nàng có vẻ ngoài thanh lịch, nữ tính và trở nên nổi bật hơn bao giờ hết."},
 
-
                         //Vòng chân
 new Product() {WarrantyId=warranty2.Id, Name="Lắc chân bạc đính đá hình trái tim", Price=532000, SubCategoryId=subcate7.Id, Material="Bạc 925", Image="vc-traitim-001.png", Description="Có thể nói, lắc chân là phụ kiện mà bất kỳ cô gái nào cũng có thể dễ dàng sử dụng để kết hợp với những thiết kế cut-out quyến rũ hay thậm chí là trang phục đời thường. Với những kiểu lắc chân đơn giản tinh tế nhất thường chỉ với một vòng dây mảnh hoặc được điểm tô bởi một ít phụ kiện nhỏ xinh như: bông hoa, chiếc lá, trái tim hay những hạt charm sang trọng nổi bật làm xiêu lòng phái đẹp."},
 new Product() {WarrantyId=warranty2.Id, Name="Lắc chân bạc cá heo", Price=474000, SubCategoryId=subcate7.Id, Material="Bạc 925", Image="vc-caheo-001.png", Description="Phụ kiện trang sức có sức mạnh “thần thánh” trong bộ sưu tập trang sức những quý cô không thể nào không nhắc đến một chiếc lắc chân. Với kiểu dáng đơn giản nhưng không kém phần thanh nhã, trang trọng lắc chân bạc Luminique được xem là vũ khí lợi hại nhất của các nàng. Ngoài công dụng làm đẹp đôi bàn chân xinh của nàng thì lắc chân cũng mang trong mình một ý nghĩa riêng."},
@@ -111,7 +95,6 @@ new Product() {WarrantyId=warranty2.Id, Name="Lắc chân bạc lục lạc", Pr
 new Product() {WarrantyId=warranty2.Id, Name="Lắc chân bạc đính đá màu đen", Price=550000, SubCategoryId=subcate7.Id, Material="Bạc 925", Image="vc-daden-001.png", Description="Những mong muốn được trở nên xinh đẹp, được trở nên đặc biệt xen lẫn cùng đôi lần muốn được mạnh mẽ hơn, được tỏa sáng hơn dường như đều là nhu cầu cơ bản của các bạn nữ. Đằng sau thiết kế của mỗi sản phẩm Luminique đều ẩn chứa những vẻ đẹp xúc cảm khác nhau. Với một thông điệp “Tinh tế gợi nét riêng”, Luminique mong muốn rằng phái đẹp sẽ luôn khẳng định được bản thân mình trong mọi tình huống, trong mọi phút giây của cuộc sống."},
 new Product() {WarrantyId=warranty2.Id, Name="Lắc chân bạc bầu trời", Price=600000, SubCategoryId=subcate7.Id, Material="Bạc 925", Image="vc-bautroi-001.png", Description="Con gái thường được coi là tín đồ của cái đẹp, yêu và thích làm đẹp vì thế bạn không thể bỏ qua việc đeo lắc lên đôi bàn chân xinh của mình. Với lắc chân bạc cao cấp Luminique không chỉ giúp nàng tô điểm cho đôi gót sen hồng mà còn mang đến cho nàng sự tự tin ở mỗi nơi nàng đặt chân đến, là điểm thu hút sự chú ý khi nàng dạo bước."},
 new Product() {WarrantyId=warranty2.Id, Name="Lắc chân bạc đính đá vô cực", Price=490000, SubCategoryId=subcate7.Id, Material="Bạc 925", Image="vc-vocuc-001.png", Description="Bạn là cô nàng yêu thích sự điệu đà, cá tính. Với lắc chân bạc biểu tượng hình vô cực là sự lựa chọn hoàn hảo cho cá tính đó của nàng. Không chỉ giúp nàng tô điểm cho đôi gót sen hồng mà còn mang đến cho nàng sự tự tin ở mỗi nơi nàng đặt chân đến, và là “bùa hộ mệnh” đem lại may mắn cho phái đẹp."},
-
 
                         //Khuyên tai
 new Product() {WarrantyId=warranty1.Id, Name="Bông tai bạc đính đá", Price=323000, SubCategoryId=subcate4.Id, Material="Bạc 925", Image="bt-bacdinhda-001.png", Description="Trang sức luôn là những phụ kiện cần thiết và là niềm đam mê bất tận của phái đẹp bởi sự hữu ích cũng như giá trị thẩm mỹ cao. Những thứ phụ kiện ấy không thể không kể đến đó chính là đôi bông tai bạc, chúng làm cho phụ nữ trở nên có sức hút và tự tin hơn. Hy vọng rằng, với bông tai này bạn sẽ tìm được cảm hứng cho phong cách của mình như tăng thêm sự đa dạng, giàu có cho bộ sưu tập bông tai của mình."},
@@ -129,8 +112,6 @@ new Product() {WarrantyId=warranty1.Id, Name="Khuyên rốn hình trái tim Zirc
 new Product() {WarrantyId=warranty1.Id, Name="Khuyên rốn Cỏ Bốn Lá", Price=100000, SubCategoryId=subcate5.Id, Material="Bạc 925", Image="k-clover-001.jpg", Description="Với sự đa dạng về thiết kế và chất liệu, khuyên rốn là một phụ kiện trang sức độc đáo có thể thể hiện phong cách và cá nhân của người sử dụng. Bằng cách chọn một mẫu khuyên rốn phù hợp với phong cách cá nhân, người dùng có thể tạo nên một vẻ ngoài độc đáo và thu hút sự chú ý."},
 new Product() {WarrantyId=warranty1.Id, Name="Khuyên rốn Star and Flower", Price=130000, SubCategoryId=subcate5.Id, Material="Bạc 925", Image="k-star-001.jpg", Description="Với sự đa dạng về thiết kế và chất liệu, khuyên rốn là một phụ kiện trang sức độc đáo có thể thể hiện phong cách và cá nhân của người sử dụng. Bằng cách chọn một mẫu khuyên rốn phù hợp với phong cách cá nhân, người dùng có thể tạo nên một vẻ ngoài độc đáo và thu hút sự chú ý."},
 
-
-
                         //Dây chuyền
 new Product() {WarrantyId=warranty2.Id, Name="Dây chuyền Bạc Nữ hình con bướm", Price=650000, SubCategoryId=subcate8.Id, Material="Bạc 925", Image="dc-bacconbuom-001.png", Description="Được hoàn thiện vẻ đẹp duy mỹ bởi những viên đá lấp lánh đính thủ công lên từng mảnh trang sức, chiếc mặt dây chuyền được chế tác từ chất liệu bạc cao cấp 92.5 kết hợp cùng sự lấp lánh của những viên đá màu trắng, tựa như đóa hoa bừng nở trên bề mặt một cách mỹ miều và tinh tế. Tôn vinh nét đẹp thanh tú của nàng xinh với chiếc mặt dây lấp lánh sắc bạc ánh kim cổ điển cùng sắc trắng của viên đá đính kèm, Luminique chắc chắn đây sẽ là những gì các nàng cần để luôn tỏa sáng và thu hút mọi ánh nhìn."},
 new Product() {WarrantyId=warranty2.Id, Name="Dây chuyền Bạc Nữ Bông Hoa đính đá hồng", Price=580000, SubCategoryId=subcate8.Id, Material="Bạc 925", Image="dc-bacbonghoadahong-001.png", Description="Được hoàn thiện vẻ đẹp duy mỹ bởi những viên đá lấp lánh đính thủ công lên từng mảnh trang sức, chiếc mặt dây chuyền được chế tác từ chất liệu bạc cao cấp 92.5 kết hợp cùng sự lấp lánh của những viên đá màu trắng, tựa như đóa hoa bừng nở trên bề mặt một cách mỹ miều và tinh tế. Tôn vinh nét đẹp thanh tú của nàng xinh với chiếc mặt dây lấp lánh sắc bạc ánh kim cổ điển cùng sắc trắng của viên đá đính kèm, Luminique chắc chắn đây sẽ là những gì các nàng cần để luôn tỏa sáng và thu hút mọi ánh nhìn."},
@@ -139,22 +120,15 @@ new Product() {WarrantyId=warranty2.Id, Name="Dây chuyền Bạc Nữ Tam giác
 new Product() {WarrantyId=warranty2.Id, Name="Dây chuyền Bạc Nữ Bông Hoa", Price=530000, SubCategoryId=subcate8.Id, Material="Bạc 925", Image="dc-bacbonghoa-001.png", Description="Với tạo hình bông hoa nhiều cánh đang khoe sắc, nổi bật là nhụy hoa được đính viên đá to tròn đầy kiêu hãnh và ấn tượng, toàn bộ bề mặt cánh hoa được đính đá cầu kỳ với những đường cắt khéo léo tạo nên sự hoàn hảo, giúp món trang sức trở nên thanh thoát hơn và khoe ra toàn bộ những ưu điểm của mình. Bên cạnh đó, các bạn gái hãy thử và phối mặt dây chuyền bạc Luminique với các sợi dây đeo sẵn có của mình để tạo ra gu thời trang tinh tế cho bản thân."},
 new Product() {WarrantyId=warranty2.Id, Name="Dây chuyền Bạc Nữ hình cá heo", Price=530000, SubCategoryId=subcate8.Id, Material="Bạc 925", Image="dc-baccaheo-001.png", Description="Hình ảnh hai chú cá heo đang hòa quyện vào nhau tạo nên một cảm giác rất trong trẻo, rất đỗi đáng yêu của mặt dây chuyền Luminique. Chúng đang cùng nhau nâng niu một viên đá nhỏ tựa như sự trân trọng của tình yêu. Đại diện cho biển cả, cá heo được biết đến là biểu tượng của sự thịnh vượng, may mắn. Vì thế, Luminique mong muốn các bạn nữ có thể lạc quan hơn, yêu đời hơn và luôn tự tin là chính mình nhé!"},
 
-
                         };
                         foreach (Product s in products)
                         {
                             context._products.Add(s);
                         }
                     }
-
                 }
-
-
-                //
             }
-
             context.SaveChanges();
-
         }
     }
 }

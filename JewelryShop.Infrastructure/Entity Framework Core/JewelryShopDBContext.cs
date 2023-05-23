@@ -39,7 +39,6 @@ public class JewelryShopDBContext : DbContext
             re.Property(r => r.Period).IsRequired();
             re.Property(r => r.Description).IsRequired();
         });
-
         modelBuilder.Entity<Product>(re =>
         {
             re.ToTable("Product");
@@ -64,7 +63,6 @@ public class JewelryShopDBContext : DbContext
             re.Property(r => r.Birthday).IsRequired();
             re.Property(r => r.Phone).IsRequired().HasMaxLength(10);
         });
-
         modelBuilder.Entity<Cart>(re =>
         {
             re.ToTable("Cart");
@@ -72,9 +70,6 @@ public class JewelryShopDBContext : DbContext
             re.Property(r => r.Total).IsRequired();
             re.HasOne<Customer>().WithOne().HasForeignKey<Cart>(r => r.CustomerId).IsRequired();//test
         });
-
-
-
         modelBuilder.Entity<CartItem>(re =>
         {
             re.ToTable("CartItem");
@@ -83,10 +78,7 @@ public class JewelryShopDBContext : DbContext
             re.Property(r => r.Quantity).IsRequired();
             re.HasOne<Cart>().WithMany().HasForeignKey(x => x.CartId).IsRequired();
             re.HasOne<Product>().WithMany().HasForeignKey(x => x.ProductId).IsRequired();
-
-
         });
-
         modelBuilder.Entity<Order>(re =>
         {
             re.ToTable("Order");
@@ -96,8 +88,6 @@ public class JewelryShopDBContext : DbContext
             re.Property(r => r.Date).IsRequired();
             re.HasOne<Customer>().WithMany().HasForeignKey(x => x.CustomerId).IsRequired();
         });
-
-
         modelBuilder.Entity<OrderDetail>(re =>
         {
             re.ToTable("OrderDetail");
@@ -113,17 +103,13 @@ public class JewelryShopDBContext : DbContext
             re.HasKey(r => r.Id);
             re.Property(r => r.Name).IsRequired().HasMaxLength(50);
         });
-
         modelBuilder.Entity<SubCategory>(re =>
         {
             re.ToTable("SubCategory");
             re.HasKey(r => r.Id);
             re.Property(r => r.Name).IsRequired().HasMaxLength(50);
             re.HasOne<Category>().WithMany().HasForeignKey(x => x.CategoryId).IsRequired();
-
         });
-
-
     }
 
 
