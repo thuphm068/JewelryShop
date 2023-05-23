@@ -41,6 +41,7 @@ namespace JewelryShop.Controllers
                 Customer = cusInfo
             });
         }
+
         [HttpPost]
         [Route("ChangePassword")]
         public async Task<IActionResult> ChangePassword(string oldP, string newP, string conformP, string id)
