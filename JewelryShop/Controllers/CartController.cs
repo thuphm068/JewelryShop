@@ -100,7 +100,6 @@ namespace JewelryShop.Controllers
                                 totalprice = PriceFormatter.FormatPrice(r.count * product.Price),
                             }
                             );
-
                     }
                     HttpContext.Session.SetString("P_ID", JsonConvert.SerializeObject(listofid).ToString());
                 }
@@ -201,7 +200,6 @@ namespace JewelryShop.Controllers
         public async Task<IActionResult> LastCheckOut(OrderViewModel order)
         {
             var listoforderDetailDto = new List<OrderDetailDto>();
-
             var listofproduct = new List<ProductDto>();
             int index = 0;
 

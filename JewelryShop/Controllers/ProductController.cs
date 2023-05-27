@@ -118,7 +118,6 @@ namespace JewelryShop.Controllers
             productdtos = productdtos.Take(4).ToList();
             ViewData["RelatedProducts"] = productdtos;
             return View(productdto);
-
         }
 
 
